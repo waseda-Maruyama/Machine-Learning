@@ -30,7 +30,7 @@ print(f"テストデータ数: {len(X_test)}")
 
 # --- 4. XGBoostモデルの学習 ---
 print("\nXGBoostモデルの学習を開始します...")
-model = xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', use_label_encoder=False)
+model = xgb.XGBClassifier(objective='binary:logistic', eval_metric='logloss', use_label_encoder=False, n_estimators=100, learning_rate=0.01)
 model.fit(X_train, y_train)
 print("✅ 学習完了。")
 

@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.8.4)  5 NOV 2025 13:45
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.8.4)  5 NOV 2025 14:28
  restricted system commands enabled.
  file:line:error style messages enabled.
 **c:/Users/maruk/Desktop/研究/sisaku/No.1.tex/sisaku1
@@ -1271,22 +1271,31 @@ Missing character: There is no 📈 (U+1F4C8) in font [lmmono10-regular]:!
 Missing character: There is no 📊 (U+1F4CA) in font [lmmono10-regular]:!
 Missing character: There is no 📊 (U+1F4CA) in font [lmmono10-regular]:!
 LaTeX Font Info:    Font shape `JT3/IPAExMincho(0)/m/n' will be
-(Font)              scaled to size 8.32242pt on input line 418.
+(Font)              scaled to size 8.32242pt on input line 430.
 LaTeX Font Info:    Font shape `JY3/IPAExMincho(0)/m/n' will be
-(Font)              scaled to size 8.32242pt on input line 418.
+(Font)              scaled to size 8.32242pt on input line 430.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
 
 
 [10
 Missing character: There is no 📊 (U+1F4CA) in font [lmmono10-regular]:!
 ]
-<../feature_importance.png, id=88, 722.7pt x 433.62pt>
+<../feature_importance.png, id=87, 722.7pt x 433.62pt>
 File: ../feature_importance.png Graphic file (type png)
 <use ../feature_importance.png>
-Package luatex.def Info: ../feature_importance.png  used on input line 454.
+Package luatex.def Info: ../feature_importance.png  used on input line 466.
 (luatex.def)             Requested size: 409.71692pt x 245.82944pt.
 
 
-[11<../feature_importance.png>] (./sisaku1.aux)
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+
+[11]
+
+[12<../feature_importance.png>] (./sisaku1.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-20>
@@ -1296,19 +1305,19 @@ Package rerunfilecheck Info: File `sisaku1.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 16214 strings out of 470118
+ 16216 strings out of 470118
  156557,953878 words of node,token memory allocated
  1007 words of node memory still in use:
    10 hlist, 2 vlist, 5 rule, 2 glue, 4 kern, 1 glyph, 179 attribute, 56 glue_spec, 27 attribute_list, 1 write, 13 user_defined nodes
-   avail lists: 1:36,2:34311,3:708,4:226,5:72,6:77,7:4974,8:13,9:1977,10:25,11:19
+   avail lists: 1:36,2:36681,3:708,4:226,5:72,6:77,7:4974,8:13,9:1977,10:25,11:19
  44259 multiletter control sequences out of 65536+600000
  79 fonts using 59578263 bytes
  119i,8n,122p,1805b,502s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman9-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman7-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmmono10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf><c:/texlive/2025/texmf-dist/fonts/truetype/public/ipaex/ipaexg.ttf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans12-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf><c:/texlive/2025/texmf-dist/fonts/truetype/public/ipaex/ipaexm.ttf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman17-regular.otf>
-Output written on sisaku1.pdf (11 pages, 541791 bytes).
+Output written on sisaku1.pdf (12 pages, 549063 bytes).
 
-PDF statistics: 164 PDF objects out of 1000 (max. 8388607)
- 117 compressed objects within 2 object streams
- 32 named destinations out of 1000 (max. 131072)
+PDF statistics: 171 PDF objects out of 1000 (max. 8388607)
+ 123 compressed objects within 2 object streams
+ 34 named destinations out of 1000 (max. 131072)
  41 words of extra memory for PDF output out of 10000 (max. 100000000)
 
