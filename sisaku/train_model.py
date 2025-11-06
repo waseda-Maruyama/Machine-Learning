@@ -25,10 +25,10 @@ features = [
     'PER',
     'PBR',
     # テクニカル指標 (12)
-    'MAdivergence_5', 'MAdivergence_25', 'MAdivergence_60', #'MAdivergence_75',
-    'RSI_5', 'RSI_25', 'RSI_60', #'RSI_75',
-    'Volatility_5', 'Volatility_25', 'Volatility_60',# 'Volatility_75',
-    'Momentum_5', 'Momentum_25', 'Momentum_60', #'Momentum_75'
+    'MAdivergence_25', 'MAdivergence_50', 'MAdivergence_75',
+     'RSI_25', 'RSI_50', 'RSI_75',
+    'Volatility_25', 'Volatility_50', 'Volatility_75',
+    'Momentum_25', 'Momentum_50', 'Momentum_75'
 ]
 X = dataset[features]
 y = dataset['target']
