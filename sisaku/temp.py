@@ -1,27 +1,28 @@
 import pandas as pd
 import xgboost as xgb
+from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
-import japanize_matplotlib
+import japanize_matplotlib # 日本語表示のためのライブラリ
 
 # --- 1. データセットの読み込み ---
 try:
-    dataset = pd.read_csv('analysis_dataset_v2_close.csv')
-    print("✅ 分析用データセット v2 ('Close + 株式数'版) の読み込み完了。")
+    # ★★★ 修正点 ★★★
+    # 読み込むファイルを v2 に変更
+    dataset = pd.read_csv('analysis_dataset_v2.csv', index_col='Date', parse_dates=True)
+    print("✅ 分析用データセット v2 (PER, PBR追加版) の読み込み完了。")
 except FileNotFoundError:
-    print("❌ エラー: 'analysis_dataset_v2_close.csv' が見つかりません。")
+    print("❌ エラー: 'analysis_dataset_v2.csv' が見つかりません。")
+    print("   'create_dataset.py' を実行してファイルを作成してください。")
     exit()
 
 # --- 2. 特徴量 (X) と 目的変数 (y) の準備 ---
-# 長い特徴量を短い別名で扱う
-long_name_shares = 'NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock'
-short_name_shares = 'Issued Shares'
-
+# ★★★ 修正点 ★★★
+# 予測に使う特徴量に PER と PBR を追加
 features = [
     'NetSales', 'OperatingProfit', 'Profit', 'TotalAssets', 'Equity', 
     'ROE', 'SelfCapitalRatio',
-    'Close', 
-    long_name_shares
+    'PER', 'PBR' # 新しく追加した特徴量
 ]
 X = dataset[features]
 y = dataset['target']
@@ -47,28 +48,26 @@ print(f"\n📈 モデルの正解率 (Accuracy): {accuracy:.4f}")
 
 # --- 6. 特徴量の重要度の可視化 ---
 print("\n特徴量の重要度を分析しています...")
+
 importance_df = pd.DataFrame({
     'feature': features,
     'importance': model.feature_importances_
 }).sort_values('importance', ascending=False)
 
-# グラフ表示のために長い特徴量を別名に置換
-importance_df['feature'] = importance_df['feature'].replace({long_name_shares: short_name_shares})
-
 print("\n--- 特徴量の重要度 ---")
 print(importance_df)
 
-# グラフ描画
 # グラフを描画
 plt.figure(figsize=(10, 6))
 plt.barh(importance_df['feature'], importance_df['importance'])
 plt.xlabel('重要度 (Feature Importance)')
 plt.ylabel('財務特徴量')
-plt.title('財務特徴量の重要度分析 (close + issued shares 追加版)')
+plt.title('財務特徴量の重要度分析 (PER, PBR 追加版)')
 plt.gca().invert_yaxis()
 plt.tight_layout()
 
-graph_filename = 'feature_importance_v2_close.png'
+# グラフをファイルに保存
+graph_filename = 'feature_importance_v2.png'
 plt.savefig(graph_filename)
 print(f"\n📊 特徴量の重要度グラフを '{graph_filename}' として保存しました。")
 plt.show()
