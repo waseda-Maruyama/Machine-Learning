@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.8.4)  6 NOV 2025 20:17
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.8.4)  6 NOV 2025 20:33
  restricted system commands enabled.
  file:line:error style messages enabled.
 **c:/Users/maruk/Desktop/研究/sisaku/No.3/No.3
@@ -1147,8 +1147,14 @@ L3 programming layer <2025-07-20>
 
 LaTeX Warning: There were undefined references.
 
-Package rerunfilecheck Info: File `No.3.out' has not changed.
-(rerunfilecheck)             Checksum: E6EF92C8B66AAB5BF2C01179AFA46516;1036.
+
+Package rerunfilecheck Warning: File `No.3.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `No.3.out':
+(rerunfilecheck)             Before: 674AD4986ABF2C4C672FCF78E25EF415;1041
+(rerunfilecheck)             After:  E6EF92C8B66AAB5BF2C01179AFA46516;1036.
 )
 
 Here is how much of LuaTeX's memory you used:
