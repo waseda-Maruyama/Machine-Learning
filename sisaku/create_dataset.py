@@ -3,7 +3,7 @@ import numpy as np
 
 # ★★★ テクニカル指標の期間をここで定義 ★★★
 # 短期・中期・長期（田村氏の論文も参考に 25, 60, 75日を採用）
-WINDOWS = [25, 60, 75] 
+WINDOWS = [25, 50,75] 
 
 print(f"--- V6 (マルチウィンドウ) 賢いフィルター版 ---")
 # --- 1. データの読み込み ---
@@ -120,7 +120,7 @@ for code_str in prices_df.columns:
 # --- 7. 最終化 (賢いフィルター) ---
 print("計算不能な行と未来の行を削除しています...")
 final_dataset = pd.concat(all_dfs).dropna(
-    subset=['target', 'ROE'] # 君の「賢いフィルター」ルール
+    subset=['target', 'ROE','MAdivergence_75'] # 君の「賢いフィルター」ルール
 )
 
 # --- 8. 結果の確認と保存 ---

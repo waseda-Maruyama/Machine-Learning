@@ -18,10 +18,10 @@ except FileNotFoundError:
 features = [
     'ROE', 'SelfCapitalRatio', 'OpProfitMargin',
     'PER', 'PBR',
-     'MAdivergence_60', 
-     'RSI_60',  
-       'Volatility_60',
-     'Momentum_60'#'MAdivergence_75','RSI_75','Volatility_75','Momentum_75','MAdivergence_25', 'RSI_25','Volatility_25', 'Momentum_25',
+     'MAdivergence_25', 'MAdivergence_50', 'MAdivergence_75',
+     'RSI_25', 'RSI_50', 'RSI_75',
+      'Volatility_50','Volatility_75',
+      'Momentum_75','Momentum_50','Volatility_25','Momentum_25',
 ]
 X = dataset[features]
 y = dataset['target']
@@ -30,7 +30,7 @@ y = dataset['target']
 # ★★★ ここからが最重要修正点 ★★★
 # 60%地点と80%地点の「行番号」を計算
 split_point_1 = int(len(X) * 0.6)
-split_point_2 = int(len(X) * 0.79)
+split_point_2 = int(len(X) * 0.8)
 
 # その「行番号」にある「日付」を取得
 split_date_1 = X.index[split_point_1]
