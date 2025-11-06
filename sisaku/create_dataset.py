@@ -81,7 +81,7 @@ for code_str in prices_df.columns:
     all_dfs.append(merged_df)
 
 # 全銘柄のデータを縦に結合し、NaNを含む行を削除
-final_dataset = pd.concat(all_dfs).dropna()
+final_dataset = pd.concat(all_dfs).dropna(subset=['target'])
 
 # --- 6. 結果の確認と保存 ---
 if final_dataset.empty:
