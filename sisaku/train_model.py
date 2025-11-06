@@ -6,30 +6,52 @@ import japanize_matplotlib
 
 # --- 1. データセットの読み込み ---
 try:
-    dataset = pd.read_csv('analysis_dataset_v2_close.csv')
-    print("✅ 分析用データセット v2 ('Close + 株式数'版) の読み込み完了。")
+    dataset = pd.read_csv('analysis_dataset_v3_technical.csv')
+    dataset['Date'] = pd.to_datetime(dataset['Date'])
+    dataset = dataset.set_index('Date')
+    
+    print("✅ 分析用データセット v3 (テクニカル指標追加) の読み込み完了。")
 except FileNotFoundError:
-    print("❌ エラー: 'analysis_dataset_v2_close.csv' が見つかりません。")
+    print("❌ エラー: 'analysis_dataset_v3_technical.csv' が見つかりません。")
     exit()
 
-# --- 2. 特徴量 (X) と 目的変数 (y) の準備 ---
-# 長い特徴量を短い別名で扱う
-long_name_shares = 'NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock'
-short_name_shares = 'Issued Shares'
+# --- 2. 特徴量の準備 (別名で扱う) ---
+LONG_NAME = 'NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock'
+SHORT_NAME = 'IssuedShares'
+if LONG_NAME in dataset.columns:
+    dataset = dataset.rename(columns={LONG_NAME: SHORT_NAME})
+    print(f"特徴量 '{LONG_NAME}' を '{SHORT_NAME}' という別名に変更しました。")
 
 features = [
     'NetSales', 'OperatingProfit', 'Profit', 'TotalAssets', 'Equity', 
     'ROE', 'SelfCapitalRatio',
     'Close', 
-    long_name_shares
+    SHORT_NAME,
+    'MAdivergence'
 ]
 X = dataset[features]
 y = dataset['target']
 
-# --- 3. データの分割 (時系列を考慮) ---
-test_size = int(len(dataset) * 0.2)
-X_train, X_test = X[:-test_size], X[-test_size:]
-y_train, y_test = y[:-test_size], y[-test_size:]
+# --- 3. データの分割 (正しい時系列分割) ---
+# ★★★ ここからが最重要修正点 ★★★
+# 80%地点の「行番号」を計算
+split_point = int(len(X) * 0.8)
+
+# その「行番号」にある「日付」を取得
+split_date = X.index[split_point]
+# ★★★ 修正完了 ★★★
+
+print(f"\n--- データの分割 ---")
+print(f"全データ期間: {X.index.min()} から {X.index.max()} まで")
+print(f"分割日: {split_date} (この日を境に学習用とテスト用に分けます)")
+
+# 分割日より「前」のデータを学習用にする
+X_train = X[X.index < split_date]
+y_train = y[y.index < split_date]
+
+# 分割日「以降」のデータをテスト用にする
+X_test = X[X.index >= split_date]
+y_test = y[y.index >= split_date]
 
 print(f"\n学習データ数: {len(X_train)}")
 print(f"テストデータ数: {len(X_test)}")
@@ -51,24 +73,19 @@ importance_df = pd.DataFrame({
     'feature': features,
     'importance': model.feature_importances_
 }).sort_values('importance', ascending=False)
-
-# グラフ表示のために長い特徴量を別名に置換
-importance_df['feature'] = importance_df['feature'].replace({long_name_shares: short_name_shares})
-
 print("\n--- 特徴量の重要度 ---")
 print(importance_df)
 
-# グラフ描画
 # グラフを描画
 plt.figure(figsize=(10, 6))
 plt.barh(importance_df['feature'], importance_df['importance'])
 plt.xlabel('重要度 (Feature Importance)')
-plt.ylabel('財務特徴量')
-plt.title('財務特徴量の重要度分析 (close + issued shares 追加版)')
+plt.ylabel('特徴量')
+plt.title('財務・テクニカル特徴量の重要度分析 (V3)')
 plt.gca().invert_yaxis()
 plt.tight_layout()
 
-graph_filename = 'feature_importance_v2_close.png'
+graph_filename = 'feature_importance_v3_technical.png'
 plt.savefig(graph_filename)
 print(f"\n📊 特徴量の重要度グラフを '{graph_filename}' として保存しました。")
 plt.show()
