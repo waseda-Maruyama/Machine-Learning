@@ -30,8 +30,8 @@ loss = (-delta.where(delta < 0, 0)).rolling(14).mean()
 df_base['RSI_14'] = 100 - (100 / (1 + gain/loss))
 
 # --- ターゲットY (固定: 10日 / -7%) ---
-LOOKAHEAD = 10
-THRESHOLD = -0.07 
+LOOKAHEAD = 5
+THRESHOLD = -0.05 
 future_min = df_base['Return'].rolling(window=LOOKAHEAD).min().shift(-LOOKAHEAD) # 近似
 # 正確には価格ベースで計算
 future_min_price = market_index.rolling(window=LOOKAHEAD).min().shift(-LOOKAHEAD)
