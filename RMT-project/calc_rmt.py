@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 import os
 
 # ---------------------------------------------------------
@@ -35,8 +36,8 @@ def get_max_eigenvalue(window_df):
     # 最大値を返す (末尾)
     return vals[-1]
 
-# 窓幅設定: 60営業日 (約3ヶ月)
-WINDOW = 55
+
+WINDOW = 110
 
 print(f"🧮 移動窓 ({WINDOW}日) で固有値を解析中...")
 print("   (98銘柄の行列計算なので数秒〜数十秒かかります)")
@@ -55,12 +56,42 @@ for i in range(WINDOW, len(df_log_returns)):
     rmt_dates.append(df_log_returns.index[i])
     max_eigenvalues.append(lambda_max)
 
-# Series化
-ts_rmt = pd.Series(max_eigenvalues, index=rmt_dates, name="RMT_Max_Eigen")
+# DataFrame化
+df_features = pd.DataFrame(max_eigenvalues, index=rmt_dates, columns=['RMT_Raw'])
 
-# ---------------------------------------------------------
-# 4. 可視化 (ここが研究のハイライト)
-# ---------------------------------------------------------
+print("⚙️ 速度、加速度、Zスコアを計算中...")
+
+# 1. 平滑化 (Smoothing)
+# 微分（速度計算）の前にノイズを低減させます。
+# 窓5日 = 1週間のトレンドを見るイメージです。
+rmt_smooth = df_features['RMT_Raw'].rolling(window=5).mean()
+
+# 2. 速度 (Velocity)
+# 平滑化したデータの「前日比」を取ります。
+df_features['RMT_Vel'] = rmt_smooth.diff()
+
+# 3. 加速度 (Acceleration)
+# 速度の変化量です。「変化の激しさ」を表します。
+df_features['RMT_Accel'] = df_features['RMT_Vel'].diff()
+
+# 4. 緊張度 (Z-Score)
+# 生データ(Raw)が、過去250日(約1年)の平均から「標準偏差いくつ分」離れているか。
+# これが +2.0 や +3.0 を超えると「異常事態」です。
+window_z = 250
+rmt_mean = df_features['RMT_Raw'].rolling(window_z).mean()
+rmt_std = df_features['RMT_Raw'].rolling(window_z).std()
+
+# ゼロ除算回避のため、stdが極端に小さい場合は考慮が必要ですが、
+# RMT固有値でstd=0になることは稀なので、今回はそのまま計算します。
+df_features['RMT_Zscore'] = (df_features['RMT_Raw'] - rmt_mean) / rmt_std
+
+# ※計算初期は窓分のデータがないため NaN (欠損) が発生します。
+# 後の工程で dropna() するか、ここで埋めるかは戦略次第ですが、
+# ここでは「データの実態」を優先して NaN のまま保存します。
+
+
+ts_rmt = df_features['RMT_Raw']
+
 # 市場平均（擬似TOPIX）を作成
 market_index = df_prices.mean(axis=1)
 market_index = market_index / market_index.iloc[0] # 正規化
@@ -82,27 +113,28 @@ ax2.set_ylabel('Max Eigenvalue (Sync Risk)', color=color_rmt, fontsize=12, fontw
 ax2.plot(ts_rmt.index, ts_rmt, color=color_rmt, alpha=0.9, linewidth=1.5, label='Max Eigenvalue')
 ax2.tick_params(axis='y', labelcolor=color_rmt)
 
-# イベントライン
-events = {
-    '2016-02-12': '2016 Crash',
-    '2018-02-06': 'VIX Shock',
-    '2018-12-25': 'Xmas Drop',
-    '2020-03-19': 'Covid-19',
-    '2022-03-09': 'Ukraine/Fed'
-}
+from config import scenarios
 
-for date, label in events.items():
-    try:
-        date_ts = pd.to_datetime(date)
-        if date_ts >= ts_rmt.index[0] and date_ts <= ts_rmt.index[-1]:
-            plt.axvline(x=date_ts, color='black', linestyle='--', alpha=0.5)
-            plt.text(date_ts, ax2.get_ylim()[1]*0.95, f' {label}', rotation=90, verticalalignment='top')
-    except:
-        pass
+for name, period_tuple in scenarios.items():
+# タプルから開始日を取り出す
+    start_date_str = period_tuple[0] 
+    end_date_str = period_tuple[1]
+    
+    # 変換（ここでエラーが出たら、データが間違っていると気づける）
+    date_ts = pd.to_datetime(start_date_str)
+    end_date_ts = pd.to_datetime(end_date_str)
+
+    ax1.axvspan(date_ts, end_date_ts, color='gray', alpha=0.2, label='_nolegend_')
+
+    plt.text(date_ts, ax1.get_ylim()[1]*0.95, name, rotation=90, verticalalignment='top', fontsize=10, color='black',fontweight='bold')
+    
+    ax1.axvline(x=date_ts, color='gray', linestyle=':', alpha=0.6)
 
 plt.title(f"Validation: RMT Signal vs Market Crashes (N={df_prices.shape[1]})", fontsize=14)
+plt.tight_layout()
 plt.show()
 
 # 保存
-ts_rmt.to_csv("feature_rmt_eigen_98.csv")
+output_file = "feature_rmt_eigen_98.csv"
+df_features.to_csv(output_file)
 print("✅ 解析完了。結果を保存しました。")

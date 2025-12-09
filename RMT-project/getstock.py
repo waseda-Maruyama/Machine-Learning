@@ -24,7 +24,7 @@ print(f"🎯 対象: {len(target_tickers)} 銘柄")
 
 # 3. データ取得 (APIの値をそのまま使う)
 START_DATE = "20160101"
-END_DATE = "20250830"
+END_DATE = "20251130"
 
 print(f"\n📥 データ取得開始...")
 combined_data = {}

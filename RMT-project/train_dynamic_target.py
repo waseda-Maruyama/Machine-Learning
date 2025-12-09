@@ -12,8 +12,9 @@ except FileNotFoundError:
     print("❌ ファイルが見つかりません。")
     exit()
 
-# RMT計算 (Window=20) ※ここが変わりました
+
 df_log_returns = np.log(df_prices / df_prices.shift(1)).dropna()
+
 def calculate_rmt(returns, window):
     vals = [np.nan] * window
     for i in range(window, len(returns)):
@@ -23,7 +24,7 @@ def calculate_rmt(returns, window):
     return pd.Series(vals, index=returns.index)
 
 print("🧮 RMTを計算中...")
-ts_rmt = calculate_rmt(df_log_returns, window=120)
+ts_rmt = calculate_rmt(df_log_returns, window=125)
 
 # 特徴量作成
 market_index = df_prices.mean(axis=1)
@@ -39,11 +40,21 @@ loss = (-delta.where(delta < 0, 0)).rolling(14).mean()
 df_ml['RSI_14'] = 100 - (100 / (1 + gain/loss))
 
 # B: RMT (進化版)
+
 df_ml['RMT_Raw'] = ts_rmt
-df_ml['RMT_Diff'] = df_ml['RMT_Raw'].diff()
-df_ml['RMT_Accel'] = df_ml['RMT_Diff'].diff()
-# Z-Score (Window=20の場合は、Zスコアの基準期間も短くすべきか検討余地ありだが、一旦250で固定)
-df_ml['RMT_Z'] = (df_ml['RMT_Raw'] - df_ml['RMT_Raw'].rolling(250).mean()) / df_ml['RMT_Raw'].rolling(250).std()
+rmt_smooth = df_ml['RMT_Raw'].rolling(window=5).mean()
+    
+df_ml['RMT_Vel'] = rmt_smooth.diff()
+
+
+df_ml['RMT_Accel'] = df_ml['RMT_Vel'].diff()
+
+window_z = 250
+rmt_mean = df_ml['RMT_Raw'].rolling(window_z).mean()
+rmt_std = df_ml['RMT_Raw'].rolling(window_z).std()
+
+df_ml['RMT_Zscore'] = (df_ml['RMT_Raw'] - rmt_mean) / rmt_std
+
 
 # C: ターゲット (動的: -2.0 * Sigma)
 LOOKAHEAD = 5 # 期間も5日に短縮して感度を合わせる
@@ -58,16 +69,12 @@ print(f"暴落発生率(Y=1): {df_ml['Target'].mean():.2%}")
 
 # 2. 全シナリオ A/Bテスト
 features_A = ['Return', 'Vol_20', 'Momentum_10', 'RSI_14']
-features_B = features_A + ['RMT_Raw', 'RMT_Diff', 'RMT_Accel', 'RMT_Z']
+features_B = features_A + ['RMT_Raw', 'RMT_Vel', 'RMT_Accel', 'RMT_Zscore']
 
-scenarios = {
-    "1. 2018 VIX": ("2018-01-01", "2018-06-30"),
-    "2. 2020 Covid": ("2020-01-01", "2020-06-30"),
-    "3. 2024 Ueda": ("2024-06-01", "2024-10-31"),
-    "4. 2025 Tariff": ("2025-01-01", "2025-08-30")
-}
+import config
+scenarios = config.scenarios
 
-print("\n🤖 動的ターゲット × 最適窓(20日) 検証開始...")
+print("\n🤖 動的ターゲット  検証開始...")
 
 results = []
 for name, (start, end) in scenarios.items():
