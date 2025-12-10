@@ -63,7 +63,7 @@ df_dataset['Accel_Smooth'] = df_dataset['Vel_Smooth'].diff()
 # ---------------------------------------------------------
 # 4. ターゲット生成
 # ---------------------------------------------------------
-LOOKAHEAD = 5
+LOOKAHEAD = 10
 THRESHOLD = -0.07
 
 future_min = df_dataset['Market_Price'].rolling(LOOKAHEAD).min().shift(-LOOKAHEAD)

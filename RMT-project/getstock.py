@@ -6,112 +6,120 @@ import jquantsapi
 from dotenv import load_dotenv, find_dotenv
 from tqdm import tqdm
 
-# 1. 認証
+# =========================================================
+# 1. 初期設定 & 認証
+# =========================================================
 load_dotenv(find_dotenv('J-Quants.env'))
-cli = jquantsapi.Client(mail_address=os.getenv("JQUANTS_EMAIL"), password=os.getenv("JQUANTS_PASSWORD"))
+try:
+    cli = jquantsapi.Client(mail_address=os.getenv("JQUANTS_EMAIL"), password=os.getenv("JQUANTS_PASSWORD"))
+except Exception as e:
+    print(f"❌ 認証エラー: {e}")
+    exit()
 
-# 2. TOPIX 100 銘柄リスト作成
-print("📋 銘柄リストを作成中...")
+START_DATE = "20160101"
+END_DATE = "20251215"
+START_DATE_FIN = "20151201"
+
+print("📋 TOPIX 100 銘柄リストを作成中...")
 df_list = cli.get_listed_info()
-target_scales = ["TOPIX Core30", "TOPIX Large70"]
-# 市場区分などのフィルタリング
 df_topix100 = df_list[
     (df_list['MarketCodeName'].astype(str).str.contains('プライム')) & 
-    (df_list['ScaleCategory'].isin(target_scales))
+    (df_list['ScaleCategory'].isin(["TOPIX Core30", "TOPIX Large70"]))
 ]
 target_tickers = df_topix100['Code'].tolist()
 print(f"🎯 対象: {len(target_tickers)} 銘柄")
 
-# 3. データ取得 (APIの値をそのまま使う)
-START_DATE = "20160101"
-END_DATE = "20251130"
-
-print(f"\n📥 データ取得開始...")
-combined_data = {}
+# =========================================================
+# 2. データ取得 (株価 & 株式数)
+# =========================================================
+print(f"\n📥 データを取得中...")
+data_adj = {}   # 分析用 (調整後株価)
+data_raw = {}   # 計算用 (生株価)
+data_shares = {} # 計算用 (株式数)
 
 for code in tqdm(target_tickers):
     try:
+        # --- (A) 株価取得 ---
         df = cli.get_prices_daily_quotes(code=code, from_yyyymmdd=START_DATE, to_yyyymmdd=END_DATE)
-        
-        if df.empty: continue
-
-        # 日付変換
-        df['Date'] = pd.to_datetime(df['Date'])
-        df = df.set_index('Date').sort_index()
-        
-        # 数値変換 (念のため)
-        # ここで公式の 'AdjustmentClose' を数値化して採用します
-        if 'AdjustmentClose' in df.columns:
-            target_col = 'AdjustmentClose'
-        else:
-            # 万が一カラムがない場合はCloseを使う(リスクあり)
-            print( f"⚠️ {code} に 'AdjustmentClose' カラムがありません")
+        if not df.empty:
+            df['Date'] = pd.to_datetime(df['Date'])
+            df = df.set_index('Date').sort_index()
             
-        series = pd.to_numeric(df[target_col], errors='coerce')
+            if 'AdjustmentClose' in df.columns:
+                data_adj[code] = pd.to_numeric(df['AdjustmentClose'], errors='coerce')
+            if 'Close' in df.columns:
+                data_raw[code] = pd.to_numeric(df['Close'], errors='coerce')
         
-        # 辞書に格納
-        combined_data[code] = series
+        time.sleep(0.5)
         
-        time.sleep(0.1)
-
+        # --- (B) 株式数取得 ---
+        try:
+            df_fins = cli.get_fins_statements(code=code)
+            if not df_fins.empty:
+                df_fins['Date'] = pd.to_datetime(df_fins['DisclosedDate'])
+                df_fins = df_fins[(df_fins['Date'] >= pd.to_datetime(START_DATE_FIN)) & 
+                                  (df_fins['Date'] <= pd.to_datetime(END_DATE))]
+                
+                # 【重要】あなたの調査で見つかった正しい列名を使用
+                target_col = 'NumberOfIssuedAndOutstandingSharesAtTheEndOfFiscalYearIncludingTreasuryStock'
+                
+                if target_col in df_fins.columns:
+                    s = df_fins.set_index('Date')[target_col]
+                    s = pd.to_numeric(s, errors='coerce')
+                    if not s.dropna().empty:
+                        # 重複日は最新を採用
+                        data_shares[code] = s[~s.index.duplicated(keep='last')]
+        except:
+            print(f"⚠️ {code} 財務データ取得失敗")
+            
     except Exception as e:
-        print(f"❌ Error at {code}: {e}")
+        print(f"❌ Error {code}: {e}")
 
-# 4. 結合・保存
-print("\n🔄 結合中...")
-df_result = pd.concat(combined_data, axis=1)
+# =========================================================
+# 3. データ結合と保存
+# =========================================================
+print("\n⚙️ データ加工中...")
 
-# ※これをしないと、この日のせいで老舗企業まで全滅します
+# 株価結合
+df_adj = pd.concat(data_adj, axis=1)
 error_date = pd.to_datetime("2020-10-01")
-if error_date in df_result.index:
-    print("⚠️ 2020-10-01 (システム障害日) を除外します")
-    df_result = df_result.drop(index=error_date)
+if error_date in df_adj.index:
+    df_adj = df_adj.drop(index=error_date)
+df_adj = df_adj.dropna(axis=1)
 
-# 生存者バイアス対策 (データが足りない銘柄は列ごと削除)
-df_clean = df_result.dropna(axis=1)
+# 保存1: 株価データ (分析用)
+df_adj.to_csv("stock_prices.csv")
+print("✅ stock_prices.csv を保存しました")
 
-# 保存
-filename = "stock_prices_topix100_simple.csv"
-df_clean.to_csv(filename)
-# 1. 生存している列（銘柄）と、元の列（銘柄）を比較して、差分を出す
-removed_tickers = df_result.columns.difference(df_clean.columns)
-
-print("-" * 40)
-print(f"🗑️ 削除された銘柄: {len(removed_tickers)} 件")
-print("-" * 40)
-
-# 2. なぜ消されたのか？（各銘柄のデータ開始日を調べる）
-for code in removed_tickers:
-    # first_valid_index() は、その列で最初に NaN じゃなくなる日付を返します
-    start_date = df_result[code].first_valid_index()
-    
-    # もし全期間 NaN なら "データなし"
-    if start_date is None:
-        status = "全期間データなし (取得失敗)"
-    else:
-        status = f"データ開始: {start_date.date()}"
+# 時価総額計算
+if len(data_shares) > 0:
+    print("🧮 時価総額データの作成を試みます...")
+    try:
+        df_raw = pd.concat(data_raw, axis=1)
+        df_shares_raw = pd.concat(data_shares, axis=1)
         
-    print(f"❌ {code} : {status}")
+        # 銘柄合わせ
+        valid_tickers = df_adj.columns.intersection(df_shares_raw.columns)
+        
+        if len(valid_tickers) > 0:
+            df_raw = df_raw[valid_tickers]
+            df_shares_raw = df_shares_raw[valid_tickers]
+            
+            # 日次展開 (ffill)
+            df_shares_daily = df_shares_raw.reindex(df_adj.index, method='ffill').bfill()
+            
+            # 計算: 生株価 * 株式数
+            df_market_cap = df_raw * df_shares_daily
+            
+            # 保存2: 時価総額データ
+            df_market_cap.to_csv("market_caps.csv")
+            print("✅ market_caps.csv を保存しました (時価総額加重用)")
+        else:
+            print("⚠️ 株価と株式数の銘柄が一致しませんでした。")
+    except Exception as e:
+        print(f"⚠️ 時価総額計算エラー: {e}")
+else:
+    print("⚠️ 株式数データが取得できませんでした。")
 
 print("-" * 40)
-
-print("-" * 40)
-print(f"✅ 完了: {filename}")
-print(f"📊 データ形状: {df_clean.shape}")
-print(f"   期間: {df_clean.index.min().date()} ~ {df_clean.index.max().date()}")
-print("-" * 40)
-
-# -----------------------------------------------------
-# 【重要】 答え合わせ (プロット)
-# -----------------------------------------------------
-# もしこのグラフで「垂直落下」している銘柄があったら、
-# APIの AdjustmentClose は「過去への遡及調整」をしていないことになります。
-# その場合は、前の「田村流ロジック」に戻す必要があります。
-if not df_clean.empty:
-    import matplotlib.pyplot as plt
-    plt.figure(figsize=(12, 6))
-    # 正規化してプロット
-    (df_clean.iloc[:, :5] / df_clean.iloc[0, :5]).plot(alpha=0.7)
-    plt.title("Check: Is 'AdjustmentClose' really adjusted retroactively?")
-    plt.grid(True)
-    plt.show()
+print("完了。これで次のステップに進めます！")

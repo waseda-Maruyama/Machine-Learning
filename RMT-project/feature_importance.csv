@@ -1,9 +1,9 @@
 Feature,Gain
-RMT_Zscore,506
-RMT_Raw,448
-Vol_20,402
-RSI_14,347
-Momentum_10,338
-RMT_Vel,335
-Return,315
-RMT_Accel,309
+Vol_20,480
+RMT_Raw,436
+Momentum_10,428
+RMT_Zscore,420
+RMT_Vel,351
+RSI_14,318
+Return,300
+RMT_Accel,267
