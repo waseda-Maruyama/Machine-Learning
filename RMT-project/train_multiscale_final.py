@@ -30,10 +30,10 @@ def calculate_rmt(returns, window):
 
 # ★ マルチスケール計算 ★
 print("🧮 RMT(Window=20: 急変検知)を計算中...")
-rmt_short = calculate_rmt(df_log_returns, window=80)
+rmt_short = calculate_rmt(df_log_returns, window=20)
 
 print("🧮 RMT(Window=105: 構造変化検知)を計算中...")
-rmt_long = calculate_rmt(df_log_returns, window=130)
+rmt_long = calculate_rmt(df_log_returns, window=105)
 
 # ---------------------------------------------------------
 # 2. 特徴量エンジニアリング (全部入り)

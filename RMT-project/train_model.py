@@ -9,7 +9,7 @@ from config import scenarios # 設定ファイル
 # ⚙️ 設定エリア
 # =========================================================
 INPUT_FILE = "dataset_ml.csv" # 前処理済みのCSV
-DECISION_THRESHOLD = 0.15     # 危険度 15% を超えたら警報を鳴らす (感度調整)
+DECISION_THRESHOLD = 0.30     # 危険度 15% を超えたら警報を鳴らす (感度調整)
 
 # =========================================================
 # 1. データ読み込み
@@ -20,9 +20,22 @@ if not os.path.exists(INPUT_FILE):
     print("❌ ファイルが見つかりません。create_dataset.py を先に実行してください。")
     exit()
 
-# CSVには [Market_Price, Target, RMT_Raw, RMT_Vel...] が入っています
+# CSVには [Market_Price, Target, RMT_Raw, RMT_Vel, RSI_14...] が全部入っています
 df_ml = pd.read_csv(INPUT_FILE, index_col=0, parse_dates=True)
 
+# ---------------------------------------------------------
+# ★追加: 安全装置 (列の存在チェック)
+# ---------------------------------------------------------
+# 使用する特徴量リスト
+features_Tech = ['Return', 'Vol_20', 'Momentum_10', 'RSI_14']
+features_RMT = features_Tech + ['RMT_Raw', 'RMT_Vel', 'RMT_Accel', 'RMT_Zscore']
+
+# CSVに必要な列があるか確認
+missing_cols = [col for col in features_RMT if col not in df_ml.columns]
+if missing_cols:
+    print(f"❌ エラー: CSVファイルに以下の列が見つかりません: {missing_cols}")
+    print("   create_dataset.py を再実行して、テクニカル指標を計算・保存してください。")
+    exit()
 
 print(f"📊 学習用データ最終形状: {df_ml.shape}")
 print(f"   ターゲット(暴落)数: {df_ml['Target'].sum()} (率: {df_ml['Target'].mean():.2%})")
@@ -30,10 +43,6 @@ print(f"   ターゲット(暴落)数: {df_ml['Target'].sum()} (率: {df_ml['Tar
 # =========================================================
 # 3. モデル学習 (Walk-Forward Validation)
 # =========================================================
-# 特徴量リスト
-features_Tech = ['Return', 'Vol_20', 'Momentum_10', 'RSI_14']
-features_RMT = features_Tech + ['RMT_Raw', 'RMT_Vel', 'RMT_Accel', 'RMT_Zscore']
-
 print(f"\n🤖 学習開始 (閾値: {DECISION_THRESHOLD:.0%})...")
 
 results = []
@@ -58,6 +67,7 @@ for name, (start_str, end_str) in scenarios.items():
         continue
 
     # 不均衡データの重み付け (Scale Pos Weight)
+    # 正解(暴落)が少ないので、見逃さないように重みを乗せる
     pos_weight = len(y_train) / (2 * y_train.sum())
     
     # -----------------------------------------------------
