@@ -37,11 +37,11 @@ market_index = market_index / market_index.iloc[0]
 # =========================================================
 # 短期条件
 short_days_list = [3, 5]            # 3日後、5日後
-short_drop_list = [-0.02, -0.03, -0.04]  # -2%, -3%, -4%
+short_drop_list = [-0.02, -0.03, -0.04, -0.05]  # -2%、-3%、-4%、-5%
 
 # 長期条件 (継続下落)
 long_days_list = [10]               # 10日後
-long_drop_list = [-0.07, -0.1]   # -6%, -7%, -8%
+long_drop_list = [-0.05, -0.06, -0.07, -0.08]  # -5%、-6%、-7%、-8%
 
 # 組み合わせ生成
 param_grid = list(itertools.product(short_days_list, short_drop_list, long_days_list, long_drop_list))

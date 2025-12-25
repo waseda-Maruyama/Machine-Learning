@@ -18,7 +18,7 @@ DROP_LONG = -0.06   # -6%
 ONSET_FILTER = 5    # Onsetフィルタ
 
 # モデル判定閾値 (train.py で決めた値)
-DECISION_THRESHOLD = 0.20
+DECISION_THRESHOLD = 0.30
 
 print("📊 データを読み込み、市場インデックスを作成中...")
 
@@ -92,7 +92,7 @@ def calculate_rmt_fast(returns_df, window_size):
 # ---------------------------------------------------------
 # 4. 感度分析ループ
 # ---------------------------------------------------------
-windows_to_scan = list(range(100, 300, 5))
+windows_to_scan = list(range(20, 200, 1))
 print(f"\n🧪 RMT窓幅の感度分析を開始: {windows_to_scan} 日")
 
 scenario_scores = {name: [] for name in scenarios.keys()}
@@ -186,9 +186,10 @@ plt.axvline(x=best_window, color='red', linestyle='--', alpha=0.5)
 plt.text(best_window, -0.05, f'Best: {best_window}d\n(Avg: {best_score:.1%})', 
          color='red', ha='center', fontweight='bold')
 
-plt.title(f'RMT Sensitivity Analysis (Threshold: {DECISION_THRESHOLD:.0%})', fontsize=14)
-plt.xlabel('Window Size (Days)', fontsize=12)
-plt.ylabel('Recall (Sensitivity)', fontsize=12)
+plt.title(f'RMT Window Sensitivity Analysis', fontsize=26)
+plt.xlabel('Window Size T(Days)', fontsize=16)
+plt.ylabel('Recall Score', fontsize=18)
+plt.tick_params(axis='both', which='major', labelsize=16)
 plt.ylim(-0.1, 1.1)
 plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.grid(True, alpha=0.3)
