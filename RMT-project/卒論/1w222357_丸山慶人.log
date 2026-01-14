@@ -1,18 +1,15 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.8.4)  9 JAN 2026 15:31
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.8.4)  14 JAN 2026 21:11
  restricted system commands enabled.
-**1w222357_丸山慶人.tex
-(./1w222357_丸山慶人.tex
+ file:line:error style messages enabled.
+**c:/Users/maruk/Desktop/研究/RMT-project/卒論/1w222357_丸山慶人
+(c:/Users/maruk/Desktop/研究/RMT-project/卒論/1w222357_丸山慶人.tex
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-20>
 Lua module: luaotfload 2024-12-03 v3.29 Lua based OpenType font support
 Lua module: lualibs 2023-07-13 v2.76 ConTeXt Lua standard libraries.
-Lua module: lualibs-extended 2023-07-13 v2.76 ConTeXt Lua libraries -- extended 
-collection.
-luaotfload | conf : Root cache directory is "C:/texlive/2025/texmf-var/luatex-ca
-che/generic/names".
-luaotfload | init : Loading fontloader "fontloader-2023-12-28.lua" from kpse-res
-olved path "c:/texlive/2025/texmf-dist/tex/luatex/luaotfload/fontloader-2023-12-
-28.lua".
+Lua module: lualibs-extended 2023-07-13 v2.76 ConTeXt Lua libraries -- extended collection.
+luaotfload | conf : Root cache directory is "C:/texlive/2025/texmf-var/luatex-cache/generic/names".
+luaotfload | init : Loading fontloader "fontloader-2023-12-28.lua" from kpse-resolved path "c:/texlive/2025/texmf-dist/tex/luatex/luaotfload/fontloader-2023-12-28.lua".
 Lua-only attribute luaotfload@noligature = 1
 luaotfload | init : Context OpenType loader version 3.134
 Inserting `luaotfload.node_processor' in `pre_linebreak_filter'.
@@ -20,8 +17,7 @@ Inserting `luaotfload.node_processor' in `hpack_filter'.
 Inserting `luaotfload.glyph_stream' in `glyph_stream_provider'.
 Inserting `luaotfload.define_font' in `define_font'.
 Lua-only attribute luaotfload_color_attribute = 2
-luaotfload | conf : Root cache directory is "C:/texlive/2025/texmf-var/luatex-ca
-che/generic/names".
+luaotfload | conf : Root cache directory is "C:/texlive/2025/texmf-var/luatex-cache/generic/names".
 Inserting `luaotfload.harf.strip_prefix' in `find_opentype_file'.
 Inserting `luaotfload.harf.strip_prefix' in `find_truetype_file'.
 Removing  `luaotfload.glyph_stream' from `glyph_stream_provider'.
@@ -39,65 +35,48 @@ Inserting `luaotfload.aux.fixup_fontdata' in `luaotfload.patch_font_unsafe'.
 Inserting `luaotfload.aux.set_capheight' in `luaotfload.patch_font'.
 Inserting `luaotfload.aux.set_xheight' in `luaotfload.patch_font'.
 Inserting `luaotfload.rewrite_fontname' in `luaotfload.patch_font'.
-Inserting `tracingstacklevels' in `input_level_string'. (c:/texlive/2025/texmf-
-dist/tex/luatex/luatexja/ltjsarticle.cls
+Inserting `tracingstacklevels' in `input_level_string'. (c:/texlive/2025/texmf-dist/tex/luatex/luatexja/ltjsarticle.cls
 Document Class: ltjsarticle 2025-05-26 ltjsclasses 
 (c:/texlive/2025/texmf-dist/tex/luatex/luatexja/luatexja.sty
 Package: luatexja 2025-07-23 Japanese Typesetting with Lua(La)TeX
-
-(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/luatexja-core.sty
+ (c:/texlive/2025/texmf-dist/tex/luatex/luatexja/luatexja-core.sty
 Package: luatexja-core 2023-10-07 Core of LuaTeX-ja
-
-(c:/texlive/2025/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+ (c:/texlive/2025/texmf-dist/tex/generic/infwarerr/infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
-)
-(c:/texlive/2025/texmf-dist/tex/luatex/luatexbase/luatexbase.sty
+) (c:/texlive/2025/texmf-dist/tex/luatex/luatexbase/luatexbase.sty
 Package: luatexbase 2015/10/04 v1.3 luatexbase interface to LuaTeX 
-
-(c:/texlive/2025/texmf-dist/tex/luatex/ctablestack/ctablestack.sty
+ (c:/texlive/2025/texmf-dist/tex/luatex/ctablestack/ctablestack.sty
 Package: ctablestack 2015/10/01 v1.0 Catcode table stable support
 \@catcodetablestackcnt=\count273
 )
 \CatcodeTableOther=\catcodetable14
 \CatcodeTableExpl=\catcodetable15
-)
-(c:/texlive/2025/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+) (c:/texlive/2025/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
-)
-(c:/texlive/2025/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
-Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
-)
-
-(c:/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty
+) (c:/texlive/2025/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+ (c:/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
 )
 Package pdftexcmds Info: \pdf@primitive is available.
 Package pdftexcmds Info: \pdf@ifprimitive is available.
 Package pdftexcmds Info: \pdfdraftmode found.
 \pdftexcmds@toks=\toks17
-)
-(c:/texlive/2025/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+) (c:/texlive/2025/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
-
-(c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkeyval.tex
-(c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkvutils.tex
+ (c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkeyval.tex (c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkvutils.tex
 \XKV@toks=\toks18
 \XKV@tempa@toks=\toks19
-
-(c:/texlive/2025/texmf-dist/tex/generic/xkeyval/keyval.tex))
+ (c:/texlive/2025/texmf-dist/tex/generic/xkeyval/keyval.tex))
 \XKV@depth=\count274
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
-))
-(c:/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+)) (c:/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count275
-)
-(c:/texlive/2025/texmf-dist/tex/latex/everyhook/everyhook.sty
-(c:/texlive/2025/texmf-dist/tex/latex/svn-prov/svn-prov.sty
+) (c:/texlive/2025/texmf-dist/tex/latex/everyhook/everyhook.sty (c:/texlive/2025/texmf-dist/tex/latex/svn-prov/svn-prov.sty
 Package: svn-prov 2010/04/24 v3.1862 Package Date/Version from SVN Keywords
 )
-Package: everyhook 2014/11/26 v1.2 (SVN Rev: 12)\ Hooks for low level TeX every
-X primitives.
+Package: everyhook 2014/11/26 v1.2 (SVN Rev: 12)\ Hooks for low level TeX everyX primitives.
 \everypar=\toks20
 \frozen@everymath=\toks21
 \frozen@everydisplay=\toks22
@@ -143,8 +122,7 @@ Custom whatsit box_boundary = 5
 Custom whatsit ja_al_boundary = 6
 Module luatexbase Info: Uninstalling kernel luatexbase code on input line 184
 (load cache: ltj-cid-auto-adobe-japan1.luc)
-Lua module: luatexja.charrange 2022-08-19 Handling the range of Japanese charact
-ers
+Lua module: luatexja.charrange 2022-08-19 Handling the range of Japanese characters
 Lua module: luatexja.stack 2022-08-20 LuaTeX-ja stack system
 Inserting `ltj.create_dir_whatsit' in `hpack_filter'.
 Inserting `ltj.create_dir_whatsit' in `post_linebreak_filter'.
@@ -197,8 +175,7 @@ Inserting `ltj.create_dir_whatsit' in `hpack_filter'.
 Removing  `luaotfload.node_processor' from `pre_linebreak_filter'.
 Inserting `ltj.set_stack_level' in `pre_linebreak_filter'.
 Inserting `luaotfload.node_processor' in `pre_linebreak_filter'.
-Lua module: luatexja.jfmglue 2025-05-27 Insertion process of JFM glues, [x]kanji
-skip and others
+Lua module: luatexja.jfmglue 2025-05-27 Insertion process of JFM glues, [x]kanjiskip and others
 Inserting `luatexja.beginpar.np_info' in `luatexja.jfmglue.whatsit_getinfo'.
 Inserting `luatexja.beginpar.np_info_after' in `luatexja.jfmglue.whatsit_after'.
 Inserting `ltj.mlist_to_hlist_pre' in `pre_mlist_to_hlist_filter'.
@@ -225,8 +202,7 @@ Inserting `ltj.set_stack_level' in `hpack_filter'.
 Inserting `luaotfload.node_processor' in `hpack_filter'.
 Inserting `ltj.main' in `hpack_filter'.
 Inserting `luaotfload.harf.finalize_hlist' in `hpack_filter'.
-Inserting `ltj.create_dir_whatsit' in `hpack_filter'.
-(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/ltj-base.sty
+Inserting `ltj.create_dir_whatsit' in `hpack_filter'. (c:/texlive/2025/texmf-dist/tex/luatex/luatexja/ltj-base.sty
 Package: ltj-base 2021-03-16
 \ltj@tempcntb=\count280
 \ltj@tempcntc=\count281
@@ -261,324 +237,168 @@ Package: ltj-base 2021-03-16
 \ltj@@lua@unboxcheckdir@inner=\luafunction55
 \ltj@@lua@uncopycheckdir@inner=\luafunction56
 \ltj@@lua@uncopy@restore@whatsit@inner=\luafunction57
-(load cache: ltj-kinsoku_default.luc)
-(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/ltj-latex.sty
+(load cache: ltj-kinsoku_default.luc) (c:/texlive/2025/texmf-dist/tex/luatex/luatexja/ltj-latex.sty
 Package: ltj-latex 2025-06-08 LaTeX support of LuaTeX-ja
-Inserting `ltj.direction' in `pre_shipout_filter'.
-(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjfont.sty
+Inserting `ltj.direction' in `pre_shipout_filter'. (c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjfont.sty
 Package: lltjfont 2023-05-16 Patch to NFSS2 for LuaTeX-ja
 \ltj@@latex@plv=\count282
-
-(c:/texlive/2025/texmf-dist/tex/latex/base/tuenc.def
+ (c:/texlive/2025/texmf-dist/tex/latex/base/tuenc.def
 File: tuenc.def 2024/12/21 v2.1c Standard LaTeX file
 \@remove@tlig@@@=\luafunction58
 LaTeX Font Info:    Redeclaring font encoding TU on input line 105.
-LaTeX Encoding Info:    Redeclaring text command \textquotesingle (encoding TU)
- on input line 148.
-LaTeX Encoding Info:    Redeclaring text command \textasciigrave (encoding TU) 
-on input line 149.
-LaTeX Encoding Info:    Redeclaring text command \textquotedbl (encoding TU) on
- input line 150.
-LaTeX Encoding Info:    Redeclaring text command \textdollar (encoding TU) on i
-nput line 151.
-LaTeX Encoding Info:    Redeclaring text command \textless (encoding TU) on inp
-ut line 152.
-LaTeX Encoding Info:    Redeclaring text command \textgreater (encoding TU) on 
-input line 153.
-LaTeX Encoding Info:    Redeclaring text command \textbackslash (encoding TU) o
-n input line 154.
-LaTeX Encoding Info:    Redeclaring text command \textasciicircum (encoding TU)
- on input line 155.
-LaTeX Encoding Info:    Redeclaring text command \textunderscore (encoding TU) 
-on input line 156.
-LaTeX Encoding Info:    Redeclaring text command \textbraceleft (encoding TU) o
-n input line 157.
-LaTeX Encoding Info:    Redeclaring text command \textbar (encoding TU) on inpu
-t line 158.
-LaTeX Encoding Info:    Redeclaring text command \textbraceright (encoding TU) 
-on input line 159.
-LaTeX Encoding Info:    Redeclaring text command \textasciitilde (encoding TU) 
-on input line 160.
-LaTeX Encoding Info:    Redeclaring text command \textexclamdown (encoding TU) 
-on input line 161.
-LaTeX Encoding Info:    Redeclaring text command \textcent (encoding TU) on inp
-ut line 162.
-LaTeX Encoding Info:    Redeclaring text command \textsterling (encoding TU) on
- input line 163.
-LaTeX Encoding Info:    Redeclaring text command \textcurrency (encoding TU) on
- input line 164.
-LaTeX Encoding Info:    Redeclaring text command \textyen (encoding TU) on inpu
-t line 165.
-LaTeX Encoding Info:    Redeclaring text command \textbrokenbar (encoding TU) o
-n input line 166.
-LaTeX Encoding Info:    Redeclaring text command \textsection (encoding TU) on 
-input line 167.
-LaTeX Encoding Info:    Redeclaring text command \textasciidieresis (encoding T
-U) on input line 168.
-LaTeX Encoding Info:    Redeclaring text command \textcopyright (encoding TU) o
-n input line 169.
-LaTeX Encoding Info:    Redeclaring text command \textordfeminine (encoding TU)
- on input line 170.
-LaTeX Encoding Info:    Redeclaring text command \guillemetleft (encoding TU) o
-n input line 171.
-LaTeX Encoding Info:    Redeclaring text command \guillemotleft (encoding TU) o
-n input line 172.
-LaTeX Encoding Info:    Redeclaring text command \textlnot (encoding TU) on inp
-ut line 173.
-LaTeX Encoding Info:    Redeclaring text command \textregistered (encoding TU) 
-on input line 174.
-LaTeX Encoding Info:    Redeclaring text command \textasciimacron (encoding TU)
- on input line 175.
-LaTeX Encoding Info:    Redeclaring text command \textdegree (encoding TU) on i
-nput line 176.
-LaTeX Encoding Info:    Redeclaring text command \textpm (encoding TU) on input
- line 177.
-LaTeX Encoding Info:    Redeclaring text command \texttwosuperior (encoding TU)
- on input line 178.
-LaTeX Encoding Info:    Redeclaring text command \textthreesuperior (encoding T
-U) on input line 179.
-LaTeX Encoding Info:    Redeclaring text command \textasciiacute (encoding TU) 
-on input line 180.
-LaTeX Encoding Info:    Redeclaring text command \textmu (encoding TU) on input
- line 181.
-LaTeX Encoding Info:    Redeclaring text command \textparagraph (encoding TU) o
-n input line 182.
-LaTeX Encoding Info:    Redeclaring text command \textperiodcentered (encoding 
-TU) on input line 183.
-LaTeX Encoding Info:    Redeclaring text command \textonesuperior (encoding TU)
- on input line 184.
-LaTeX Encoding Info:    Redeclaring text command \textordmasculine (encoding TU
-) on input line 185.
-LaTeX Encoding Info:    Redeclaring text command \guillemetright (encoding TU) 
-on input line 186.
-LaTeX Encoding Info:    Redeclaring text command \guillemotright (encoding TU) 
-on input line 187.
-LaTeX Encoding Info:    Redeclaring text command \textonequarter (encoding TU) 
-on input line 188.
-LaTeX Encoding Info:    Redeclaring text command \textonehalf (encoding TU) on 
-input line 189.
-LaTeX Encoding Info:    Redeclaring text command \textthreequarters (encoding T
-U) on input line 190.
-LaTeX Encoding Info:    Redeclaring text command \textquestiondown (encoding TU
-) on input line 191.
-LaTeX Encoding Info:    Redeclaring text command \AE (encoding TU) on input lin
-e 192.
-LaTeX Encoding Info:    Redeclaring text command \DH (encoding TU) on input lin
-e 193.
-LaTeX Encoding Info:    Redeclaring text command \texttimes (encoding TU) on in
-put line 194.
-LaTeX Encoding Info:    Redeclaring text command \O (encoding TU) on input line
- 195.
-LaTeX Encoding Info:    Redeclaring text command \TH (encoding TU) on input lin
-e 196.
-LaTeX Encoding Info:    Redeclaring text command \ss (encoding TU) on input lin
-e 197.
-LaTeX Encoding Info:    Redeclaring text command \ae (encoding TU) on input lin
-e 198.
-LaTeX Encoding Info:    Redeclaring text command \dh (encoding TU) on input lin
-e 199.
-LaTeX Encoding Info:    Redeclaring text command \textdiv (encoding TU) on inpu
-t line 200.
-LaTeX Encoding Info:    Redeclaring text command \o (encoding TU) on input line
- 201.
-LaTeX Encoding Info:    Redeclaring text command \th (encoding TU) on input lin
-e 202.
-LaTeX Encoding Info:    Redeclaring text command \DJ (encoding TU) on input lin
-e 203.
-LaTeX Encoding Info:    Redeclaring text command \dj (encoding TU) on input lin
-e 204.
-LaTeX Encoding Info:    Redeclaring text command \i (encoding TU) on input line
- 205.
-LaTeX Encoding Info:    Redeclaring text command \IJ (encoding TU) on input lin
-e 206.
-LaTeX Encoding Info:    Redeclaring text command \ij (encoding TU) on input lin
-e 207.
-LaTeX Encoding Info:    Redeclaring text command \L (encoding TU) on input line
- 208.
-LaTeX Encoding Info:    Redeclaring text command \l (encoding TU) on input line
- 209.
-LaTeX Encoding Info:    Redeclaring text command \NG (encoding TU) on input lin
-e 210.
-LaTeX Encoding Info:    Redeclaring text command \ng (encoding TU) on input lin
-e 211.
-LaTeX Encoding Info:    Redeclaring text command \OE (encoding TU) on input lin
-e 212.
-LaTeX Encoding Info:    Redeclaring text command \oe (encoding TU) on input lin
-e 213.
-LaTeX Encoding Info:    Redeclaring text command \textflorin (encoding TU) on i
-nput line 214.
-LaTeX Encoding Info:    Redeclaring text command \j (encoding TU) on input line
- 215.
-LaTeX Encoding Info:    Redeclaring text command \textasciicaron (encoding TU) 
-on input line 216.
-LaTeX Encoding Info:    Redeclaring text command \textasciibreve (encoding TU) 
-on input line 217.
-LaTeX Encoding Info:    Redeclaring text command \textacutedbl (encoding TU) on
- input line 218.
-LaTeX Encoding Info:    Redeclaring text command \textgravedbl (encoding TU) on
- input line 219.
-LaTeX Encoding Info:    Redeclaring text command \texttildelow (encoding TU) on
- input line 220.
-LaTeX Encoding Info:    Redeclaring text command \textbaht (encoding TU) on inp
-ut line 221.
-LaTeX Encoding Info:    Redeclaring text command \SS (encoding TU) on input lin
-e 222.
-LaTeX Encoding Info:    Redeclaring text command \textcompwordmark (encoding TU
-) on input line 223.
-LaTeX Encoding Info:    Redeclaring text command \textendash (encoding TU) on i
-nput line 224.
-LaTeX Encoding Info:    Redeclaring text command \textemdash (encoding TU) on i
-nput line 225.
-LaTeX Encoding Info:    Redeclaring text command \textnonbreakinghyphen (encodi
-ng TU) on input line 226.
-LaTeX Encoding Info:    Redeclaring text command \textfiguredash (encoding TU) 
-on input line 228.
-LaTeX Encoding Info:    Redeclaring text command \texthorizontalbar (encoding T
-U) on input line 230.
-LaTeX Encoding Info:    Redeclaring text command \textbardbl (encoding TU) on i
-nput line 232.
-LaTeX Encoding Info:    Redeclaring text command \textquoteleft (encoding TU) o
-n input line 233.
-LaTeX Encoding Info:    Redeclaring text command \textquoteright (encoding TU) 
-on input line 234.
-LaTeX Encoding Info:    Redeclaring text command \quotesinglbase (encoding TU) 
-on input line 235.
-LaTeX Encoding Info:    Redeclaring text command \textquotedblleft (encoding TU
-) on input line 236.
-LaTeX Encoding Info:    Redeclaring text command \textquotedblright (encoding T
-U) on input line 237.
-LaTeX Encoding Info:    Redeclaring text command \quotedblbase (encoding TU) on
- input line 238.
-LaTeX Encoding Info:    Redeclaring text command \textdagger (encoding TU) on i
-nput line 239.
-LaTeX Encoding Info:    Redeclaring text command \textdaggerdbl (encoding TU) o
-n input line 240.
-LaTeX Encoding Info:    Redeclaring text command \textbullet (encoding TU) on i
-nput line 241.
-LaTeX Encoding Info:    Redeclaring text command \textellipsis (encoding TU) on
- input line 242.
-LaTeX Encoding Info:    Redeclaring text command \textperthousand (encoding TU)
- on input line 243.
-LaTeX Encoding Info:    Redeclaring text command \textpertenthousand (encoding 
-TU) on input line 244.
-LaTeX Encoding Info:    Redeclaring text command \guilsinglleft (encoding TU) o
-n input line 245.
-LaTeX Encoding Info:    Redeclaring text command \guilsinglright (encoding TU) 
-on input line 246.
-LaTeX Encoding Info:    Redeclaring text command \textreferencemark (encoding T
-U) on input line 247.
-LaTeX Encoding Info:    Redeclaring text command \textinterrobang (encoding TU)
- on input line 248.
-LaTeX Encoding Info:    Redeclaring text command \textfractionsolidus (encoding
- TU) on input line 249.
-LaTeX Encoding Info:    Redeclaring text command \textlquill (encoding TU) on i
-nput line 250.
-LaTeX Encoding Info:    Redeclaring text command \textrquill (encoding TU) on i
-nput line 251.
-LaTeX Encoding Info:    Redeclaring text command \textdiscount (encoding TU) on
- input line 252.
-LaTeX Encoding Info:    Redeclaring text command \textcolonmonetary (encoding T
-U) on input line 253.
-LaTeX Encoding Info:    Redeclaring text command \textlira (encoding TU) on inp
-ut line 254.
-LaTeX Encoding Info:    Redeclaring text command \textnaira (encoding TU) on in
-put line 255.
-LaTeX Encoding Info:    Redeclaring text command \textwon (encoding TU) on inpu
-t line 256.
-LaTeX Encoding Info:    Redeclaring text command \textdong (encoding TU) on inp
-ut line 257.
-LaTeX Encoding Info:    Redeclaring text command \texteuro (encoding TU) on inp
-ut line 258.
-LaTeX Encoding Info:    Redeclaring text command \textpeso (encoding TU) on inp
-ut line 259.
-LaTeX Encoding Info:    Redeclaring text command \textcelsius (encoding TU) on 
-input line 260.
-LaTeX Encoding Info:    Redeclaring text command \textnumero (encoding TU) on i
-nput line 261.
-LaTeX Encoding Info:    Redeclaring text command \textcircledP (encoding TU) on
- input line 262.
-LaTeX Encoding Info:    Redeclaring text command \textrecipe (encoding TU) on i
-nput line 263.
-LaTeX Encoding Info:    Redeclaring text command \textservicemark (encoding TU)
- on input line 264.
-LaTeX Encoding Info:    Redeclaring text command \texttrademark (encoding TU) o
-n input line 265.
-LaTeX Encoding Info:    Redeclaring text command \textohm (encoding TU) on inpu
-t line 266.
-LaTeX Encoding Info:    Redeclaring text command \textmho (encoding TU) on inpu
-t line 267.
-LaTeX Encoding Info:    Redeclaring text command \textestimated (encoding TU) o
-n input line 268.
-LaTeX Encoding Info:    Redeclaring text command \textleftarrow (encoding TU) o
-n input line 269.
-LaTeX Encoding Info:    Redeclaring text command \textuparrow (encoding TU) on 
-input line 270.
-LaTeX Encoding Info:    Redeclaring text command \textrightarrow (encoding TU) 
-on input line 271.
-LaTeX Encoding Info:    Redeclaring text command \textdownarrow (encoding TU) o
-n input line 272.
-LaTeX Encoding Info:    Redeclaring text command \textminus (encoding TU) on in
-put line 273.
-LaTeX Encoding Info:    Redeclaring text command \Hwithstroke (encoding TU) on 
-input line 275.
-LaTeX Encoding Info:    Redeclaring text command \hwithstroke (encoding TU) on 
-input line 276.
-LaTeX Encoding Info:    Redeclaring text command \textasteriskcentered (encodin
-g TU) on input line 277.
-LaTeX Encoding Info:    Redeclaring text command \textsurd (encoding TU) on inp
-ut line 288.
-LaTeX Encoding Info:    Redeclaring text command \textlangle (encoding TU) on i
-nput line 289.
-LaTeX Encoding Info:    Redeclaring text command \textrangle (encoding TU) on i
-nput line 290.
-LaTeX Encoding Info:    Redeclaring text command \textblank (encoding TU) on in
-put line 291.
-LaTeX Encoding Info:    Redeclaring text command \textvisiblespace (encoding TU
-) on input line 292.
-LaTeX Encoding Info:    Redeclaring text command \textopenbullet (encoding TU) 
-on input line 293.
-LaTeX Encoding Info:    Redeclaring text command \textbigcircle (encoding TU) o
-n input line 294.
-LaTeX Encoding Info:    Redeclaring text command \textmusicalnote (encoding TU)
- on input line 295.
-LaTeX Encoding Info:    Redeclaring text command \textmarried (encoding TU) on 
-input line 296.
-LaTeX Encoding Info:    Redeclaring text command \textdivorced (encoding TU) on
- input line 297.
-LaTeX Encoding Info:    Redeclaring text command \textinterrobangdown (encoding
- TU) on input line 298.
-LaTeX Encoding Info:    Redeclaring text command \` (encoding TU) on input line
- 299.
-LaTeX Encoding Info:    Redeclaring text command \' (encoding TU) on input line
- 300.
-LaTeX Encoding Info:    Redeclaring text command \^ (encoding TU) on input line
- 301.
-LaTeX Encoding Info:    Redeclaring text command \~ (encoding TU) on input line
- 302.
-LaTeX Encoding Info:    Redeclaring text command \= (encoding TU) on input line
- 303.
-LaTeX Encoding Info:    Redeclaring text command \u (encoding TU) on input line
- 304.
-LaTeX Encoding Info:    Redeclaring text command \. (encoding TU) on input line
- 305.
-LaTeX Encoding Info:    Redeclaring text command \" (encoding TU) on input line
- 306.
-LaTeX Encoding Info:    Redeclaring text command \r (encoding TU) on input line
- 307.
-LaTeX Encoding Info:    Redeclaring text command \H (encoding TU) on input line
- 308.
-LaTeX Encoding Info:    Redeclaring text command \v (encoding TU) on input line
- 309.
-LaTeX Encoding Info:    Redeclaring text command \b (encoding TU) on input line
- 310.
-LaTeX Encoding Info:    Redeclaring text command \d (encoding TU) on input line
- 311.
-LaTeX Encoding Info:    Redeclaring text command \c (encoding TU) on input line
- 312.
-LaTeX Encoding Info:    Redeclaring text command \k (encoding TU) on input line
- 313.
-LaTeX Encoding Info:    Redeclaring text command \textcommabelow (encoding TU) 
-on input line 314.
+LaTeX Encoding Info:    Redeclaring text command \textquotesingle (encoding TU) on input line 148.
+LaTeX Encoding Info:    Redeclaring text command \textasciigrave (encoding TU) on input line 149.
+LaTeX Encoding Info:    Redeclaring text command \textquotedbl (encoding TU) on input line 150.
+LaTeX Encoding Info:    Redeclaring text command \textdollar (encoding TU) on input line 151.
+LaTeX Encoding Info:    Redeclaring text command \textless (encoding TU) on input line 152.
+LaTeX Encoding Info:    Redeclaring text command \textgreater (encoding TU) on input line 153.
+LaTeX Encoding Info:    Redeclaring text command \textbackslash (encoding TU) on input line 154.
+LaTeX Encoding Info:    Redeclaring text command \textasciicircum (encoding TU) on input line 155.
+LaTeX Encoding Info:    Redeclaring text command \textunderscore (encoding TU) on input line 156.
+LaTeX Encoding Info:    Redeclaring text command \textbraceleft (encoding TU) on input line 157.
+LaTeX Encoding Info:    Redeclaring text command \textbar (encoding TU) on input line 158.
+LaTeX Encoding Info:    Redeclaring text command \textbraceright (encoding TU) on input line 159.
+LaTeX Encoding Info:    Redeclaring text command \textasciitilde (encoding TU) on input line 160.
+LaTeX Encoding Info:    Redeclaring text command \textexclamdown (encoding TU) on input line 161.
+LaTeX Encoding Info:    Redeclaring text command \textcent (encoding TU) on input line 162.
+LaTeX Encoding Info:    Redeclaring text command \textsterling (encoding TU) on input line 163.
+LaTeX Encoding Info:    Redeclaring text command \textcurrency (encoding TU) on input line 164.
+LaTeX Encoding Info:    Redeclaring text command \textyen (encoding TU) on input line 165.
+LaTeX Encoding Info:    Redeclaring text command \textbrokenbar (encoding TU) on input line 166.
+LaTeX Encoding Info:    Redeclaring text command \textsection (encoding TU) on input line 167.
+LaTeX Encoding Info:    Redeclaring text command \textasciidieresis (encoding TU) on input line 168.
+LaTeX Encoding Info:    Redeclaring text command \textcopyright (encoding TU) on input line 169.
+LaTeX Encoding Info:    Redeclaring text command \textordfeminine (encoding TU) on input line 170.
+LaTeX Encoding Info:    Redeclaring text command \guillemetleft (encoding TU) on input line 171.
+LaTeX Encoding Info:    Redeclaring text command \guillemotleft (encoding TU) on input line 172.
+LaTeX Encoding Info:    Redeclaring text command \textlnot (encoding TU) on input line 173.
+LaTeX Encoding Info:    Redeclaring text command \textregistered (encoding TU) on input line 174.
+LaTeX Encoding Info:    Redeclaring text command \textasciimacron (encoding TU) on input line 175.
+LaTeX Encoding Info:    Redeclaring text command \textdegree (encoding TU) on input line 176.
+LaTeX Encoding Info:    Redeclaring text command \textpm (encoding TU) on input line 177.
+LaTeX Encoding Info:    Redeclaring text command \texttwosuperior (encoding TU) on input line 178.
+LaTeX Encoding Info:    Redeclaring text command \textthreesuperior (encoding TU) on input line 179.
+LaTeX Encoding Info:    Redeclaring text command \textasciiacute (encoding TU) on input line 180.
+LaTeX Encoding Info:    Redeclaring text command \textmu (encoding TU) on input line 181.
+LaTeX Encoding Info:    Redeclaring text command \textparagraph (encoding TU) on input line 182.
+LaTeX Encoding Info:    Redeclaring text command \textperiodcentered (encoding TU) on input line 183.
+LaTeX Encoding Info:    Redeclaring text command \textonesuperior (encoding TU) on input line 184.
+LaTeX Encoding Info:    Redeclaring text command \textordmasculine (encoding TU) on input line 185.
+LaTeX Encoding Info:    Redeclaring text command \guillemetright (encoding TU) on input line 186.
+LaTeX Encoding Info:    Redeclaring text command \guillemotright (encoding TU) on input line 187.
+LaTeX Encoding Info:    Redeclaring text command \textonequarter (encoding TU) on input line 188.
+LaTeX Encoding Info:    Redeclaring text command \textonehalf (encoding TU) on input line 189.
+LaTeX Encoding Info:    Redeclaring text command \textthreequarters (encoding TU) on input line 190.
+LaTeX Encoding Info:    Redeclaring text command \textquestiondown (encoding TU) on input line 191.
+LaTeX Encoding Info:    Redeclaring text command \AE (encoding TU) on input line 192.
+LaTeX Encoding Info:    Redeclaring text command \DH (encoding TU) on input line 193.
+LaTeX Encoding Info:    Redeclaring text command \texttimes (encoding TU) on input line 194.
+LaTeX Encoding Info:    Redeclaring text command \O (encoding TU) on input line 195.
+LaTeX Encoding Info:    Redeclaring text command \TH (encoding TU) on input line 196.
+LaTeX Encoding Info:    Redeclaring text command \ss (encoding TU) on input line 197.
+LaTeX Encoding Info:    Redeclaring text command \ae (encoding TU) on input line 198.
+LaTeX Encoding Info:    Redeclaring text command \dh (encoding TU) on input line 199.
+LaTeX Encoding Info:    Redeclaring text command \textdiv (encoding TU) on input line 200.
+LaTeX Encoding Info:    Redeclaring text command \o (encoding TU) on input line 201.
+LaTeX Encoding Info:    Redeclaring text command \th (encoding TU) on input line 202.
+LaTeX Encoding Info:    Redeclaring text command \DJ (encoding TU) on input line 203.
+LaTeX Encoding Info:    Redeclaring text command \dj (encoding TU) on input line 204.
+LaTeX Encoding Info:    Redeclaring text command \i (encoding TU) on input line 205.
+LaTeX Encoding Info:    Redeclaring text command \IJ (encoding TU) on input line 206.
+LaTeX Encoding Info:    Redeclaring text command \ij (encoding TU) on input line 207.
+LaTeX Encoding Info:    Redeclaring text command \L (encoding TU) on input line 208.
+LaTeX Encoding Info:    Redeclaring text command \l (encoding TU) on input line 209.
+LaTeX Encoding Info:    Redeclaring text command \NG (encoding TU) on input line 210.
+LaTeX Encoding Info:    Redeclaring text command \ng (encoding TU) on input line 211.
+LaTeX Encoding Info:    Redeclaring text command \OE (encoding TU) on input line 212.
+LaTeX Encoding Info:    Redeclaring text command \oe (encoding TU) on input line 213.
+LaTeX Encoding Info:    Redeclaring text command \textflorin (encoding TU) on input line 214.
+LaTeX Encoding Info:    Redeclaring text command \j (encoding TU) on input line 215.
+LaTeX Encoding Info:    Redeclaring text command \textasciicaron (encoding TU) on input line 216.
+LaTeX Encoding Info:    Redeclaring text command \textasciibreve (encoding TU) on input line 217.
+LaTeX Encoding Info:    Redeclaring text command \textacutedbl (encoding TU) on input line 218.
+LaTeX Encoding Info:    Redeclaring text command \textgravedbl (encoding TU) on input line 219.
+LaTeX Encoding Info:    Redeclaring text command \texttildelow (encoding TU) on input line 220.
+LaTeX Encoding Info:    Redeclaring text command \textbaht (encoding TU) on input line 221.
+LaTeX Encoding Info:    Redeclaring text command \SS (encoding TU) on input line 222.
+LaTeX Encoding Info:    Redeclaring text command \textcompwordmark (encoding TU) on input line 223.
+LaTeX Encoding Info:    Redeclaring text command \textendash (encoding TU) on input line 224.
+LaTeX Encoding Info:    Redeclaring text command \textemdash (encoding TU) on input line 225.
+LaTeX Encoding Info:    Redeclaring text command \textnonbreakinghyphen (encoding TU) on input line 226.
+LaTeX Encoding Info:    Redeclaring text command \textfiguredash (encoding TU) on input line 228.
+LaTeX Encoding Info:    Redeclaring text command \texthorizontalbar (encoding TU) on input line 230.
+LaTeX Encoding Info:    Redeclaring text command \textbardbl (encoding TU) on input line 232.
+LaTeX Encoding Info:    Redeclaring text command \textquoteleft (encoding TU) on input line 233.
+LaTeX Encoding Info:    Redeclaring text command \textquoteright (encoding TU) on input line 234.
+LaTeX Encoding Info:    Redeclaring text command \quotesinglbase (encoding TU) on input line 235.
+LaTeX Encoding Info:    Redeclaring text command \textquotedblleft (encoding TU) on input line 236.
+LaTeX Encoding Info:    Redeclaring text command \textquotedblright (encoding TU) on input line 237.
+LaTeX Encoding Info:    Redeclaring text command \quotedblbase (encoding TU) on input line 238.
+LaTeX Encoding Info:    Redeclaring text command \textdagger (encoding TU) on input line 239.
+LaTeX Encoding Info:    Redeclaring text command \textdaggerdbl (encoding TU) on input line 240.
+LaTeX Encoding Info:    Redeclaring text command \textbullet (encoding TU) on input line 241.
+LaTeX Encoding Info:    Redeclaring text command \textellipsis (encoding TU) on input line 242.
+LaTeX Encoding Info:    Redeclaring text command \textperthousand (encoding TU) on input line 243.
+LaTeX Encoding Info:    Redeclaring text command \textpertenthousand (encoding TU) on input line 244.
+LaTeX Encoding Info:    Redeclaring text command \guilsinglleft (encoding TU) on input line 245.
+LaTeX Encoding Info:    Redeclaring text command \guilsinglright (encoding TU) on input line 246.
+LaTeX Encoding Info:    Redeclaring text command \textreferencemark (encoding TU) on input line 247.
+LaTeX Encoding Info:    Redeclaring text command \textinterrobang (encoding TU) on input line 248.
+LaTeX Encoding Info:    Redeclaring text command \textfractionsolidus (encoding TU) on input line 249.
+LaTeX Encoding Info:    Redeclaring text command \textlquill (encoding TU) on input line 250.
+LaTeX Encoding Info:    Redeclaring text command \textrquill (encoding TU) on input line 251.
+LaTeX Encoding Info:    Redeclaring text command \textdiscount (encoding TU) on input line 252.
+LaTeX Encoding Info:    Redeclaring text command \textcolonmonetary (encoding TU) on input line 253.
+LaTeX Encoding Info:    Redeclaring text command \textlira (encoding TU) on input line 254.
+LaTeX Encoding Info:    Redeclaring text command \textnaira (encoding TU) on input line 255.
+LaTeX Encoding Info:    Redeclaring text command \textwon (encoding TU) on input line 256.
+LaTeX Encoding Info:    Redeclaring text command \textdong (encoding TU) on input line 257.
+LaTeX Encoding Info:    Redeclaring text command \texteuro (encoding TU) on input line 258.
+LaTeX Encoding Info:    Redeclaring text command \textpeso (encoding TU) on input line 259.
+LaTeX Encoding Info:    Redeclaring text command \textcelsius (encoding TU) on input line 260.
+LaTeX Encoding Info:    Redeclaring text command \textnumero (encoding TU) on input line 261.
+LaTeX Encoding Info:    Redeclaring text command \textcircledP (encoding TU) on input line 262.
+LaTeX Encoding Info:    Redeclaring text command \textrecipe (encoding TU) on input line 263.
+LaTeX Encoding Info:    Redeclaring text command \textservicemark (encoding TU) on input line 264.
+LaTeX Encoding Info:    Redeclaring text command \texttrademark (encoding TU) on input line 265.
+LaTeX Encoding Info:    Redeclaring text command \textohm (encoding TU) on input line 266.
+LaTeX Encoding Info:    Redeclaring text command \textmho (encoding TU) on input line 267.
+LaTeX Encoding Info:    Redeclaring text command \textestimated (encoding TU) on input line 268.
+LaTeX Encoding Info:    Redeclaring text command \textleftarrow (encoding TU) on input line 269.
+LaTeX Encoding Info:    Redeclaring text command \textuparrow (encoding TU) on input line 270.
+LaTeX Encoding Info:    Redeclaring text command \textrightarrow (encoding TU) on input line 271.
+LaTeX Encoding Info:    Redeclaring text command \textdownarrow (encoding TU) on input line 272.
+LaTeX Encoding Info:    Redeclaring text command \textminus (encoding TU) on input line 273.
+LaTeX Encoding Info:    Redeclaring text command \Hwithstroke (encoding TU) on input line 275.
+LaTeX Encoding Info:    Redeclaring text command \hwithstroke (encoding TU) on input line 276.
+LaTeX Encoding Info:    Redeclaring text command \textasteriskcentered (encoding TU) on input line 277.
+LaTeX Encoding Info:    Redeclaring text command \textsurd (encoding TU) on input line 288.
+LaTeX Encoding Info:    Redeclaring text command \textlangle (encoding TU) on input line 289.
+LaTeX Encoding Info:    Redeclaring text command \textrangle (encoding TU) on input line 290.
+LaTeX Encoding Info:    Redeclaring text command \textblank (encoding TU) on input line 291.
+LaTeX Encoding Info:    Redeclaring text command \textvisiblespace (encoding TU) on input line 292.
+LaTeX Encoding Info:    Redeclaring text command \textopenbullet (encoding TU) on input line 293.
+LaTeX Encoding Info:    Redeclaring text command \textbigcircle (encoding TU) on input line 294.
+LaTeX Encoding Info:    Redeclaring text command \textmusicalnote (encoding TU) on input line 295.
+LaTeX Encoding Info:    Redeclaring text command \textmarried (encoding TU) on input line 296.
+LaTeX Encoding Info:    Redeclaring text command \textdivorced (encoding TU) on input line 297.
+LaTeX Encoding Info:    Redeclaring text command \textinterrobangdown (encoding TU) on input line 298.
+LaTeX Encoding Info:    Redeclaring text command \` (encoding TU) on input line 299.
+LaTeX Encoding Info:    Redeclaring text command \' (encoding TU) on input line 300.
+LaTeX Encoding Info:    Redeclaring text command \^ (encoding TU) on input line 301.
+LaTeX Encoding Info:    Redeclaring text command \~ (encoding TU) on input line 302.
+LaTeX Encoding Info:    Redeclaring text command \= (encoding TU) on input line 303.
+LaTeX Encoding Info:    Redeclaring text command \u (encoding TU) on input line 304.
+LaTeX Encoding Info:    Redeclaring text command \. (encoding TU) on input line 305.
+LaTeX Encoding Info:    Redeclaring text command \" (encoding TU) on input line 306.
+LaTeX Encoding Info:    Redeclaring text command \r (encoding TU) on input line 307.
+LaTeX Encoding Info:    Redeclaring text command \H (encoding TU) on input line 308.
+LaTeX Encoding Info:    Redeclaring text command \v (encoding TU) on input line 309.
+LaTeX Encoding Info:    Redeclaring text command \b (encoding TU) on input line 310.
+LaTeX Encoding Info:    Redeclaring text command \d (encoding TU) on input line 311.
+LaTeX Encoding Info:    Redeclaring text command \c (encoding TU) on input line 312.
+LaTeX Encoding Info:    Redeclaring text command \k (encoding TU) on input line 313.
+LaTeX Encoding Info:    Redeclaring text command \textcommabelow (encoding TU) on input line 314.
 )
 \Cht=\dimen151
 \cht=\dimen152
@@ -614,12 +434,9 @@ LaTeX Info: Redefining \fontshapeforce on input line 789.
 \ltj@@jfont@@jfmonly@@inner=\luafunction69
 \ltj@@does@alt@set@@inner=\luafunction70
 \ltj@@cipath@clear@inner=\luafunction71
-)
-(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjdefs.sty
+) (c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjdefs.sty
 Package: lltjdefs 2024-05-16 Default font settings of LuaTeX-ja
-luaotfload | db : Font names database loaded from C:/texlive/2025/texmf-var/luat
-ex-cache/generic/names/luaotfload-names.luc.gz(load cache: extra_lmroman10-regul
-ar.luc)
+luaotfload | db : Font names database loaded from C:/texlive/2025/texmf-var/luatex-cache/generic/names/luaotfload-names.luc.gz(load cache: extra_lmroman10-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
 (Font)              scaled to size 9.24713pt on input line 69.
 
@@ -631,15 +448,11 @@ LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 \symmincho=\mathgroup4
 LaTeX Font Info:    Overwriting symbol font `mincho' in version `bold'
 (Font)                  JY3/mc/m/n --> JY3/gt/m/n on input line 78.
-)
-(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjcore.sty
-Package: lltjcore 2025-06-12 Patch to LaTeX2e Kernel for LuaTeX-ja (for LaTeX2e
- >=2025-06-01)
-
-(c:/texlive/2025/texmf-dist/tex/latex/l3kernel/expl3.sty
+) (c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjcore.sty
+Package: lltjcore 2025-06-12 Patch to LaTeX2e Kernel for LuaTeX-ja (for LaTeX2e >=2025-06-01)
+ (c:/texlive/2025/texmf-dist/tex/latex/l3kernel/expl3.sty
 Package: expl3 2025-07-20 L3 programming layer (loader) 
-
-(c:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-luatex.def
+ (c:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-luatex.def
 File: l3backend-luatex.def 2025-06-09 L3 backend support: PDF output (LuaTeX)
 \l__color_backend_stack_int=\count283
 Inserting `l3color' in `luaotfload.parse_color'.))
@@ -662,21 +475,16 @@ Inserting `l3color' in `luaotfload.parse_color'.))
 \@@paperwidth=\dimen164
 \@@topmargin=\dimen165
 LaTeX Info: Redefining \underline on input line 300.
-)
-(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjp-atbegshi.sty
+) (c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjp-atbegshi.sty
 Package: lltjp-atbegshi 2024-05-14 Patching \shipout hooks for LuaTeX-ja
 \l__platex_shipout_dummy_box=\box69
-)
-(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjp-geometry.sty
-Package: lltjp-geometry 2024-05-16 Patch to geometry for LuaTeX-ja with vertica
-l writing mode
-
-(c:/texlive/2025/texmf-dist/tex/generic/iftex/ifluatex.sty
+) (c:/texlive/2025/texmf-dist/tex/luatex/luatexja/patches/lltjp-geometry.sty
+Package: lltjp-geometry 2024-05-16 Patch to geometry for LuaTeX-ja with vertical writing mode
+ (c:/texlive/2025/texmf-dist/tex/generic/iftex/ifluatex.sty
 Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 )))
 \ltj@temp@cctb=\catcodetable16
-)
-(c:/texlive/2025/texmf-dist/tex/luatex/luatexja/luatexja-compat.sty
+) (c:/texlive/2025/texmf-dist/tex/luatex/luatexja/luatexja-compat.sty
 Package: luatexja-compat 2020-08-08 Compatibility with pTeX
 (load cache: ltj-jisx0208.luc)
 \hour=\count284
@@ -714,53 +522,43 @@ LaTeX Info: Redefining \gt on input line 1214.
 \jsc@tocl@width=\dimen169
 \@lnumwidth=\dimen170
 \bibindent=\dimen171
-
-(c:/texlive/2025/texmf-dist/tex/platex/jsclasses/jslogo.sty
+ (c:/texlive/2025/texmf-dist/tex/platex/jsclasses/jslogo.sty
 Package: jslogo 2019/07/25 okumura, texjporg
 LaTeX Info: Redefining \TeX on input line 82.
 LaTeX Info: Redefining \LaTeX on input line 135.
 LaTeX Info: Redefining \LaTeXe on input line 188.
 )
 \heisei=\count294
-)
-(c:/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
+) (c:/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
-
-(c:/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
+ (c:/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
-
-(c:/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty
+ (c:/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
-)
-(c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+) (c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: luatex.def on input line 106.
-
-(c:/texlive/2025/texmf-dist/tex/latex/graphics-def/luatex.def
+ (c:/texlive/2025/texmf-dist/tex/latex/graphics-def/luatex.def
 File: luatex.def 2024/04/13 v1.2e Graphics/color driver for luatex
 ))
 \Gin@req@height=\dimen172
 \Gin@req@width=\dimen173
-)
-(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
+) (c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2025/06/16 v2.17y AMS math features
 \@mathmargin=\skip52
 
 For additional information on amsmath, use the `?' option.
 (c:/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2024/11/17 v2.01 AMS text
-
-(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty
+ (c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks27
 \ex@=\dimen174
-))
-(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty
+)) (c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen175
-)
-(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty
+) (c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty
 Package: amsopn 2022/04/08 v2.04 operator names
 )
 \inf@bad=\count295
@@ -810,22 +608,18 @@ LaTeX Info: Redefining \Relbar on input line 970.
 \mathdisplay@stack=\toks31
 LaTeX Info: Redefining \[ on input line 2949.
 LaTeX Info: Redefining \] on input line 2950.
-)
-(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty
+) (c:/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
-
-(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+ (c:/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \symAMSa=\mathgroup5
 \symAMSb=\mathgroup6
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-))
-(c:/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
+)) (c:/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
-
-(c:/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
+ (c:/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
 \Gm@cnth=\count307
@@ -840,20 +634,16 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layouthoffset=\dimen189
 \Gm@layoutvoffset=\dimen190
 \Gm@dimlist=\toks32
-)
-(c:/texlive/2025/texmf-dist/tex/latex/setspace/setspace.sty
+) (c:/texlive/2025/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2022/12/04 v6.7b set line spacing
-)
-(c:/texlive/2025/texmf-dist/tex/latex/here/here.sty)
-(c:/texlive/2025/texmf-dist/tex/latex/float/float.sty
+) (c:/texlive/2025/texmf-dist/tex/latex/here/here.sty) (c:/texlive/2025/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \c@float@type=\count310
 \float@exts=\toks33
 \float@box=\box73
 \@float@everytoks=\toks34
 \@floatcapt=\box74
-)
-(c:/texlive/2025/texmf-dist/tex/latex/tocloft/tocloft.sty
+) (c:/texlive/2025/texmf-dist/tex/latex/tocloft/tocloft.sty
 Package: tocloft 2017/08/31 v2.3i parameterised ToC, etc., typesetting
 Package tocloft Info: The document has section divisions on input line 51.
 \cftparskip=\skip55
@@ -889,35 +679,32 @@ Package tocloft Info: The document has section divisions on input line 51.
 \cftbeforetabskip=\skip83
 \cfttabindent=\skip84
 \cfttabnumwidth=\skip85
-)
-(c:/texlive/2025/texmf-dist/tex/latex/comment/comment.sty
+) (c:/texlive/2025/texmf-dist/tex/latex/comment/comment.sty
 \CommentStream=\write3
-
-Excluding comment 'comment') (./1w222357_丸山慶人.aux)
+ Excluding comment 'comment') (./1w222357_丸山慶人.aux)
 \openout1 = 1w222357_丸山慶人.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for JY3/mc/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-LaTeX Font Info:    Checking defaults for JT3/mc/m/n on input line 40.
-LaTeX Font Info:    ... okay on input line 40.
-
-(c:/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for JY3/mc/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for JT3/mc/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+ (c:/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count313
 \scratchdimen=\dimen191
@@ -932,12 +719,9 @@ LaTeX Font Info:    ... okay on input line 40.
 \everyMPtoPDFconversion=\toks36
 ) (c:/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
-Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
-85.
-
-(c:/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
-File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
-e
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (c:/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
 *geometry* driver: auto-detecting
 *geometry* detected driver: luatex
@@ -975,68 +759,62 @@ e
 
 (load cache: extra_lmroman17-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 15.97902pt on input line 43.
+(Font)              scaled to size 15.97902pt on input line 44.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 15.97902pt on input line 43.
+(Font)              scaled to size 15.97902pt on input line 44.
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 19.17854pt on input line 43.
+(Font)              scaled to size 19.17854pt on input line 44.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 19.17854pt on input line 43.
+(Font)              scaled to size 19.17854pt on input line 44.
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 23.00687pt on input line 43.
+(Font)              scaled to size 23.00687pt on input line 44.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 23.00687pt on input line 43.
+(Font)              scaled to size 23.00687pt on input line 44.
 (load cache: extra_lmroman12-bold.luc)
 LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <24.88> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 43.
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 44.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 19.17242pt on input line 43.
+(Font)              scaled to size 19.17242pt on input line 44.
 LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <24.88> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 43.
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 44.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 19.17242pt on input line 43.
-(load cache: extra_haranoajigothic-medium.luc)(load cache: extra_lmroman12-regul
-ar.luc)
+(Font)              scaled to size 19.17242pt on input line 44.
+(load cache: extra_haranoajigothic-medium.luc)(load cache: extra_lmroman12-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 11.09656pt on input line 43.
+(Font)              scaled to size 11.09656pt on input line 44.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 11.09656pt on input line 43.
-LaTeX Font Info:    Calculating math sizes for size <14.39996> on input line 43
-.
+(Font)              scaled to size 11.09656pt on input line 44.
+LaTeX Font Info:    Calculating math sizes for size <14.39996> on input line 44.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 7.76755pt on input line 43.
+(Font)              scaled to size 7.76755pt on input line 44.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 5.54828pt on input line 43.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 43.
-
+(Font)              scaled to size 5.54828pt on input line 44.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 44.
 (c:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 43.
-
-
-(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
+LaTeX Font Info:    Trying to load font information for U+msb on input line 44.
+ (c:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 13.31586pt on input line 43.
+(Font)              scaled to size 13.31586pt on input line 44.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 13.31586pt on input line 43.
+(Font)              scaled to size 13.31586pt on input line 44.
 
 
 [1
 
 {c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <14.4> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 50.
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 51.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 11.09657pt on input line 50.
+(Font)              scaled to size 11.09657pt on input line 51.
 LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <14.4> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 50.
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 51.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 11.09657pt on input line 50.
-
-(./1w222357_丸山慶人.toc(load cache: extra_lmroman10-bold.luc)
+(Font)              scaled to size 11.09657pt on input line 51.
+ (./1w222357_丸山慶人.toc(load cache: extra_lmroman10-bold.luc)
 LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <10> not available
 (Font)              Font shape `JT3/gt/m/n' tried instead on input line 1.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
@@ -1046,7 +824,6 @@ LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <10> not available
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 (Font)              scaled to size 7.70596pt on input line 1.
 LaTeX Font Info:    Calculating math sizes for size <11.99997> on input line 1.
-
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 6.47295pt on input line 1.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
@@ -1061,74 +838,108 @@ LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 
 ]
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 13.31586pt on input line 55.
+(Font)              scaled to size 13.31586pt on input line 56.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 13.31586pt on input line 55.
+(Font)              scaled to size 13.31586pt on input line 56.
 (load cache: extra_lmsans12-regular.luc)
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 11.09656pt on input line 56.
+(Font)              scaled to size 11.09656pt on input line 57.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 11.09656pt on input line 56.
+(Font)              scaled to size 11.09656pt on input line 57.
 
 
 [1
 
 ]
-LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 9.24713pt on input line 71.
-LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 9.24713pt on input line 71.
-(load cache: extra_lmsans10-regular.luc)
+Overfull \hbox (33.35124pt too wide) in paragraph at lines 79--80
+[]|\JY3/mc/m/n/11.99997 こ |こ |に |画 |像\TU/lmr/m/n/11.99997 ![im-age.png](at-tach-ment:ab766a80-9efe-4718-af1d-62e95ec96b06:image.png) 
+ []
+
+
 
 [2]
+LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
+(Font)              scaled to size 9.24713pt on input line 109.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 9.24713pt on input line 109.
+(load cache: extra_lmsans10-regular.luc)
 
-[3](load cache: extra_lmroman7-regular.luc)
+[3]
+
+[4](load cache: extra_lmroman7-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 6.47295pt on input line 125.
+(Font)              scaled to size 6.47295pt on input line 149.
 (load cache: extra_lmroman5-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 4.62357pt on input line 125.
-
-
-[4]
-<../figure/figure1.png, id=34, 578.16pt x 361.35pt>
-File: ../figure/figure1.png Graphic file (type png)
-<use ../figure/figure1.png>
-Package luatex.def Info: ../figure/figure1.png  used on input line 147.
-(luatex.def)             Requested size: 426.79135pt x 266.74419pt.
-(load cache: extra_lmroman9-regular.luc)
-LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 8.32242pt on input line 148.
-LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 8.32242pt on input line 148.
-<../figure/figure2.png, id=35, 578.16pt x 361.35pt>
-File: ../figure/figure2.png Graphic file (type png)
-<use ../figure/figure2.png>
-Package luatex.def Info: ../figure/figure2.png  used on input line 157.
-(luatex.def)             Requested size: 426.79135pt x 266.74419pt.
-<../figure/figure3.png, id=36, 578.16pt x 361.35pt>
-File: ../figure/figure3.png Graphic file (type png)
-<use ../figure/figure3.png>
-Package luatex.def Info: ../figure/figure3.png  used on input line 168.
-(luatex.def)             Requested size: 426.79135pt x 266.74419pt.
+(Font)              scaled to size 4.62357pt on input line 149.
 
 
 [5]
-
-[6<../figure/figure1.png><../figure/figure2.png>] (./1w222357_丸山慶人.bbl
-
-[7<../figure/figure3.png>](load cache: extra_lmroman10-italic.luc)
-LaTeX Font Info:    Font shape `JT3/gt/m/it' in size <10> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 12.
-LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 7.70596pt on input line 12.
-LaTeX Font Info:    Font shape `JY3/gt/m/it' in size <10> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 12.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 7.70596pt on input line 12.
-)
+(Font)              scaled to size 6.47295pt on input line 164.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 4.62357pt on input line 164.
 
-[8] (./1w222357_丸山慶人.aux)
+
+[6]
+
+[7]
+
+[8]
+
+[9]
+
+[10]
+
+[11]
+
+[12]
+
+[13]
+
+[14]
+
+[15]
+<../figure/figure1.png, id=75, 578.16pt x 361.35pt>
+File: ../figure/figure1.png Graphic file (type png)
+<use ../figure/figure1.png>
+Package luatex.def Info: ../figure/figure1.png  used on input line 350.
+(luatex.def)             Requested size: 426.79135pt x 266.74419pt.
+(load cache: extra_lmroman9-regular.luc)
+LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
+(Font)              scaled to size 8.32242pt on input line 351.
+LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
+(Font)              scaled to size 8.32242pt on input line 351.
+<../figure/figure2.png, id=76, 578.16pt x 361.35pt>
+File: ../figure/figure2.png Graphic file (type png)
+<use ../figure/figure2.png>
+Package luatex.def Info: ../figure/figure2.png  used on input line 360.
+(luatex.def)             Requested size: 426.79135pt x 266.74419pt.
+<../figure/figure3.png, id=77, 578.16pt x 361.35pt>
+File: ../figure/figure3.png Graphic file (type png)
+<use ../figure/figure3.png>
+Package luatex.def Info: ../figure/figure3.png  used on input line 371.
+(luatex.def)             Requested size: 426.79135pt x 266.74419pt.
+
+
+[16]
+
+[17<../figure/figure1.png><../figure/figure2.png>] (./1w222357_丸山慶人.bbl
+
+[18<../figure/figure3.png>](load cache: extra_lmroman10-italic.luc)
+LaTeX Font Info:    Font shape `JT3/gt/m/it' in size <10> not available
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 31.
+LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
+(Font)              scaled to size 7.70596pt on input line 31.
+LaTeX Font Info:    Font shape `JY3/gt/m/it' in size <10> not available
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 31.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 7.70596pt on input line 31.
+
+
+[19])
+
+[20] (./1w222357_丸山慶人.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-20>
@@ -1136,34 +947,19 @@ L3 programming layer <2025-07-20>
 )
 
 Here is how much of LuaTeX's memory you used:
- 6018 strings out of 470118
- 156557,662416 words of node,token memory allocated
- 1248 words of node memory still in use:
-   10 hlist, 2 vlist, 5 rule, 2 glue, 4 kern, 1 glyph, 223 attribute, 85 glue_sp
-ec, 31 attribute_list, 1 write, 13 user_defined nodes
-   avail lists: 1:30,2:44190,3:275,4:158,5:118,6:32,7:4652,8:32,9:2052,10:38,11:
-166
- 34229 multiletter control sequences out of 65536+600000
- 87 fonts using 69771735 bytes
- 119i,7n,112p,1777b,367s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf><c:/te
-xlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman9-regular.otf><c:/texlive/
-2025/texmf-dist/fonts/opentype/public/lm/lmsans10-regular.otf><c:/texlive/2025/t
-exmf-dist/fonts/opentype/public/lm/lmsans12-regular.otf><c:/texlive/2025/texmf-d
-ist/fonts/opentype/public/lm/lmroman10-regular.otf><c:/texlive/2025/texmf-dist/f
-onts/opentype/public/lm/lmroman10-bold.otf><c:/texlive/2025/texmf-dist/fonts/ope
-ntype/public/lm/lmroman12-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype
-/public/haranoaji/HaranoAjiGothic-Medium.otf><c:/texlive/2025/texmf-dist/fonts/o
-pentype/public/lm/lmroman17-regular.otf><c:/texlive/2025/texmf-dist/fonts/openty
-pe/public/haranoaji/HaranoAjiMincho-Regular.otf><c:/texlive/2025/texmf-dist/font
-s/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfon
-ts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.
-pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on 1w222357_丸山慶人.pdf (10 pages, 314570 bytes).
+ 6033 strings out of 470118
+ 244632,662416 words of node,token memory allocated
+ 2137 words of node memory still in use:
+   11 hlist, 2 vlist, 5 rule, 2 glue, 4 kern, 1 glyph, 623 attribute, 85 glue_spec, 69 attribute_list, 1 write, 14 user_defined nodes
+   avail lists: 1:22,2:74679,3:357,4:237,5:168,6:40,7:6642,8:42,9:2666,10:38,11:232
+ 34244 multiletter control sequences out of 65536+600000
+ 92 fonts using 77525991 bytes
+ 119i,12n,112p,1822b,367s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman9-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans12-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/haranoaji/HaranoAjiGothic-Medium.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman17-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/haranoaji/HaranoAjiMincho-Regular.otf><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+Output written on 1w222357_丸山慶人.pdf (22 pages, 496679 bytes).
 
-PDF statistics: 131 PDF objects out of 1000 (max. 8388607)
- 77 compressed objects within 1 object stream
+PDF statistics: 199 PDF objects out of 1000 (max. 8388607)
+ 125 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
 
