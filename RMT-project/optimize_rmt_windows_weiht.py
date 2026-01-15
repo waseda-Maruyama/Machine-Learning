@@ -198,7 +198,16 @@ for rmt_w in tqdm(RMT_WINDOWS, desc="Scanning"):
     # ★重要: 必ずコピーして使う (元のdf_baseを汚さない)
     df_ml = df_base.copy()
     df_ml['RMT_Raw'] = rmt_raw
+
+    # 2. Smooth (平滑化) -> Velocity計算用
+    smooth = df_ml['RMT_Raw'].rolling(window=5).mean()
     
+    # 3. Velocity (速度)
+    df_ml['RMT_Vel'] = smooth.diff()
+    
+    # 4. Acceleration (加速度)
+    df_ml['RMT_Accel'] = df_ml['RMT_Vel'].diff()
+
     # 変化率
     df_ml['RMT_Vel'] = df_ml['RMT_Raw'].diff()
     df_ml['RMT_Accel'] = df_ml['RMT_Vel'].diff()
