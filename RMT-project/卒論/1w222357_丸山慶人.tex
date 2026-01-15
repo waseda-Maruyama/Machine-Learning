@@ -1,0 +1,96 @@
+\documentclass[twocolumn, a4paper, 10pt]{ltjsarticle}
+
+% --- パッケージの読み込み ---
+\usepackage[luatex]{graphicx}
+\usepackage{amsmath, amssymb}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{caption}
+\usepackage{float}
+
+% 余白の設定（概要書向けに最適化）
+\geometry{top=25mm, bottom=25mm, left=20mm, right=20mm}
+
+% --- タイトル部分の設定 ---
+\makeatletter
+\newcommand{\abstracttitle}[7]{
+    \twocolumn[
+        \begin{center}
+            {\Large \textbf{卒業論文概要書}} \\
+            \vspace{3mm}
+            \begin{tabular}{|p{4cm}|p{4cm}|p{3cm}|p{3.5cm}|}
+                \hline
+                学科名 & #1 & 学籍番号 & #2 \\ \hline
+                研究室名 & #3 & 氏名 & #4 \\ \hline
+                指導教員 & #5 & 論文題目 & #6 \\ \hline
+            \end{tabular}
+        \end{center}
+        \vspace{5mm}
+    ]
+}
+\makeatother
+
+\begin{document}
+
+% --- 表データに基づいたタイトル出力 ---
+\abstracttitle{機械科学・航空宇宙学科}{1W222357}{柳尾研究室}{丸山 慶人}{柳尾 朋洋}{○○に関する研究} 
+
+\section{背景と目的}
+近年、金融時系列予測において機械学習が高い精度を示しているが、実用には「説明可能性」と「頑健性」が不可欠である [cite: 4]。従来のブラックボックス的なアプローチは、予測根拠が不明瞭であり、市場のノイズを過剰学習する課題があった [cite: 4]。
+本研究の目的は、日本市場の大型株群（TOPIX100）を対象に、ランダム行列理論（RMT）に基づき算出された最大固有値を特徴量としてLightGBMに導入し、説明可能かつ頑健な暴落予測モデルを構築することである [cite: 4]。
+
+\section{研究方法}
+\subsection{目的変数の定義と最適化}
+暴落を定量的に定義するため、短期（3日後）および中期の累積リターンを用いた以下の複合条件によって正解ラベル $y_t$ を定義した [cite: 7, 10]。
+\begin{equation}
+    y_t = 1 \text{ if } R_{t+3} \le -0.02 \cap R_{t+10} \le -0.08
+\end{equation}
+それ以外を0とする [cite: 8, 9]。全期間中、本条件を満たすイベントは97件（約4.4\%）であり、統計的ノイズを除外した「本格的な暴落」を抽出するバランスとしている [cite: 11]。
+
+\subsection{重み付け学習 (Sample Weighting)}
+不均衡データ問題を解消するため、学習データに対して重み付けを行う [cite: 13]。$y_t = 1$ に対してその後の最大ドローダウンに比例した重みを付与することで、致命的な暴落の予兆を優先的に学習させる [cite: 13]。
+
+\subsection{入力特徴量の構成}
+以下の2種類の特徴量を採用する [cite: 15]。
+\begin{itemize}
+    \item \textbf{ベースライン特徴量}: Return, Volatility (20d), Momentum (10d), RSI (14d) [cite: 18, 19, 20, 21]。
+    \item \textbf{提案特徴量 (RMT指標)}: 相関行列の最大固有値 $\lambda_{\max}$ に着目し、その値（Raw）、1階微分（Vel）、2階微分（Accel）を採用する [cite: 23, 24, 25, 26]。
+\end{itemize}
+
+\subsection{予測モデルの構築}
+非線形性の考慮、特徴量重要度の算出、不均衡データへの対応が容易なLightGBMを採用した [cite: 28, 30, 31, 32]。
+
+\section{実験結果}
+2025年の関税ショックシナリオにおける有効性を検証した [cite: 34]。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\columnwidth]{figure1.png} % 画像ファイル名を指定
+    \caption{PR曲線による予測精度の比較}
+    \label{fig:pr_curve}
+\end{figure}
+
+第一に、予測精度の向上である（図\ref{fig:pr_curve}） [cite: 35]。提案モデルはAPスコアを0.118から0.348へと約3倍に向上させた [cite: 35]。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\columnwidth]{figure2.png}
+    \caption{2025年関税ショック時における資産推移シミュレーション}
+    \label{fig:simulation}
+\end{figure}
+
+第二に、リスク管理の最大化である（図\ref{fig:simulation}） [cite: 35]。提案モデルは最大ドローダウンを市場平均（-41.2\%）の半分以下である-18.3\%に抑制した [cite: 35]。また、市場の大底における「相関構造の崩壊」を検知し、理想的なタイミングでの市場復帰（Re-entry）に成功している [cite: 35]。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\columnwidth]{figure3.png}
+    \caption{SHAP値による特徴量重要度の分析}
+    \label{fig:shap}
+\end{figure}
+
+第三に、予測根拠の物理的妥当性である（図\ref{fig:shap}） [cite: 36]。SHAP値の分析により、RMT最大固有値が意思決定に最も寄与しており、市場全体の同期性が高まる相転移現象を物理的に捉えていることが実証された [cite: 36]。
+
+\section{結論}
+本研究では、RMTに基づく物理指標を機械学習に統合する手法を提案した [cite: 38]。RMT指標の導入により、不均衡データ下での検知能力が有意に改善し、ボラティリティ指標よりも早期のリスク回避が可能となることが明らかとなった [cite: 40, 41]。
+
+\end{document}
