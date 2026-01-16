@@ -69,11 +69,9 @@ def add_physics_indicators(df_target, base_col, suffix):
     # 1. Raw (生データ)
     raw_col = f"RMT_Raw_{suffix}"
     
-    # 2. Smooth (平滑化) -> Velocity計算用
-    smooth = df_target[raw_col].rolling(window=3).mean()
-    
+       
     # 3. Velocity (速度)
-    df_target[f"RMT_Vel_{suffix}"] = smooth.diff()
+    df_target[f"RMT_Vel_{suffix}"] = df_target[raw_col].diff()
     
     # 4. Acceleration (加速度)
     df_target[f"RMT_Accel_{suffix}"] = df_target[f"RMT_Vel_{suffix}"].diff()
