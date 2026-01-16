@@ -7,23 +7,25 @@ Delphine Lautier, Franck Raynaud, et~al.
   Saint-Quentin, 75010 Paris (France), 2010.
 
 \bibitem{cite:2}
+{日本証券業協会}.
+\newblock 2024年度末の「個人株主の動向」について.
+\newblock Technical report, 日本証券業協会, 7 2025.
+\newblock Accessed: 2026-01-09.
+
+\bibitem{cite:3}
 {日本取引所グループ}.
 \newblock 2024年度株式分布状況調査の調査結果について.
 \newblock Technical report, 日本取引所グループ, 7 2025.
 \newblock Accessed: 2026-01-09.
 
-\bibitem{cite:3}
+\bibitem{cite:4}
 {証券保管振替機構}.
-\newblock 株式等振替制度 株式5
+\newblock 株式等振替制度 株式5,7
   属性別株主数状況（人数）【6か月累計】.
 \newblock https://www.jasdec.com/statistics/, 最新更新 2025.
 \newblock Excelデータダウンロード、Accessed: 2026-01-09.
 
-\bibitem{cite:4}
-{日本証券業協会}.
-\newblock 2024年度末の「個人株主の動向」について.
-\newblock Technical report, 日本証券業協会, 7 2025.
-\newblock Accessed: 2026-01-09.
+
 
 \bibitem{cite:5}
 Burton~G Malkiel.

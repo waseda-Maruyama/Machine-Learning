@@ -1,6 +1,4 @@
 \documentclass[12pt,a4paper,oneside]{ltjsarticle}
-
-% --- パッケージの読み込み ---
 \usepackage[luatex]{graphicx}
 \usepackage{amsmath, amssymb}
 \usepackage{geometry}
@@ -9,6 +7,10 @@
 \usepackage{tocloft} % 目次のカスタマイズ
 \usepackage{comment} % comment 環境を使用するために追加
 \DeclareMathOperator*{\argmin}{argmin} % argmin コマンドを定義
+
+% 図番号を章ごとにリセット
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\counterwithin{figure}{section}
 
 % 余白設定
 \geometry{top=30mm, bottom=30mm, left=30mm, right=30mm}
@@ -68,32 +70,34 @@
 暴落の予兆からその後の収束に至る市場の動態を包括的に記述する、新たな金融予測フレームワークの構築へと繋がると期待される。
 さらに、機械学習モデルの探索空間に物理的な制約（Inductive Bias）を与えることで、未知の局面に対する頑健性（Robustness）を向上させる点も重要である。
 また、近年の投資プラットフォームの普及に伴う新規参入者の急増も、市場の非合理性を加速させる一因となっている。
-東京証券取引所\cite{cite:2}の調査によれば、
-2024年度の個人株主数は約1600万人に達し、増加傾向であることを示している。また、図1.1より、
+日本証券業協会\cite{cite:2}の調査によれば、
+2024年度の個人株主数は約1600万人に達し、増加傾向であることを示している。また、図\ref{fig:1.1}より、
 投資家が複数の銘柄を跨いで保有している数である平均の株式保有数も上昇している。
 これは銘柄（要素）間に「投資家」という媒体を通じた強い結合が網の目状に張り巡らされている状態に相当する。
 
 
 
 
-ここに画像![image.png](attachment:ab766a80-9efe-4718-af1d-62e95ec96b06:image.png)
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/figure1_1.png}
+\caption{個人株主数の推移\\（日本証券業協会による図,データ：日本取引所グループ「株式分布状況調査」\cite{cite:3}\\証券保管振替機構\\「株式等振替制度 株式5 属性別株主数状況（人数）【6か月累計】」\cite{cite:4}）}
+\label{fig:1.1}
+\end{figure}
 
-図 1.1：個人株主数の推移
-（出典：日本取引所グループ「2024年度株式分布状況調査」\cite{cite:3}）
 
-さらに、図2に示すように、特に若年層を含む投資未経験者の市場流入を端的に示している。
+さらに、図\ref{fig:1.2}に示すように、特に若年層を含む投資未経験者の市場流入を端的に示している。
 十分な経験や知識、あるいは厳密な投資規律を持たないこれら多数の投資家は、ファンダメンタルズに基づかない感情的な売買や、
 SNSを通じた「模倣行動」を行いやすく、系全体の相互作用を増大させる要因となる。
 したがって、各要素が独立かつ合理的に振る舞う理想的な市場モデルはもはや現実的ではないことが懸念される。
 そのため、情報の非対称性と強い相互作用が支配する市場を統計力学的な「複雑系」と見なし、マクロな秩序（相関構造）の変化を捉える手法が必要となる。
-
-
-
-
-ここに画像![image.png](attachment:6f3f3f5b-4f2e-4f7b-8f7e-1d3e2e2f3c5b:image.png)
-図 1.2：個人株主数の推移
-（出典：日本取引所グループ「2024年度株式分布状況調査」\cite{cite:4}）
-
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/figure1_2.png}
+\caption{個人株主数の推移\\
+（日本証券業協会による図\\データ：証券保管振替機構「株式等振替制度 株式7 属性別株主数状況（人数）【6か月累計】\cite{cite:4}）}
+\label{fig:1.2}
+\end{figure}
 
 \subsection{研究目的}
 本研究の目的は、金融市場における銘柄間の相関構造の動態を、統計力学における「相転移」の枠組みで捉え直し、ランダム行列理論（RMT）に基づく物理指標を機械学習モデルに導入することで、
@@ -103,6 +107,9 @@ SNSを通じた「模倣行動」を行いやすく、系全体の相互作用�
 物理指標の導入が、従来のテクニカル指標のみでは困難であった暴落の先行検知、および「過度な同期状態からの脱却（底打ち）」の判別精度に与える影響を明らかにする。
 第三に、SHAPを用いた特徴量寄与度の分析により、モデルが市場の同期・非同期の切り替わりをどのように学習し、それが「暴落回避」および「買い戻し」の判断根拠としていかに機能しているかを、物理的解釈に基づき実証する。
 
+
+
+\clearpage
 \section{伝統的経済学と経済物理学的}
 \subsection{伝統的経済学とその限界}
 本研究で用いる経済物理学的アプローチの妥当性を論じるにあたり、まず伝統的な金融経済学の基礎となる諸仮説とその工学的観点からの限界について述べる。
@@ -347,7 +354,7 @@ GOSSによる計算効率と収束性: LightGBM特有のアルゴリズムであ
 
 \begin{figure}
     \centering
-    \includegraphics[width=\columnwidth]{../figure/figure1.png} % 画像ファイル名を指定
+    \includegraphics[width=\columnwidth]{figures/figure1_pr_curve_2025_Tariff.png} % 画像ファイル名を指定
     \caption{PR曲線による予測精度の比較}
     \label{fig:pr_curve}
 \end{figure}
@@ -357,7 +364,7 @@ GOSSによる計算効率と収束性: LightGBM特有のアルゴリズムであ
 
 \begin{figure}
     \centering
-    \includegraphics[width=\columnwidth]{../figure/figure2.png}
+    \includegraphics[width=\columnwidth]{figures/figure2_equity_2025_Tariff.png}
     \caption{2025年関税ショック時における資産推移シミュレーション}
     \label{fig:simulation}
 \end{figure}
@@ -368,7 +375,7 @@ GOSSによる計算効率と収束性: LightGBM特有のアルゴリズムであ
 
 \begin{figure}
     \centering
-    \includegraphics[width=\columnwidth]{../figure/figure3.png}
+    \includegraphics[width=\columnwidth]{figures/figure3_shap_2025_Tariff.png}
     \caption{SHAP値による特徴量重要度の分析}
     \label{fig:shap}
 \end{figure}
