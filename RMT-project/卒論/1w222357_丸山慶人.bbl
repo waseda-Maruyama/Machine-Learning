@@ -3,29 +3,25 @@
 \bibitem{cite:1}
 Delphine Lautier, Franck Raynaud, et~al.
 \newblock Energy derivative markets and systemic risk.
-\newblock Technical report, Conseil Francais de l'Energie-CFE, 12 Rue de
-  Saint-Quentin, 75010 Paris (France), 2010.
+\newblock Technical report, Conseil Francais de l'Energie-CFE, 12 Rue de Saint-Quentin, 75010 Paris (France), 2010.
 
 \bibitem{cite:2}
-{日本証券業協会}.
-\newblock 2024年度末の「個人株主の動向」について.
-\newblock Technical report, 日本証券業協会, 7 2025.
-\newblock Accessed: 2026-01-09.
-
-\bibitem{cite:3}
 {日本取引所グループ}.
 \newblock 2024年度株式分布状況調査の調査結果について.
 \newblock Technical report, 日本取引所グループ, 7 2025.
 \newblock Accessed: 2026-01-09.
 
-\bibitem{cite:4}
+\bibitem{cite:3}
 {証券保管振替機構}.
-\newblock 株式等振替制度 株式5,7
-  属性別株主数状況（人数）【6か月累計】.
+\newblock 株式等振替制度 株式5 属性別株主数状況（人数）【6か月累計】.
 \newblock https://www.jasdec.com/statistics/, 最新更新 2025.
 \newblock Excelデータダウンロード、Accessed: 2026-01-09.
 
-
+\bibitem{cite:4}
+{日本証券業協会}.
+\newblock 2024年度末の「個人株主の動向」について.
+\newblock Technical report, 日本証券業協会, 7 2025.
+\newblock Accessed: 2026-01-09.
 
 \bibitem{cite:5}
 Burton~G Malkiel.
@@ -60,15 +56,12 @@ P.~Gopikrishnan, M.~Meyer, L.~A.~N. Amaral, and H.~E. Stanley.
 
 \bibitem{cite:11}
 Stefan Bornholdt.
-\newblock Expectation bubbles in a spin model of markets: Intermittency from
-  frustration across scales.
-\newblock {\em International Journal of Modern Physics C}, 12(05):667--674,
-  2001.
+\newblock Expectation bubbles in a spin model of markets: Intermittency from frustration across scales.
+\newblock {\em International Journal of Modern Physics C}, 12(05):667--674, 2001.
 
 \bibitem{cite:12}
 Didier Sornette.
-\newblock Physics and financial economics (1776--2014): puzzles, ising and
-  agent-based models.
+\newblock Physics and financial economics (1776--2014): puzzles, ising and agent-based models.
 \newblock {\em Reports on Progress in Physics}, 77(6):062001, 2014.
 
 \bibitem{cite:13}
@@ -77,10 +70,8 @@ Laurent Laloux, Pierre Cizeau, Jean-Philippe Bouchaud, and Marc Potters.
 \newblock {\em Physical Review Letters}, 83(7):1467--1470, 1999.
 
 \bibitem{cite:14}
-Vasiliki Plerou, Parameswaran Gopikrishnan, Bernd Rosenow, Lu{\'i}s A.~Nunes
-  Amaral, and H.~Eugene Stanley.
-\newblock Universal and {N}onuniversal {P}roperties of {C}ross {C}orrelations
-  in {F}inancial {T}ime {S}eries.
+Vasiliki Plerou, Parameswaran Gopikrishnan, Bernd Rosenow, Lu{\'i}s A.~Nunes Amaral, and H.~Eugene Stanley.
+\newblock Universal and {N}onuniversal {P}roperties of {C}ross {C}orrelations in {F}inancial {T}ime {S}eries.
 \newblock {\em Physical Review Letters}, 83(7):1471--1474, 1999.
 
 \end{thebibliography}

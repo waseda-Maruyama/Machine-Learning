@@ -30,10 +30,11 @@ if os.path.exists("market_caps.csv") and os.path.exists("stock_prices.csv"):
     
     # 共通のカラムのみで計算（エラー回避）
     common_cols = df_prices.columns.intersection(df_caps.columns)
-    market_index = (df_prices[common_cols] * df_caps[common_cols]).sum(axis=1)
+    # 時価総額の合計（既に株価×発行株式数が含まれている）
+    total_market_cap = df_caps[common_cols].sum(axis=1)
     
     # 正規化
-    market_index = market_index / market_index.iloc[0]
+    market_index = total_market_cap / total_market_cap.iloc[0]
 else:
     print("❌ データ不足: stock_prices.csv または market_caps.csv が見つかりません")
     exit()
