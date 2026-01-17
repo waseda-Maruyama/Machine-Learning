@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.8.4)  16 JAN 2026 14:52
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.8.4)  16 JAN 2026 23:30
  restricted system commands enabled.
  file:line:error style messages enabled.
 **c:/Users/maruk/Desktop/Machine-Learning/RMT-project/卒論/1w222357_丸山慶人
@@ -681,42 +681,76 @@ Package tocloft Info: The document has section divisions on input line 51.
 \cfttabnumwidth=\skip85
 ) (c:/texlive/2025/texmf-dist/tex/latex/comment/comment.sty
 \CommentStream=\write3
- Excluding comment 'comment') (./1w222357_丸山慶人.aux)
+ Excluding comment 'comment') (c:/texlive/2025/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2023/07/28 v1.6b Sub-captions (AR)
+ (c:/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+ (c:/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen191
+\captionmargin=\dimen192
+\caption@leftmargin=\dimen193
+\caption@rightmargin=\dimen194
+\caption@width=\dimen195
+\caption@indent=\dimen196
+\caption@parindent=\dimen197
+\caption@hangindent=\dimen198
+Package caption Info: Unknown document class (or package),
+(caption)             standard defaults will be used.
+Package caption Info: \@makecaption = \long macro:#1#2->{\small \advance \leftskip .0628\linewidth \advance \rightskip .0628\linewidth \vskip \abovecaptionskip \sbox \@tempboxa {#1{\hskip 1\zw }#2}\ifdim \wd \@tempboxa <\hsize \centering \fi #1{\hskip 1\zw }#2\par \vskip \belowcaptionskip } on input line 1175.
+)
+
+Package caption Warning: Unknown document class (or package),
+(caption)                standard defaults will be used.
+See the caption package documentation for explanation.
+
+\c@caption@flags=\count313
+\c@continuedfloat=\count314
+Package caption Info: float package is loaded.
+)
+Package caption Info: New subtype `subfigure' on input line 238.
+\c@subfigure=\count315
+Package caption Info: New subtype `subtable' on input line 238.
+\c@subtable=\count316
+) (c:/texlive/2025/texmf-dist/tex/latex/tools/enumerate.sty
+Package: enumerate 2023/07/04 v3.00 enumerate extensions (DPC)
+\@enLab=\toks35
+) (./1w222357_丸山慶人.aux)
 \openout1 = 1w222357_丸山慶人.aux
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for JY3/mc/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
-LaTeX Font Info:    Checking defaults for JT3/mc/m/n on input line 43.
-LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for JY3/mc/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
+LaTeX Font Info:    Checking defaults for JT3/mc/m/n on input line 45.
+LaTeX Font Info:    ... okay on input line 45.
  (c:/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count313
-\scratchdimen=\dimen191
+\scratchcounter=\count317
+\scratchdimen=\dimen199
 \scratchbox=\box75
-\nofMPsegments=\count314
-\nofMParguments=\count315
-\everyMPshowfont=\toks35
-\MPscratchCnt=\count316
-\MPscratchDim=\dimen192
-\MPnumerator=\count317
-\makeMPintoPDFobject=\count318
-\everyMPtoPDFconversion=\toks36
+\nofMPsegments=\count318
+\nofMParguments=\count319
+\everyMPshowfont=\toks36
+\MPscratchCnt=\count320
+\MPscratchDim=\dimen256
+\MPnumerator=\count321
+\makeMPintoPDFobject=\count322
+\everyMPtoPDFconversion=\toks37
 ) (c:/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -757,63 +791,65 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
 (load cache: extra_lmroman17-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 15.97902pt on input line 46.
+(Font)              scaled to size 15.97902pt on input line 48.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 15.97902pt on input line 46.
+(Font)              scaled to size 15.97902pt on input line 48.
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 19.17854pt on input line 46.
+(Font)              scaled to size 19.17854pt on input line 48.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 19.17854pt on input line 46.
+(Font)              scaled to size 19.17854pt on input line 48.
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 23.00687pt on input line 46.
+(Font)              scaled to size 23.00687pt on input line 48.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 23.00687pt on input line 46.
+(Font)              scaled to size 23.00687pt on input line 48.
 (load cache: extra_lmroman12-bold.luc)
 LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <24.88> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 46.
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 48.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 19.17242pt on input line 46.
+(Font)              scaled to size 19.17242pt on input line 48.
 LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <24.88> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 46.
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 48.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 19.17242pt on input line 46.
+(Font)              scaled to size 19.17242pt on input line 48.
 (load cache: extra_haranoajigothic-medium.luc)(load cache: extra_lmroman12-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 11.09656pt on input line 46.
+(Font)              scaled to size 11.09656pt on input line 48.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 11.09656pt on input line 46.
-LaTeX Font Info:    Calculating math sizes for size <14.39996> on input line 46.
+(Font)              scaled to size 11.09656pt on input line 48.
+LaTeX Font Info:    Calculating math sizes for size <14.39996> on input line 48.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 7.76755pt on input line 46.
+(Font)              scaled to size 7.76755pt on input line 48.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 5.54828pt on input line 46.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 46.
+(Font)              scaled to size 5.54828pt on input line 48.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 48.
 (c:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 46.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 48.
  (c:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 13.31586pt on input line 46.
+(Font)              scaled to size 13.31586pt on input line 48.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 13.31586pt on input line 46.
+(Font)              scaled to size 13.31586pt on input line 48.
 
 
 [1
 
 {c:/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <14.4> not available
-(Font)              Font shape `JT3/gt/m/n' tried instead on input line 53.
+(Font)              Font shape `JT3/gt/m/n' tried instead on input line 55.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 11.09657pt on input line 53.
+(Font)              scaled to size 11.09657pt on input line 55.
 LaTeX Font Info:    Font shape `JY3/mc/b/n' in size <14.4> not available
-(Font)              Font shape `JY3/gt/m/n' tried instead on input line 53.
+(Font)              Font shape `JY3/gt/m/n' tried instead on input line 55.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 11.09657pt on input line 53.
+(Font)              scaled to size 11.09657pt on input line 55.
  (./1w222357_丸山慶人.toc(load cache: extra_lmroman10-bold.luc)
 LaTeX Font Info:    Font shape `JT3/mc/b/n' in size <10> not available
 (Font)              Font shape `JT3/gt/m/n' tried instead on input line 1.
@@ -838,14 +874,14 @@ LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 
 ]
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 13.31586pt on input line 58.
+(Font)              scaled to size 13.31586pt on input line 60.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 13.31586pt on input line 58.
+(Font)              scaled to size 13.31586pt on input line 60.
 (load cache: extra_lmsans12-regular.luc)
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 11.09656pt on input line 59.
+(Font)              scaled to size 11.09656pt on input line 61.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 11.09656pt on input line 59.
+(Font)              scaled to size 11.09656pt on input line 61.
 
 
 [1
@@ -854,27 +890,27 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 <figures/figure1_1.png, id=19, 716.6775pt x 335.75438pt>
 File: figures/figure1_1.png Graphic file (type png)
 <use figures/figure1_1.png>
-Package luatex.def Info: figures/figure1_1.png  used on input line 83.
-(luatex.def)             Requested size: 384.1096pt x 179.95213pt.
+Package luatex.def Info: figures/figure1_1.png  used on input line 85.
+(luatex.def)             Requested size: 341.43437pt x 159.96144pt.
 (load cache: extra_lmroman9-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 8.32242pt on input line 84.
+(Font)              scaled to size 8.32242pt on input line 86.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
-(Font)              scaled to size 8.32242pt on input line 84.
+(Font)              scaled to size 8.32242pt on input line 86.
 <figures/figure1_2.png, id=20, 718.93594pt x 342.5297pt>
 File: figures/figure1_2.png Graphic file (type png)
 <use figures/figure1_2.png>
-Package luatex.def Info: figures/figure1_2.png  used on input line 96.
-(luatex.def)             Requested size: 384.1096pt x 183.00853pt.
+Package luatex.def Info: figures/figure1_2.png  used on input line 92.
+(luatex.def)             Requested size: 341.43437pt x 162.67715pt.
 
 
-[2<./figures/figure1_1.png>]
+[2<./figures/figure1_1.png><./figures/figure1_2.png>]
 
-[3<./figures/figure1_2.png>]
+[3]
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
-(Font)              scaled to size 9.24713pt on input line 116.
+(Font)              scaled to size 9.24713pt on input line 122.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 9.24713pt on input line 116.
+(Font)              scaled to size 9.24713pt on input line 122.
 (load cache: extra_lmsans10-regular.luc)
 
 [4
@@ -883,17 +919,17 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 
 [5](load cache: extra_lmroman7-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 6.47295pt on input line 156.
+(Font)              scaled to size 6.47295pt on input line 163.
 (load cache: extra_lmroman5-regular.luc)
 LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
-(Font)              scaled to size 4.62357pt on input line 156.
+(Font)              scaled to size 4.62357pt on input line 163.
 
 
 [6]
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 6.47295pt on input line 171.
+(Font)              scaled to size 6.47295pt on input line 178.
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
-(Font)              scaled to size 4.62357pt on input line 171.
+(Font)              scaled to size 4.62357pt on input line 178.
 
 
 [7]
@@ -912,31 +948,44 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 
 [14]
 
-[15]
+[15
+
+]
 
 [16]
-<figures/figure1_pr_curve_2025_Tariff.png, id=83, 462.528pt x 346.896pt>
-File: figures/figure1_pr_curve_2025_Tariff.png Graphic file (type png)
-<use figures/figure1_pr_curve_2025_Tariff.png>
-Package luatex.def Info: figures/figure1_pr_curve_2025_Tariff.png  used on input line 357.
-(luatex.def)             Requested size: 426.79135pt x 320.11154pt.
-<figures/figure2_equity_2025_Tariff.png, id=84, 722.7pt x 433.62pt>
-File: figures/figure2_equity_2025_Tariff.png Graphic file (type png)
-<use figures/figure2_equity_2025_Tariff.png>
-Package luatex.def Info: figures/figure2_equity_2025_Tariff.png  used on input line 367.
-(luatex.def)             Requested size: 426.79135pt x 256.07838pt.
-<figures/figure3_shap_2025_Tariff.png, id=85, 578.16pt x 310.761pt>
-File: figures/figure3_shap_2025_Tariff.png Graphic file (type png)
-<use figures/figure3_shap_2025_Tariff.png>
-Package luatex.def Info: figures/figure3_shap_2025_Tariff.png  used on input line 378.
-(luatex.def)             Requested size: 426.79135pt x 229.4pt.
-
 
 [17]
 
-[18<./figures/figure1_pr_curve_2025_Tariff.png><./figures/figure2_equity_2025_Tariff.png>] (./1w222357_丸山慶人.bbl
+[18
 
-[19<./figures/figure3_shap_2025_Tariff.png>](load cache: extra_lmroman10-italic.luc)
+]
+
+[19]
+
+[20]
+<figures/figure1_pr_curve_2025_Tariff.png, id=96, 462.528pt x 346.896pt>
+File: figures/figure1_pr_curve_2025_Tariff.png Graphic file (type png)
+<use figures/figure1_pr_curve_2025_Tariff.png>
+Package luatex.def Info: figures/figure1_pr_curve_2025_Tariff.png  used on input line 427.
+(luatex.def)             Requested size: 426.79135pt x 320.11154pt.
+
+
+[21]
+<figures/figure2_equity_2025_Tariff.png, id=100, 722.7pt x 433.62pt>
+File: figures/figure2_equity_2025_Tariff.png Graphic file (type png)
+<use figures/figure2_equity_2025_Tariff.png>
+Package luatex.def Info: figures/figure2_equity_2025_Tariff.png  used on input line 437.
+(luatex.def)             Requested size: 426.79135pt x 256.07838pt.
+<figures/figure3_shap_2025_Tariff.png, id=101, 578.16pt x 310.761pt>
+File: figures/figure3_shap_2025_Tariff.png Graphic file (type png)
+<use figures/figure3_shap_2025_Tariff.png>
+Package luatex.def Info: figures/figure3_shap_2025_Tariff.png  used on input line 448.
+(luatex.def)             Requested size: 426.79135pt x 229.4pt.
+
+
+[22<./figures/figure1_pr_curve_2025_Tariff.png>]
+
+[23<./figures/figure2_equity_2025_Tariff.png><./figures/figure3_shap_2025_Tariff.png>] (./1w222357_丸山慶人.bbl(load cache: extra_lmroman10-italic.luc)
 LaTeX Font Info:    Font shape `JT3/gt/m/it' in size <10> not available
 (Font)              Font shape `JT3/gt/m/n' tried instead on input line 33.
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
@@ -947,9 +996,11 @@ LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 (Font)              scaled to size 7.70596pt on input line 33.
 
 
-[20])
+[24
 
-[21] (./1w222357_丸山慶人.aux)
+])
+
+[25] (./1w222357_丸山慶人.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-20>
@@ -961,19 +1012,19 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 )
 
 Here is how much of LuaTeX's memory you used:
- 6055 strings out of 470118
- 244632,662416 words of node,token memory allocated
+ 7563 strings out of 470118
+ 195704,662416 words of node,token memory allocated
  2161 words of node memory still in use:
    11 hlist, 2 vlist, 5 rule, 2 glue, 4 kern, 1 glyph, 634 attribute, 85 glue_spec, 70 attribute_list, 1 write, 14 user_defined nodes
-   avail lists: 1:22,2:74679,3:357,4:237,5:188,6:42,7:6642,8:42,9:2666,10:38,11:276
- 34260 multiletter control sequences out of 65536+600000
+   avail lists: 1:14,2:55066,3:331,4:247,5:158,6:45,7:4779,8:43,9:2146,10:38,11:182
+ 35748 multiletter control sequences out of 65536+600000
  92 fonts using 77525991 bytes
- 119i,12n,112p,1861b,391s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 119i,12n,128p,1861b,734s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman9-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans12-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/haranoaji/HaranoAjiGothic-Medium.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman17-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/haranoaji/HaranoAjiMincho-Regular.otf><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on 1w222357_丸山慶人.pdf (23 pages, 1235473 bytes).
+Output written on 1w222357_丸山慶人.pdf (27 pages, 1260889 bytes).
 
-PDF statistics: 206 PDF objects out of 1000 (max. 8388607)
- 127 compressed objects within 2 object streams
+PDF statistics: 218 PDF objects out of 1000 (max. 8388607)
+ 135 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
 

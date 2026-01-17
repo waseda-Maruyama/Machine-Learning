@@ -20,8 +20,8 @@ except Exception as e:
     # traceback.print_exc() # 必要であれば詳細なスタックトレースを表示
     exit()
 
-START_DATE = "20160101"
-END_DATE = "20251215"
+START_DATE = "20160130"
+END_DATE = "20250115"
 START_DATE_FIN = "20150101"
 
 # APIリトライ用の関数（エラー時にも内容を表示）
