@@ -9,7 +9,7 @@ import os
 TERM_SHORT = 3      # 推奨: 3日
 DROP_SHORT = -0.02  # 推奨: -2%
 TERM_LONG = 10      # 推奨: 10日
-DROP_LONG = -0.08   # 推奨: -8% (より深い暴落を狙う場合)
+DROP_LONG = -0.08  # 推奨: -8% (より深い暴落を狙う場合)
 
 # 重みの設定
 DECAY_RATE = 0.5    # 減衰スピード

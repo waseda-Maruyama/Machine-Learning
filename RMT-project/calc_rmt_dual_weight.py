@@ -1,3 +1,4 @@
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -36,26 +37,26 @@ def get_max_eigenvalue_series(returns_df, window_size):
     data_values = returns_df.values
     dates = returns_df.index
     n_samples = len(dates)
-    
+
     vals = np.full(n_samples, np.nan)
-    
+
     # 高速化のためループ処理
     for i in range(window_size, n_samples):
         # 窓切り出し
         sub_data = data_values[i-window_size : i]
-        
+
         # 相関行列 & 固有値分解
         # 欠損(NaN)ケア: fillna(0)相当
         sub_data = np.nan_to_num(sub_data)
         if np.all(sub_data == 0):
             vals[i] = 0
             continue
-            
+
         corr = np.corrcoef(sub_data, rowvar=False)
         corr = np.nan_to_num(corr)
         eigvals = np.linalg.eigvalsh(corr)
         vals[i] = eigvals[-1] # 最大固有値
-        
+
     return pd.Series(vals, index=dates)
 
 # ---------------------------------------------------------
@@ -68,16 +69,16 @@ df_features = pd.DataFrame(index=df_log_returns.index)
 def add_physics_indicators(df_target, base_col, suffix):
     # 1. Raw (生データ)
     raw_col = f"RMT_Raw_{suffix}"
-    
+
     # 2. Smooth (平滑化) -> Velocity計算用
     smooth = df_target[raw_col].rolling(window=3).mean()
-    
+
     # 3. Velocity (速度)
     df_target[f"RMT_Vel_{suffix}"] = smooth.diff()
-    
+
     # 4. Acceleration (加速度)
     df_target[f"RMT_Accel_{suffix}"] = df_target[f"RMT_Vel_{suffix}"].diff()
-    
+
 
 
 
@@ -110,6 +111,10 @@ else:
 market_index = market_index / market_index.iloc[0]
 
 # --- プロット作成 ---
+
+
+
+
 fig, ax1 = plt.subplots(figsize=(14, 8))
 
 # 1. 市場インデックス (左軸: 対数表示)
@@ -126,17 +131,41 @@ ax2 = ax1.twinx()
 color_short = 'tab:blue'
 color_long = 'tab:red'
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ax2.set_ylabel(r'Max Eigenvalue ($\lambda_{max}$)', color='tab:purple', fontsize=16) # LaTeX表記
+
+
+
 
 # Short (短期窓)
 ax2.plot(df_features.index, df_features['RMT_Raw_S'], 
-         color=color_short, linewidth=1, alpha=0.8, label=f'Short $\lambda$ ({WINDOW_S}d)')
+         color=color_short, linewidth=1, alpha=0.8, label=rf'Short $\lambda$ ({WINDOW_S}d)')
 
 # Long (長期窓)
 ax2.plot(df_features.index, df_features['RMT_Raw_L'], 
-         color=color_long, linewidth=1.5, alpha=0.8, label=f'Long $\lambda$ ({WINDOW_L}d)')
-
+         color=color_long, linewidth=1.5, alpha=0.8, label=rf'Long $\lambda$ ({WINDOW_L}d)')
 ax2.tick_params(axis='y', labelsize=14)
+
+
+
+
 
 # --- 凡例の整理 ---
 # 2つの軸の凡例を1箇所にまとめます
@@ -144,12 +173,17 @@ lines1, labels1 = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
 ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left', fontsize=12)
 
+
+
+
 # --- イベント帯の表示 ---
 # データの範囲内にあるイベントだけを描画
 data_start = df_features.index[0]
 data_end = df_features.index[-1]
 
 ymin, ymax = ax2.get_ylim() # テキスト位置調整用
+
+
 
 for name, period in scenarios.items():
     event_date = pd.to_datetime(period[0])

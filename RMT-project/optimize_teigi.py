@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 import itertools
 import os
 from config import scenarios # 設定ファイル
@@ -40,7 +41,7 @@ short_days_list = [3, 5]            # 3日後、5日後
 short_drop_list = [-0.02, -0.03, -0.04, -0.05]  # -2%、-3%、-4%、-5%
 
 # 長期条件 (継続下落)
-long_days_list = [10]               # 10日後
+long_days_list = [7,10]               # 10日後
 long_drop_list = [-0.05, -0.06, -0.07, -0.08]  # -5%、-6%、-7%、-8%
 
 # 組み合わせ生成
@@ -124,3 +125,44 @@ print(df_results.head(10))
 output_csv = "target_definition_comparison.csv"
 df_results.to_csv(output_csv, index=False)
 print(f"\n✅ 結果を保存しました: {output_csv}")
+
+
+target_s_days = 3
+target_s_drop = -0.02
+target_l_days = 10
+target_l_drop = -0.08
+
+print(f"\n📈 可視化チェック: Short({target_s_days}d, {target_s_drop:.0%}) & Long({target_l_days}d, {target_l_drop:.0%})")
+
+# 再計算 (ループ内と同じロジック)
+ret_s = market_index.shift(-target_s_days) / market_index - 1.0
+ret_l = market_index.shift(-target_l_days) / market_index - 1.0
+raw = (ret_s <= target_s_drop) & (ret_l <= target_l_drop)
+raw = raw.astype(int)
+
+event_id = (raw.diff() != 0).cumsum()
+days_since = raw.groupby(event_id).cumcount()
+final_target = raw.copy()
+final_target[(raw == 1) & (days_since >= 5)] = 0
+
+# プロット
+plt.figure(figsize=(15, 6))
+plt.plot(market_index.index, market_index, label="TOPIX100 Index", color="gray", alpha=0.6)
+
+# 暴落発生箇所を赤点でプロット
+crash_dates = final_target[final_target == 1].index
+plt.scatter(crash_dates, market_index.loc[crash_dates], color="red", s=10, label="Crash Onset", zorder=5)
+
+# 有名イベントの期間をシャドウで表示
+colors = ['blue', 'green', 'orange', 'purple']
+for i, (name, (start, end)) in enumerate(scenarios.items()):
+    plt.axvspan(pd.to_datetime(start), pd.to_datetime(end), color=colors[i%4], alpha=0.1, label=name)
+
+plt.title(f"Crash Definition: Short{target_s_drop:.0%} & Long{target_l_drop:.0%} (Total: {final_target.sum()} days)")
+plt.legend()
+plt.grid(True, alpha=0.3)
+
+# 保存
+plt.savefig("crash_definition_check.png")
+print("🖼️ チャートを 'crash_definition_check.png' に保存しました。")
+# plt.show() # 環境によってはコメントアウトを外す

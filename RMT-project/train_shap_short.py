@@ -23,7 +23,7 @@ plt.rcParams['lines.linewidth'] = 2.5
 # =========================================================
 INPUT_FILE = "dataset_ml_weighted.csv" # あなたのデータファイル名
 SCENARIO_NAME = "2025 Tariff"          # 概要書に載せるメインのシナリオ
-SCENARIO_RANGE = ["2024-01-01", "2024-10-31"] # 期間
+SCENARIO_RANGE = ["2025-01-01", "2025-10-31"] # 期間
 
 # バックテスト用パラメータ
 SELL_THRESHOLD = 0.5   # リスク判定閾値

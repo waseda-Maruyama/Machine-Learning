@@ -28,8 +28,9 @@
 \contentsline {subsubsection}{\numberline {4.1.1}データソースと解析対象}{18}{}%
 \contentsline {subsubsection}{\numberline {4.1.2}データ前処理}{19}{}%
 \contentsline {subsection}{\numberline {4.2}目的変数の定義と最適化}{21}{}%
-\contentsline {subsection}{\numberline {4.3}重み付け学習 (Sample Weighting)}{21}{}%
-\contentsline {subsection}{\numberline {4.4}入力特徴量の構成}{21}{}%
+\contentsline {subsubsection}{\numberline {4.2.1}目的変数の定義}{21}{}%
+\contentsline {subsection}{\numberline {4.3}重み付け学習 (Sample Weighting)}{22}{}%
+\contentsline {subsection}{\numberline {4.4}入力特徴量の構成}{22}{}%
 \contentsline {subsection}{\numberline {4.5}予測モデルの構築}{22}{}%
-\contentsline {section}{\numberline {5}実験結果}{22}{}%
+\contentsline {section}{\numberline {5}実験結果}{23}{}%
 \contentsline {section}{\numberline {6}結論}{25}{}%

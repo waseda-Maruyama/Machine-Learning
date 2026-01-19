@@ -269,3 +269,82 @@ print(f"AP Improvement: {ap_a:.3f} (Base) -> {ap_b:.3f} (Prop) | (+{ap_b - ap_a:
 print(f"MDD Reduction : {mdd_bh:.1%} (Hold) -> {mdd_b:.1%} (Prop)")
 print(f"Total Return  : {eq_bh.iloc[-1]-1:.1%} (Hold) -> {ret_b:.1%} (Prop)")
 print("-" * 60)
+
+# =========================================================
+# 図1: PR曲線 (Standard vs Weighted 比較)
+# =========================================================
+print("📊 Drawing Figure 4: PR Curve (Standard vs Weighted)...")
+
+# 1. テストデータ用の重みを取得
+if 'Sample_Weight' in df_ml.columns:
+    w_test = df_ml.loc[test_mask, 'Sample_Weight']
+else:
+    w_test = np.ones(len(y_test))
+
+# --- A. ベースライン (Model A) - Standard ---
+prec_a, rec_a, _ = precision_recall_curve(y_test, probs_a)
+ap_a = average_precision_score(y_test, probs_a)
+
+# --- B. 提案モデル (Model B) - Standard (件数ベース) ---
+prec_b, rec_b, thresholds_b = precision_recall_curve(y_test, probs_b)
+ap_b = average_precision_score(y_test, probs_b)
+
+# --- C. 提案モデル (Model B) - Weighted (金額インパクトベース) ---
+# sample_weight を渡して計算
+prec_b_w, rec_b_w, _ = precision_recall_curve(y_test, probs_b, sample_weight=w_test)
+ap_b_w = average_precision_score(y_test, probs_b, sample_weight=w_test)
+
+# --- プロット作成 ---
+plt.figure(figsize=(10, 7))
+
+# 1. Baseline (点線)
+plt.plot(rec_a, prec_a, linestyle=':', color='gray', alpha=0.8, linewidth=2,
+         label=f'Baseline (Standard AP={ap_a:.3f})')
+
+# 2. Proposed Standard (破線)
+plt.plot(rec_b, prec_b, linestyle='--', color='salmon', alpha=0.8, linewidth=2,
+         label=f'Proposed (Standard AP={ap_b:.3f})')
+
+# 3. Proposed Weighted (実線・太線) -> これが主役！
+plt.plot(rec_b_w, prec_b_w, color='crimson', linewidth=3, zorder=10,
+         label=f'Proposed (Weighted AP={ap_b_w:.3f})')
+
+# --- 動作点 (Operating Point) の描画 ---
+# Weightedでの閾値位置を確認する
+closest_idx = np.abs(thresholds_b - SELL_THRESHOLD).argmin()
+target_prec = prec_b[closest_idx] # ここはStandardの値を参照（実務的な誤検知率だから）
+target_rec = rec_b[closest_idx]
+actual_th = thresholds_b[closest_idx]
+
+plt.scatter(target_rec, target_prec, color='black', s=150, zorder=11, 
+            edgecolor='white', linewidth=2, label=f'Threshold={actual_th:.2f}')
+
+# 注釈
+plt.annotate(
+    f'Standard AP: {ap_b:.3f}\nWeighted AP: {ap_b_w:.3f}\n(+{ap_b_w - ap_b:.3f} Boost)',
+    xy=(0.5, 0.5), xycoords='axes fraction',
+    xytext=(0.6, 0.6), 
+    fontsize=12, color='darkred', weight='bold',
+    bbox=dict(boxstyle="round,pad=0.5", fc="white", ec="crimson", alpha=0.9)
+)
+
+plt.xlabel('Recall (Sensitivity)')
+plt.ylabel('Precision (Reliability)')
+plt.title(f'Figure 1: Predictive Performance & Impact Analysis\nScenario: {SCENARIO_NAME}')
+plt.legend(loc='lower left') # 左下に配置変更（曲線とかぶらないように）
+plt.grid(True, linestyle=':', alpha=0.6)
+plt.tight_layout()
+
+fname1 = os.path.join(OUTPUT_DIR, f'figure1_pr_curve_weighted_{SCENARIO_NAME.replace(" ", "_")}.png')
+plt.savefig(fname1, dpi=300)
+print(f"✅ Saved Weighted PR Curve: {fname1}")
+plt.close()
+
+# --- コンソール出力用 ---
+print("\n⚖️ Weighted Evaluation Results:")
+print(f"Proposed Standard AP: {ap_b:.4f}")
+print(f"Proposed Weighted AP: {ap_b_w:.4f}")
+if ap_b_w > ap_b:
+    print("🚀 Result: Weighted score is HIGHER. The model effectively captures large crashes!")
+else:
+    print("⚠️ Result: Weighted score is lower. The model might be missing some large crashes.")

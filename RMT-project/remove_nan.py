@@ -9,8 +9,8 @@ NAN_THRESHOLD = 2  # これ以上の欠損は削除
 print("🧹 データクリーニング & 特定銘柄の救済処理を開始します...")
 
 try:
-    df_prices = pd.read_csv("stock_prices1.csv", index_col=0, parse_dates=True)
-    df_mc = pd.read_csv("market_caps1.csv", index_col=0, parse_dates=True)
+    df_prices = pd.read_csv("stock_prices.csv", index_col=0, parse_dates=True)
+    df_mc = pd.read_csv("market_caps.csv", index_col=0, parse_dates=True)
     print(f"📥 読み込み完了: {len(df_prices.columns)} 銘柄")
 except FileNotFoundError:
     print("❌ ファイルが見つかりません。")
@@ -116,8 +116,8 @@ else:
 df_prices_clean = df_prices_clean.ffill()
 df_mc_clean = df_mc_clean.ffill()
 
-df_prices_clean.to_csv("stock_prices1.csv")
-df_mc_clean.to_csv("market_caps1.csv")
+df_prices_clean.to_csv("stock_prices.csv")
+df_mc_clean.to_csv("market_caps.csv")
 
 print(f"\n💾 保存完了: {len(df_prices_clean.columns)} 銘柄")
 print("   stock_prices.csv / market_caps.csv を更新しました。")
