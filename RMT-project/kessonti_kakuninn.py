@@ -20,7 +20,7 @@ except Exception as e:
     exit()
 
 START_DATE = "20160130"  # ユーザー指定の期間に合わせて変更
-END_DATE = "20250115"
+END_DATE = "20260117"
 START_DATE_FIN = "20160130" # 財務データは少し前から取っておく
 
 # APIリトライ用の関数
