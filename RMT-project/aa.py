@@ -98,11 +98,14 @@ add_physics_indicators(df_features, 'L')
 
 # --- 市場インデックスの準備 ---
 market_cap_file = "market_caps.csv"
-if os.path.exists(market_cap_file):
+if os.path.exists(market_cap_file) and os.path.exists("close_shares.csv") and os.path.exists("stock_close.csv"):
     print("📈 時価総額加重インデックスを使用")
+    df_close = pd.read_csv("stock_close.csv", index_col=0, parse_dates=True)
+    df_shares = pd.read_csv("close_shares.csv", index_col=0, parse_dates=True)
     df_caps = pd.read_csv(market_cap_file, index_col=0, parse_dates=True)
     df_caps = df_caps.reindex(df_prices.index).ffill()
-    market_index = df_caps.sum(axis=1)
+
+    market_index = ((df_caps*0)+(df_close)*df_shares).sum(axis=1)
 else:
     print("📉 単純平均インデックスを使用")
     market_index = df_prices.mean(axis=1)

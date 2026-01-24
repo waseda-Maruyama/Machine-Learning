@@ -1,73 +1,73 @@
 import pandas as pd
+import numpy as np
 
-# 1. 読み込み (あえて日付パースせずに生の状態も見ます)
-print("📂 ファイルを読み込んでいます...")
-try:
-    df_prices = pd.read_csv("stock_prices1.csv", index_col=0, parse_dates=True)
-    df_mc = pd.read_csv("market_caps1.csv", index_col=0, parse_dates=True)
-except FileNotFoundError:
-    print("❌ ファイルが見つかりません")
-    exit()
-
-target = "54010"  # 日本製鉄
-
-# ---------------------------------------------------------
-# 検査 1: そもそもデータフレームにいるか？
-# ---------------------------------------------------------
-if target not in df_mc.columns:
-    print(f"❌ エラー: {target} が market_caps.csv に存在しません。")
-    exit()
-
-# ---------------------------------------------------------
-# 検査 2: シンプルな欠損数カウント (条件なし)
-# ---------------------------------------------------------
-mc_series = df_mc[target]
-price_series = df_prices[target] if target in df_prices.columns else pd.Series(dtype=float)
-
-mc_null_count = mc_series.isnull().sum()
-price_null_count = price_series.isnull().sum()
-
-print(f"\n📊 {target} の基本ステータス:")
-print(f"   - 全期間の日数: {len(mc_series)}")
-print(f"   - 時価総額(MC) のNaN数: {mc_null_count} <--- ここが 0 ならファイルは『無欠損』です")
-print(f"   - 株価(Price) のNaN数: {price_null_count}")
-
-# ---------------------------------------------------------
-# 検査 3: レポートとの矛盾の原因を探る
-# ---------------------------------------------------------
-# 「株価はあるのに、MCがない」日を探す (さっきのtemp.pyのロジック)
-# インデックスを合わせてから比較
-df_mc_aligned = df_mc.reindex(df_prices.index)
-culprit_mask = df_prices[target].notnull() & df_mc_aligned[target].isnull()
-culprit_days = df_prices.index[culprit_mask]
-
-print(f"\n🕵️‍♀️ 犯人捜しロジック (Price!=NaN かつ MC==NaN) の結果:")
-print(f"   - 該当日数: {len(culprit_days)} 日")
-
-if len(culprit_days) > 0:
-    print("   🚨 発見しました！以下のような日付です:")
-    print(culprit_days[:5])
-else:
-    print("   ✅ 該当なし (つまり、株価がある日は必ずMCも入っています)")
-
-# ---------------------------------------------------------
-# 検査 4: もし「MC欠損数」が 0 なら...
-# ---------------------------------------------------------
-if mc_null_count == 0:
-    print("\n💡 結論:")
-    print("  このファイル上の日本製鉄は【完全に埋まっています】。")
-    print("  レポートで「111日欠損」と出た理由は以下の可能性が高いです：")
-    print("  1. 生成スクリプト内の `bfill()` が保存時に効いて、CSV化する段階で直った。")
-    print("  2. レポート計算時点ではNaNだったが、その後の処理で埋まった。")
+def find_outliers_2017():
+    print("🔍 2017年のデータ異常を調査します...")
     
-# ---------------------------------------------------------
-# 検査 5: もし「MC欠損数」が > 0 なのに「犯人」が 0 なら...
-# ---------------------------------------------------------
-elif mc_null_count > 0 and len(culprit_days) == 0:
-    print("\n💡 結論:")
-    print("  時価総額の欠損はありますが、その日は【株価も欠損】しています。")
-    print("  そのため「株価はあるのに...」という検索には引っかかりませんでした。")
+    # 1. データ読み込み
+    try:
+        df_mc = pd.read_csv("market_caps.csv", index_col=0, parse_dates=True)
+    except Exception as e:
+        print(f"❌ 読み込みエラー: {e}")
+        return
+
+    # 2. 2017年に絞り込む
+    df_2017 = df_mc.loc['2017-01-01':'2017-12-31']
     
-    # 実際に両方NaNの日を表示
-    both_nan = df_prices[target].isnull() & df_mc_aligned[target].isnull()
-    print(f"  (株価と時価総額が共にNaNの日数: {both_nan.sum()} 日)")
+    if df_2017.empty:
+        print("⚠️ 2017年のデータがありません。")
+        return
+
+    # 3. 全体の時価総額と、前日比(差額)を計算
+    total_mc = df_2017.sum(axis=1)
+    
+    # 前日との差額 (Total Market Cap Diff)
+    total_diff = total_mc.diff()
+    
+    # 変動が大きかった日トップ5を抽出 (絶対値ベース)
+    # ※乖離がいきなり+10%とかになった日を探すため
+    top_volatiles = total_diff.abs().nlargest(5)
+    
+    print(f"\n📅 2017年で時価総額が激しく動いた日 TOP5")
+    print("="*60)
+    
+    for date, change_amount in top_volatiles.items():
+        date_str = date.strftime('%Y-%m-%d')
+        
+        # その日の「個別銘柄の変動額」を計算
+        # (当日 - 前日)
+        day_idx = df_2017.index.get_loc(date)
+        if day_idx == 0: continue
+        
+        prev_date = df_2017.index[day_idx - 1]
+        
+        # 全銘柄の差分を計算
+        stock_diffs = df_2017.loc[date] - df_2017.loc[prev_date]
+        
+        # その日の変動要因になった銘柄トップ3 (絶対値でソート)
+        culprits = stock_diffs.abs().sort_values(ascending=False).head(3)
+        
+        # 表示
+        direction = "📈 増加" if total_diff.loc[date] > 0 else "📉 減少"
+        print(f"\n🗓 {date_str} | 全体変動: {change_amount:,.0f} ({direction})")
+        print(f"   👇 主な要因銘柄:")
+        
+        for code, diff_val in culprits.items():
+            # 寄与率: その銘柄の変動 / 全体の変動
+            contribution = (diff_val / total_diff.loc[date]) * 100
+            
+            # その銘柄の時価総額が前日からどう変わったか
+            val_prev = df_2017.loc[prev_date, code]
+            val_curr = df_2017.loc[date, code]
+            pct = ((val_curr - val_prev) / val_prev) * 100 if val_prev != 0 else np.nan
+            
+            print(f"     Code {code}: 変動額 {diff_val:,.0f} (前日比 {pct:+.1f}%) | 寄与率: {contribution:.1f}%")
+            print(f"         (前日: {val_prev:,.0f} -> 当日: {val_curr:,.0f})")
+
+    print("\n" + "="*60)
+    print("💡 ヒント:")
+    print("もし '前日比 +100%' や '+900%' (10倍) のような銘柄があれば、")
+    print("株式分割や併合のデータ反映タイミングが、株価と発行済み株式数でズレています。")
+
+if __name__ == "__main__":
+    find_outliers_2017()

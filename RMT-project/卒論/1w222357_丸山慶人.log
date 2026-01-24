@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.8.4)  19 JAN 2026 15:59
+This is LuaHBTeX, Version 1.22.0 (TeX Live 2025)  (format=lualatex 2025.8.4)  23 JAN 2026 15:56
  restricted system commands enabled.
  file:line:error style messages enabled.
 **c:/Users/maruk/Desktop/Machine-Learning/RMT-project/卒論/1w222357_丸山慶人
@@ -1064,7 +1064,7 @@ LaTeX Font Info:    Font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/n' will be
 File: figures/figure1_1.png Graphic file (type png)
 <use figures/figure1_1.png>
 Package luatex.def Info: figures/figure1_1.png  used on input line 87.
-(luatex.def)             Requested size: 341.43437pt x 159.96144pt.
+(luatex.def)             Requested size: 384.1096pt x 179.95213pt.
 (load cache: extra_lmroman9-regular.luc)
 LaTeX Font Info:    Font shape `JT3/HaranoAjiMincho-Regular.otf(0)/m/n' will be
 (Font)              scaled to size 8.32242pt on input line 88.
@@ -1074,37 +1074,37 @@ LaTeX Font Info:    Font shape `JY3/HaranoAjiMincho-Regular.otf(0)/m/n' will be
 File: figures/figure1_2.png Graphic file (type png)
 <use figures/figure1_2.png>
 Package luatex.def Info: figures/figure1_2.png  used on input line 94.
-(luatex.def)             Requested size: 341.43437pt x 162.67715pt.
+(luatex.def)             Requested size: 384.1096pt x 183.00853pt.
 
 
-[2<./figures/figure1_1.png><./figures/figure1_2.png>]
+[2]
 
-[3]
+[3<./figures/figure1_1.png><./figures/figure1_2.png>]
+
+[4]
 LaTeX Font Info:    Font shape `JT3/HaranoAjiGothic-Medium.otf(0)/m/n' will be
-(Font)              scaled to size 9.24713pt on input line 124.
+(Font)              scaled to size 9.24713pt on input line 129.
 LaTeX Font Info:    Font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/n' will be
-(Font)              scaled to size 9.24713pt on input line 124.
+(Font)              scaled to size 9.24713pt on input line 129.
 (load cache: extra_lmsans10-regular.luc)
 
-[4
+[5
 
 ]
 
-[5]
+[6]
 LaTeX Font Info:    Font shape `JT3/HaranoAjiMincho-Regular.otf(0)/m/n' will be
-(Font)              scaled to size 6.47295pt on input line 167.
+(Font)              scaled to size 6.47295pt on input line 172.
 LaTeX Font Info:    Font shape `JT3/HaranoAjiMincho-Regular.otf(0)/m/n' will be
-(Font)              scaled to size 4.62357pt on input line 167.
+(Font)              scaled to size 4.62357pt on input line 172.
 
 
-[6](load cache: extra_lmromandemi10-regular.luc)
+[7](load cache: extra_lmromandemi10-regular.luc)
 LaTeX Font Info:    Font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/n' will be
-(Font)              scaled to size 6.47295pt on input line 182.
+(Font)              scaled to size 6.47295pt on input line 187.
 LaTeX Font Info:    Font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/n' will be
-(Font)              scaled to size 4.62357pt on input line 182.
+(Font)              scaled to size 4.62357pt on input line 187.
 
-
-[7]
 
 [8]
 
@@ -1120,9 +1120,7 @@ LaTeX Font Info:    Font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/n' will be
 
 [14]
 
-[15
-
-]
+[15]
 
 [16]
 
@@ -1136,78 +1134,120 @@ LaTeX Font Info:    Font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/n' will be
 
 [20]
 
-[21]
-<figures/figure1_pr_curve_2025_Tariff.png, id=99, 462.528pt x 346.896pt>
-File: figures/figure1_pr_curve_2025_Tariff.png Graphic file (type png)
-<use figures/figure1_pr_curve_2025_Tariff.png>
-Package luatex.def Info: figures/figure1_pr_curve_2025_Tariff.png  used on input line 478.
-(luatex.def)             Requested size: 426.79135pt x 320.11154pt.
+[21
 
+]
 
 [22]
-<figures/figure2_equity_2025_Tariff.png, id=103, 722.7pt x 433.62pt>
+
+[23]
+
+[24]
+
+[25]
+
+[26]
+
+[27]
+
+[28]
+Overfull \hbox (50.52284pt too wide) in paragraph at lines 642--656
+ [][][][] 
+ []
+
+
+
+[29]
+
+[30]
+
+[31]
+
+[32]
+
+[33]
+
+LaTeX Warning: Reference `tab:periods' on page 34 undefined on input line 762.
+
+
+
+[34
+
+]
+<figures/figure1_pr_curve_2025_Tariff.png, id=139, 462.528pt x 346.896pt>
+File: figures/figure1_pr_curve_2025_Tariff.png Graphic file (type png)
+<use figures/figure1_pr_curve_2025_Tariff.png>
+Package luatex.def Info: figures/figure1_pr_curve_2025_Tariff.png  used on input line 804.
+(luatex.def)             Requested size: 426.79135pt x 320.11154pt.
+<figures/figure2_equity_2025_Tariff.png, id=140, 722.7pt x 433.62pt>
 File: figures/figure2_equity_2025_Tariff.png Graphic file (type png)
 <use figures/figure2_equity_2025_Tariff.png>
-Package luatex.def Info: figures/figure2_equity_2025_Tariff.png  used on input line 488.
+Package luatex.def Info: figures/figure2_equity_2025_Tariff.png  used on input line 814.
 (luatex.def)             Requested size: 426.79135pt x 256.07838pt.
-<figures/figure3_shap_2025_Tariff.png, id=104, 578.16pt x 310.761pt>
+<figures/figure3_shap_2025_Tariff.png, id=141, 578.16pt x 310.761pt>
 File: figures/figure3_shap_2025_Tariff.png Graphic file (type png)
 <use figures/figure3_shap_2025_Tariff.png>
-Package luatex.def Info: figures/figure3_shap_2025_Tariff.png  used on input line 499.
+Package luatex.def Info: figures/figure3_shap_2025_Tariff.png  used on input line 825.
 (luatex.def)             Requested size: 426.79135pt x 229.4pt.
 
 
-[23<./figures/figure1_pr_curve_2025_Tariff.png>]
+[35]
 
-[24<./figures/figure2_equity_2025_Tariff.png><./figures/figure3_shap_2025_Tariff.png>] (./1w222357_丸山慶人.bbl(load cache: extra_lmroman10-italic.luc)
+[36<./figures/figure1_pr_curve_2025_Tariff.png><./figures/figure2_equity_2025_Tariff.png>]
+
+[37<./figures/figure3_shap_2025_Tariff.png>] (./1w222357_丸山慶人.bbl(load cache: extra_lmroman10-italic.luc)
 LaTeX Font Info:    Kanji font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/it' undefined
-(Font)              No change on input line 31.
+(Font)              No change on input line 38.
 LaTeX Font Info:    Kanji font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/it' undefined
-(Font)              No change on input line 36.
+(Font)              No change on input line 43.
 LaTeX Font Info:    Kanji font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/it' undefined
-(Font)              No change on input line 41.
+(Font)              No change on input line 48.
 LaTeX Font Info:    Kanji font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/it' undefined
-(Font)              No change on input line 46.
+(Font)              No change on input line 53.
 LaTeX Font Info:    Kanji font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/it' undefined
-(Font)              No change on input line 51.
+(Font)              No change on input line 58.
 
 
-[25
+[38
 
 ]
 LaTeX Font Info:    Kanji font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/it' undefined
-(Font)              No change on input line 55.
-LaTeX Font Info:    Kanji font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/it' undefined
-(Font)              No change on input line 63.
+(Font)              No change on input line 62.
 LaTeX Font Info:    Kanji font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/it' undefined
 (Font)              No change on input line 70.
 LaTeX Font Info:    Kanji font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/it' undefined
-(Font)              No change on input line 75.
+(Font)              No change on input line 77.
 LaTeX Font Info:    Kanji font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/it' undefined
 (Font)              No change on input line 82.
+LaTeX Font Info:    Kanji font shape `JY3/HaranoAjiGothic-Medium.otf(0)/m/it' undefined
+(Font)              No change on input line 89.
 )
 
-[26] (./1w222357_丸山慶人.aux)
+[39] (./1w222357_丸山慶人.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2025-07-20>
  ***********
+
+
+LaTeX Warning: There were undefined references.
+
 )
 
 Here is how much of LuaTeX's memory you used:
- 10413 strings out of 470118
- 195704,794899 words of node,token memory allocated
- 2281 words of node memory still in use:
-   11 hlist, 2 vlist, 5 rule, 2 glue, 4 kern, 1 glyph, 689 attribute, 85 glue_spec, 75 attribute_list, 1 write, 14 user_defined nodes
-   avail lists: 1:20,2:56517,3:312,4:247,5:159,6:45,7:4830,8:43,9:2146,10:38,11:182
- 38548 multiletter control sequences out of 65536+600000
+ 10419 strings out of 470118
+ 195698,794899 words of node,token memory allocated
+ 3025 words of node memory still in use:
+   11 hlist, 2 vlist, 5 rule, 2 glue, 4 kern, 1 glyph, 1030 attribute, 85 glue_spec, 106 attribute_list, 1 write, 14 user_defined nodes
+   avail lists: 1:33,2:60608,3:349,4:302,5:185,6:48,7:5628,8:44,9:2573,10:38,11:182
+ 38554 multiletter control sequences out of 65536+600000
  102 fonts using 108268399 bytes
  119i,12n,122p,1853b,734s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmromandemi10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman7-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman9-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans12-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/haranoaji/HaranoAjiGothic-Medium.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman17-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/haranoaji/HaranoAjiMincho-Regular.otf><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on 1w222357_丸山慶人.pdf (28 pages, 1251985 bytes).
+<c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-italic.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmromandemi10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman9-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman7-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmsans12-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman10-bold.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman12-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/haranoaji/HaranoAjiGothic-Medium.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/lm/lmroman17-regular.otf><c:/texlive/2025/texmf-dist/fonts/opentype/public/haranoaji/HaranoAjiMincho-Regular.otf><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+Output written on 1w222357_丸山慶人.pdf (41 pages, 1335545 bytes).
 
-PDF statistics: 227 PDF objects out of 1000 (max. 8388607)
- 139 compressed objects within 2 object streams
+PDF statistics: 268 PDF objects out of 1000 (max. 8388607)
+ 167 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 131072)
  1 words of extra memory for PDF output out of 10000 (max. 100000000)
 

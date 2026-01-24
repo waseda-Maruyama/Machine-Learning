@@ -1,149 +1,151 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 import itertools
 import os
 
 # =========================================================
 # ⚙️ 設定エリア
 # =========================================================
-PRICE_FILE = "stock_prices.csv"
+PRICE_FILE = "stock_close.csv"
 CAP_FILE = "market_caps.csv"
-RESULT_CSV = "grid_search_results_weighted.csv"  # ファイル名も少し変更
+RESULT_CSV = "grid_search_comparison.csv"
 
-# 重みパラメータ (データセット作成コードと合わせる)
+# 重みパラメータ
 DECAY_RATE = 0.5     # 減衰スピード
 BOOST_FACTOR = 10.0  # 初動の基本ブースト値
 
-# 検証用シナリオ（実際に起きたイベント）
+# 検証用シナリオ
 scenarios = {
     "2020 Covid": ("2020-02-01", "2020-04-01"),
     "2024 Ueda":  ("2024-07-20", "2024-08-15"),
-    "2025 Tariff": ("2025-01-01", "2025-02-28")
+    "2025 Tariff": ("2025-01-01", "2025-03-28")
 }
 
 # =========================================================
-# 1. データ準備
+# 1. データ準備 (Index 1 & Index 2 生成)
 # =========================================================
 print(f"📊 データを読み込んでいます...")
 
 if not os.path.exists(PRICE_FILE):
-    # ダミーデータ（テスト用）
-    print("⚠️ stock_prices.csv がないためダミーデータで動作確認します。")
-    dates = pd.date_range("2013-01-01", "2025-12-31", freq="B")
-    returns = np.random.normal(0.0002, 0.01, size=len(dates))
-    shock_idx = np.random.choice(len(dates), 10)
-    returns[shock_idx] = -0.05 
-    data = np.cumprod(1 + returns)
-    df_prices = pd.DataFrame(data, index=dates, columns=["Dummy"])
-    market_index = df_prices["Dummy"]
-else:
-    df_prices = pd.read_csv(PRICE_FILE, index_col=0, parse_dates=True)
+    print("⚠️ ファイルがないため、ダミーデータで動作確認します。")
+    np.random.seed(42)
+    dates = pd.date_range("2016-01-01", "2026-01-01", freq="B")
     
+    # 銘柄A: 値がさ株 (High Price)
+    r_A = np.random.normal(0.0002, 0.015, len(dates))
+    price_A = 50000 * np.cumprod(1 + r_A)
+    cap_A = price_A * 100000 # 株数一定
+    
+    # 銘柄B: 大型株 (Low Price, High Cap)
+    r_B = np.random.normal(0.0001, 0.008, len(dates))
+    price_B = 2000 * np.cumprod(1 + r_B)
+    cap_B = price_B * 5000000 # 株数多い
+    
+    df_close = pd.DataFrame({'A': price_A, 'B': price_B}, index=dates)
+    df_caps = pd.DataFrame({'A': cap_A, 'B': cap_B}, index=dates)
+    
+else:
+    df_close = pd.read_csv(PRICE_FILE, index_col=0, parse_dates=True)
     if os.path.exists(CAP_FILE):
-        print("   -> 時価総額データを使用 (TOPIX型)")
         df_caps = pd.read_csv(CAP_FILE, index_col=0, parse_dates=True)
-        df_caps = df_caps.reindex(df_prices.index).ffill()
-        common_cols = df_prices.columns.intersection(df_caps.columns)
-        market_index = (df_prices[common_cols] * df_caps[common_cols]).sum(axis=1) / df_caps[common_cols].sum(axis=1)
+        df_caps = df_caps.reindex(df_close.index).ffill()
     else:
-        print("   -> 単純平均データを使用")
-        market_index = df_prices.mean(axis=1)
+        # 時価総額ファイルがない場合は単純平均などを代用
+        df_caps = pd.DataFrame(1, index=df_close.index, columns=df_close.columns)
 
-# 正規化
-market_index = market_index / market_index.iloc[0]
+# 共通カラム抽出
+common_cols = df_close.columns.intersection(df_caps.columns)
+df_close = df_close[common_cols]
+df_caps = df_caps[common_cols]
+
+# --- インデックス作成 ---
+# Index 1: 経済的価値 (時価総額加重)
+raw_idx1 = df_caps.sum(axis=1)
+market_index1 = raw_idx1 / raw_idx1.iloc[0] * 100
+
+# Index 2: 物理的エネルギー (時価総額 × 生株価)
+# 定義: Σ (M * P)
+raw_idx2 = (df_caps * df_close).sum(axis=1)
+market_index2 = raw_idx2 / raw_idx2.iloc[0] * 100
+
+targets = {
+    "Index 1 (Eco)": market_index1,
+    "Index 2 (Phy)": market_index2
+}
 
 # =========================================================
 # 2. グリッドサーチ設定
 # =========================================================
-# 短期条件 (初速)
+# パラメータ範囲（必要に応じて変更してください）
 short_days_list = [3, 5]
-short_drop_list = [-0.02, -0.03, -0.04]
-
-# 長期条件 (深度)
+short_drop_list = [-0.01, -0.02,  -0.03]
 long_days_list = [7,10]
-long_drop_list = [-0.05, -0.06, -0.07, -0.08]
+long_drop_list = [ -0.02, -0.025,-0.03, -0.04, -0.06, -0.08, -0.10]
 
 param_grid = list(itertools.product(short_days_list, short_drop_list, long_days_list, long_drop_list))
-
-print(f"🧪 全 {len(param_grid)} 通りのパラメータを検証します...\n")
+print(f"🧪 全 {len(param_grid) * 2} 通りのパラメータを検証します (Index 1 & 2)...\n")
 
 # =========================================================
-# 3. 実行ループ
+# 3. 実行ループ (Target x Grid)
 # =========================================================
 results = []
 
-for s_days, s_drop, l_days, l_drop in param_grid:
-    
-    # --- A. ロジック計算 ---
-    ret_short = market_index.shift(-s_days) / market_index - 1.0
-    ret_long = market_index.shift(-l_days) / market_index - 1.0
-    
-    # 複合条件 (AND)
-    is_crash = (ret_short <= s_drop) & (ret_long <= l_drop)
-    is_crash = is_crash.fillna(False).astype(int)
-    
-    # 全く検知されなければスキップ
-    if is_crash.sum() == 0:
-        continue
+for target_name, series in targets.items():
+    for s_days, s_drop, l_days, l_drop in param_grid:
+        
+        # --- A. ロジック計算 ---
+        ret_short = series.shift(-s_days) / series - 1.0
+        ret_long = series.shift(-l_days) / series - 1.0
+        
+        # 複合条件
+        is_crash = (ret_short <= s_drop) & (ret_long <= l_drop)
+        is_crash = is_crash.fillna(False).astype(int)
+        
+        if is_crash.sum() == 0:
+            continue
 
-    # --- B. 連続イベントのグループ化 ---
-    # 暴落が連続している区間を1つのイベントとみなす（Onset判定用）
-    event_group = (is_crash != is_crash.shift()).cumsum()
-    
-    # 各暴落日について「発生から何日目か」を計算 (0, 1, 2, ...)
-    days_since_start = is_crash.groupby(event_group).cumcount()
-    
-    # 【変更点】5日以降も除外せず、全ての is_crash=1 を対象とする
-    # ただし、統計情報として「イベント数（塊の数）」と「総日数」は分けて記録する
-    
-    # イベント数（塊の数）
-    # is_crash=1 のグループIDのユニーク数をカウント（偶数・奇数の並びによる簡易計算）
-    # 単純に「diff() != 0 で is_crash==1 になった回数」を数える
-    num_events = ((is_crash == 1) & (is_crash.shift(1) != 1)).sum()
-    
-    # 総検知日数
-    total_days = is_crash.sum()
+        # --- B. イベント集計 ---
+        event_group = (is_crash != is_crash.shift()).cumsum()
+        days_since_start = is_crash.groupby(event_group).cumcount()
+        
+        # イベント数（塊の数）
+        num_events = ((is_crash == 1) & (is_crash.shift(1) != 1)).sum()
+        total_days = is_crash.sum()
 
-    # --- C. 重み計算 (Decay x Severity) ---
-    # 1. 時間減衰 (Time Decay)
-    decay_comp = BOOST_FACTOR * np.exp(-DECAY_RATE * days_since_start)
-    
-    # 2. 被害規模 (Severity Ratio)
-    # 現在設定している閾値(l_drop)に対して、実際のリターン(ret_long)が何倍酷いか
-    severity_ratio = ret_long.abs() / abs(l_drop)
-    
-    # 3. 結合
-    # is_crash=0 の場所は計算不要なのでマスクする
-    raw_weights = decay_comp * severity_ratio
-    final_weights = raw_weights[is_crash == 1] # 暴落日のみ抽出
-    
-    avg_weight = final_weights.mean() if len(final_weights) > 0 else 0
-    max_weight = final_weights.max() if len(final_weights) > 0 else 0
-    sum_weight = final_weights.sum() # 総学習エネルギー的な指標
-    
-    # --- D. イベント捕捉確認 ---
-    caught_list = []
-    for name, (start, end) in scenarios.items():
-        try:
-            # 期間内に1日でもフラグが立っていればOK
-            sub = is_crash.loc[start:end]
-            if sub.sum() > 0:
-                caught_list.append(name)
-        except:
-            pass
-            
-    # 結果保存
-    results.append({
-        "Short_Cond": f"{s_days}d {s_drop:.0%}",
-        "Long_Cond": f"{l_days}d {l_drop:.0%}",
-        "Events": num_events,        # 暴落の「回数」
-        "Days": total_days,          # 暴落の「総日数」
-        "Avg_Weight": round(avg_weight, 2),
-        "Max_Weight": round(max_weight, 2),
-        "Sum_Weight": round(sum_weight, 2), # 今回はこれも参考になるかも
-        "Caught": ", ".join(caught_list),
-        "_sort_key": max_weight
-    })
+        # --- C. 重み計算 ---
+        decay_comp = BOOST_FACTOR * np.exp(-DECAY_RATE * days_since_start)
+        severity_ratio = ret_long.abs() / abs(l_drop)
+        
+        raw_weights = decay_comp * severity_ratio
+        final_weights = raw_weights[is_crash == 1]
+        
+        avg_weight = final_weights.mean() if len(final_weights) > 0 else 0
+        sum_weight = final_weights.sum()
+
+        # --- D. シナリオ捕捉 ---
+        caught_list = []
+        for name, (start, end) in scenarios.items():
+            try:
+                sub = is_crash.loc[start:end]
+                if sub.sum() > 0:
+                    caught_list.append(name)
+            except:
+                pass
+        
+        results.append({
+            "Target": target_name,
+            "Short": f"{s_days}d {s_drop:.1%}",
+            "Long": f"{l_days}d {l_drop:.1%}",
+            "Events": num_events,
+            "Days": total_days,
+            "Avg_Weight": round(avg_weight, 2),
+            "Sum_Weight": round(sum_weight, 2),
+            "Caught": ", ".join(caught_list),
+            # 生の値も保存（プロット選択用）
+            "_s_days": s_days, "_s_drop": s_drop,
+            "_l_days": l_days, "_l_drop": l_drop
+        })
 
 # =========================================================
 # 4. 結果出力
@@ -151,21 +153,82 @@ for s_days, s_drop, l_days, l_drop in param_grid:
 df_res = pd.DataFrame(results)
 
 if df_res.empty:
-    print("❌ 条件に合うイベントが見つかりませんでした。閾値を緩めてください。")
+    print("❌ 条件に合うイベントが見つかりませんでした。")
 else:
-    # Avg_Weightが高い順にソート
-    df_res = df_res.sort_values(by="_sort_key", ascending=False).drop(columns=["_sort_key"])
-
-    print(f"📊 分析結果 (Avg_Weight順 Top 15):")
-    # 見やすいようにカラム順序を整理
-    cols = ["Short_Cond", "Long_Cond", "Events", "Days", "Avg_Weight", "Max_Weight", "Caught"]
-    df_res = df_res[cols]
+    # ターゲットごとにAvg_Weightが高い順にソートして表示
+    df_res = df_res.sort_values(by=["Target", "Avg_Weight"], ascending=[True, False])
     
-    pd.set_option('display.max_colwidth', None)
-    pd.set_option('display.width', 1000)
-    print(df_res.head(15))
-
-    # CSV保存
+    print(f"📊 分析結果 (各Indexの上位5件):")
+    cols = ["Target", "Short", "Long", "Events", "Days", "Avg_Weight", "Caught"]
+    print(df_res[cols].groupby("Target").head(10)) # 各ターゲットの上位5行を表示
+    
     df_res.to_csv(RESULT_CSV, index=False)
     print(f"\n💾 全結果を保存しました: {RESULT_CSV}")
-    print("👉 Avg_Weightが高く、Events/Daysが過剰でない（ノイズを拾いすぎていない）設定を選んでください。")
+# =========================================================
+# 5. 比較プロット (1軸統合版: Index 1 & 2 を重ねる)
+# =========================================================
+print("\n📈 グラフを作成中...")
+
+# --- A. 条件の選択 ---
+# Index 1 (Eco) のベスト条件
+if not df_res[df_res["Target"] == "Index 1 (Eco)"].empty:
+    best_cond1 = df_res[df_res["Target"] == "Index 1 (Eco)"].iloc[0]
+else:
+    best_cond1 = None
+
+# Index 2 (Phy) のベスト条件
+if not df_res[df_res["Target"] == "Index 2 (Phy)"].empty:
+    best_cond2 = df_res[df_res["Target"] == "Index 2 (Phy)"].iloc[0]
+else:
+    best_cond2 = None
+
+# --- B. プロット実行 ---
+fig, ax = plt.subplots(figsize=(15, 8))
+
+# 1. Index 1 (経済指標: 黒実線)
+# メインとなる市場価格の動き
+ax.plot(market_index1.index, market_index1, color='black', alpha=0.7, linewidth=1.5, label='Index 1 (Eco: Price)')
+
+# 2. Index 2 (物理指標: オレンジ破線) - 同じ軸に追加
+# 両方とも100スタートで正規化されているため、乖離が直接比較できます
+ax.plot(market_index2.index, market_index2, color='tab:orange', alpha=0.6, linewidth=1.2, linestyle='--', label='Index 2 (Phy: Energy)')
+
+# 3. 暴落検知ポイントのプロット
+# 視認性を高めるため、検知マークはすべて「Index 1（実際の価格線）」の上に表示します。
+# 「価格はここにあるが、エネルギー側で警報が出た」という状況を可視化するためです。
+
+if best_cond1 is not None:
+    # Index 1 検知 (再計算)
+    r_s1 = market_index1.shift(-int(best_cond1["_s_days"])) / market_index1 - 1.0
+    r_l1 = market_index1.shift(-int(best_cond1["_l_days"])) / market_index1 - 1.0
+    mask1 = (r_s1 <= best_cond1["_s_drop"]) & (r_l1 <= best_cond1["_l_drop"])
+    
+    crashes1 = market_index1[mask1]
+    label1 = f"Index 1 Detect\n({best_cond1['Short']} & {best_cond1['Long']})"
+    # 青丸: 価格自体が崩れたポイント
+    ax.scatter(crashes1.index, crashes1, color='blue', s=50, label=label1, zorder=5)
+
+if best_cond2 is not None:
+    # Index 2 検知 (再計算)
+    r_s2 = market_index2.shift(-int(best_cond2["_s_days"])) / market_index2 - 1.0
+    r_l2 = market_index2.shift(-int(best_cond2["_l_days"])) / market_index2 - 1.0
+    mask2 = (r_s2 <= best_cond2["_s_drop"]) & (r_l2 <= best_cond2["_l_drop"])
+    
+    # タイミングはIndex 2で判定するが、y座標はIndex 1に合わせる
+    crashes2_dates = market_index2[mask2].index
+    crashes2_values = market_index1.loc[crashes2_dates]
+    
+    label2 = f"Index 2 Detect\n({best_cond2['Short']} & {best_cond2['Long']})"
+    # 赤バツ: エネルギーが崩壊したポイント（価格への予兆）
+    ax.scatter(crashes2_dates, crashes2_values, color='red', marker='x', s=80, label=label2, zorder=6)
+
+plt.title("Crash Detection Comparison: Economic Price vs Physical Energy", fontsize=16)
+plt.ylabel("Normalized Index Value (Start=100)")
+plt.legend(loc='upper left')
+plt.grid(True, alpha=0.3)
+plt.tight_layout()
+
+img_file = "crash_comparison_single_axis.png"
+plt.savefig(img_file)
+print(f"🖼️ 画像を保存しました: {img_file}")
+plt.show()

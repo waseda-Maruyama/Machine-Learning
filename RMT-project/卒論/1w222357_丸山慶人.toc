@@ -1,36 +1,62 @@
 \contentsline {section}{\numberline {1}序論}{1}{}%
 \contentsline {subsection}{\numberline {1.1}研究背景}{1}{}%
-\contentsline {subsection}{\numberline {1.2}研究目的}{3}{}%
-\contentsline {section}{\numberline {2}伝統的経済学と経済物理学的}{4}{}%
-\contentsline {subsection}{\numberline {2.1}伝統的経済学とその限界}{4}{}%
-\contentsline {subsubsection}{\numberline {2.1.1}効率的市場仮説とランダムウォーク}{4}{}%
-\contentsline {subsubsection}{\numberline {2.1.2}幾何ブラウン運動とブラック・ショールズモデルの数理}{4}{}%
-\contentsline {subsubsection}{\numberline {2.1.3}ファットテールとべき乗則}{5}{}%
-\contentsline {subsubsection}{\numberline {2.1.4}限定合理性と複雑系としての市場}{6}{}%
-\contentsline {subsection}{\numberline {2.2}イジングモデルによる市場の記述と相転移}{7}{}%
-\contentsline {subsubsection}{\numberline {2.2.1}イジングモデルの定義とハミルトニアン}{7}{}%
-\contentsline {subsubsection}{\numberline {2.2.2}相転移と臨界現象}{8}{}%
-\contentsline {subsubsection}{\numberline {2.2.3}金融市場とのアナロジー}{10}{}%
-\contentsline {subsection}{\numberline {2.3}ランダム行列理論}{11}{}%
-\contentsline {subsubsection}{\numberline {2.3.1}相関行列の構築と統計的性質}{11}{}%
-\contentsline {subsubsection}{\numberline {2.3.2}マルチェンコ・パスツール分布}{12}{}%
-\contentsline {subsubsection}{\numberline {2.3.3}最大固有値と市場の同期性}{13}{}%
-\contentsline {paragraph}{マーケット・モードとしての物理的意味}{13}{}%
-\contentsline {paragraph}{診断指標としての有効性}{14}{}%
-\contentsline {section}{\numberline {3}金融市場と機械学習}{15}{}%
-\contentsline {subsection}{\numberline {3.1}機械学習の数理的定式化}{15}{}%
-\contentsline {subsubsection}{\numberline {3.1.1}経験リスク最小化と正則化}{15}{}%
-\contentsline {subsection}{\numberline {3.2}勾配ブースティング決定木とLightGBM}{16}{}%
-\contentsline {subsubsection}{\numberline {3.2.1}関数空間における勾配降下法}{16}{}%
-\contentsline {subsubsection}{\numberline {3.2.2}LightGBMの特徴とDeep Learningとの比較}{16}{}%
-\contentsline {section}{\numberline {4}提案手法}{18}{}%
-\contentsline {subsection}{\numberline {4.1}解析対象とデータセット}{18}{}%
-\contentsline {subsubsection}{\numberline {4.1.1}データソースと解析対象}{18}{}%
-\contentsline {subsubsection}{\numberline {4.1.2}データ前処理}{19}{}%
-\contentsline {subsection}{\numberline {4.2}目的変数の定義と最適化}{21}{}%
-\contentsline {subsubsection}{\numberline {4.2.1}目的変数の定義}{21}{}%
-\contentsline {subsection}{\numberline {4.3}重み付け学習 (Sample Weighting)}{22}{}%
-\contentsline {subsection}{\numberline {4.4}入力特徴量の構成}{22}{}%
-\contentsline {subsection}{\numberline {4.5}予測モデルの構築}{22}{}%
-\contentsline {section}{\numberline {5}実験結果}{23}{}%
-\contentsline {section}{\numberline {6}結論}{25}{}%
+\contentsline {subsection}{\numberline {1.2}研究目的}{2}{}%
+\contentsline {section}{\numberline {2}伝統的経済学と経済物理学}{5}{}%
+\contentsline {subsection}{\numberline {2.1}伝統的経済学とその限界}{5}{}%
+\contentsline {subsubsection}{\numberline {2.1.1}効率的市場仮説とランダムウォーク}{5}{}%
+\contentsline {subsubsection}{\numberline {2.1.2}幾何ブラウン運動とブラック・ショールズモデルの数理}{5}{}%
+\contentsline {subsubsection}{\numberline {2.1.3}ファットテールとべき乗則}{6}{}%
+\contentsline {subsubsection}{\numberline {2.1.4}限定合理性と複雑系としての市場}{7}{}%
+\contentsline {subsection}{\numberline {2.2}イジングモデルによる市場の記述と相転移}{8}{}%
+\contentsline {subsubsection}{\numberline {2.2.1}イジングモデルの定義とハミルトニアン}{8}{}%
+\contentsline {subsubsection}{\numberline {2.2.2}相転移と臨界現象}{9}{}%
+\contentsline {subsubsection}{\numberline {2.2.3}金融市場とのアナロジー}{11}{}%
+\contentsline {subsection}{\numberline {2.3}ランダム行列理論}{12}{}%
+\contentsline {subsubsection}{\numberline {2.3.1}相関行列の構築と統計的性質}{12}{}%
+\contentsline {subsubsection}{\numberline {2.3.2}マルチェンコ・パスツール分布}{13}{}%
+\contentsline {subsubsection}{\numberline {2.3.3}最大固有値と市場の同期性}{14}{}%
+\contentsline {paragraph}{マーケット・モードとしての物理的意味}{14}{}%
+\contentsline {paragraph}{診断指標としての有効性}{15}{}%
+\contentsline {subsection}{\numberline {2.4}市場ポテンシャルと調和振動子モデル}{15}{}%
+\contentsline {subsubsection}{\numberline {2.4.1}物理学における調和振動子}{15}{}%
+\contentsline {subsubsection}{\numberline {2.4.2}先行研究における市場モデル}{16}{}%
+\contentsline {subsection}{\numberline {2.5}金融ネットワークと日本市場の特異性}{16}{}%
+\contentsline {subsubsection}{\numberline {2.5.1}企業間の結合とネットワーク理論}{16}{}%
+\contentsline {subsubsection}{\numberline {2.5.2}日本市場の構造的歪み：値がさ株の影響}{17}{}%
+\contentsline {subsubsection}{\numberline {2.5.3}株価加重型指数の特異性}{17}{}%
+\contentsline {subsubsection}{\numberline {2.5.4}ファーストリテイリングの事例}{17}{}%
+\contentsline {section}{\numberline {3}金融市場と機械学習}{18}{}%
+\contentsline {subsection}{\numberline {3.1}機械学習の数理的定式化}{18}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}経験リスク最小化と正則化}{18}{}%
+\contentsline {subsection}{\numberline {3.2}勾配ブースティング決定木とLightGBM}{19}{}%
+\contentsline {subsubsection}{\numberline {3.2.1}関数空間における勾配降下法}{19}{}%
+\contentsline {subsubsection}{\numberline {3.2.2}LightGBMの特徴とDeep Learningとの比較}{19}{}%
+\contentsline {section}{\numberline {4}提案手法}{21}{}%
+\contentsline {subsection}{\numberline {4.1}解析対象とデータセット}{21}{}%
+\contentsline {subsubsection}{\numberline {4.1.1}解析対象}{21}{}%
+\contentsline {subsubsection}{\numberline {4.1.2}データ前処理}{22}{}%
+\contentsline {subsubsection}{\numberline {4.1.3}データ抽出と変数の定義}{24}{}%
+\contentsline {subsection}{\numberline {4.2}RMTによる相転移の検知（タイミングの捕捉）}{24}{}%
+\contentsline {subsubsection}{\numberline {4.2.1}物理モデル適用に向けた前処理}{25}{}%
+\contentsline {subsection}{\numberline {4.3}第2の柱：生株価エネルギーによる構造的歪みの検知}{26}{}%
+\contentsline {subsection}{\numberline {4.4}独立変数の統合と学習戦略}{26}{}%
+\contentsline {subsubsection}{\numberline {4.4.1}特徴量空間の独立性}{26}{}%
+\contentsline {subsubsection}{\numberline {4.4.2}学習ターゲットとしての物理エネルギー}{27}{}%
+\contentsline {subsection}{\numberline {4.5}機械学習的観点：信号増幅による学習効率の向上}{27}{}%
+\contentsline {subsubsection}{\numberline {4.5.1}信号対雑音比（S/N比）の改善}{27}{}%
+\contentsline {subsubsection}{\numberline {4.5.2}不均衡データ問題の緩和}{28}{}%
+\contentsline {subsection}{\numberline {4.6}学習・評価フレームワークの全体像}{28}{}%
+\contentsline {subsubsection}{\numberline {4.6.1}入力モデルの定義（3種類）}{28}{}%
+\contentsline {subsubsection}{\numberline {4.6.2}目的変数の定義（2系統）}{29}{}%
+\contentsline {subsubsection}{\numberline {4.6.3}比較検証パターン（計6通り）}{29}{}%
+\contentsline {subsubsection}{\numberline {4.6.4}評価指標の統一（Evaluation Metric）}{30}{}%
+\contentsline {subsection}{\numberline {4.7}目的変数の決定と重み付け学習}{30}{}%
+\contentsline {subsubsection}{\numberline {4.7.1}グリッドサーチ}{30}{}%
+\contentsline {subsubsection}{\numberline {4.7.2}物理的重み付け学習（Sample Weighting）}{31}{}%
+\contentsline {subsubsection}{\numberline {4.7.3}機械学習モデルへの適合性と最終決定}{32}{}%
+\contentsline {section}{\numberline {5}実験結果と考察}{34}{}%
+\contentsline {subsection}{\numberline {5.1}実験設定と評価指標}{34}{}%
+\contentsline {subsubsection}{\numberline {5.1.1}データセットと期間分割}{34}{}%
+\contentsline {subsubsection}{\numberline {5.1.2}比較手法（ベースラインと比較モデル）}{34}{}%
+\contentsline {subsubsection}{\numberline {5.1.3}評価指標}{35}{}%
+\contentsline {section}{\numberline {6}結論}{38}{}%

@@ -53,7 +53,9 @@ except Exception as e:
 print(f"\n📥 データ取得と計算を開始します...")
 
 data_market_cap = {} # 時価総額 (Close * Shares)
-data_prices = {}     # 分析用株価 (AdjustmentClose)
+data_close = {}      # 株価 (Close)
+data_adj_close = {}     # 分析用株価 (AdjustmentClose)
+data_adj_shares = {}    # 調整後発行株式数
 error_logs = []
 
 for code in tqdm(target_tickers):
@@ -77,7 +79,8 @@ for code in tqdm(target_tickers):
         series_adj_close = pd.to_numeric(df_price['AdjustmentClose'], errors='coerce')
 
         # ★ここで「分析用株価」を保存！
-        data_prices[code] = series_adj_close
+        data_adj_close[code] = series_adj_close
+        data_close[code] = series_close
 
         # 調整係数 (分割対応用)
         if 'AdjustmentFactor' in df_price.columns:
@@ -100,6 +103,7 @@ for code in tqdm(target_tickers):
                     s_fin = pd.to_numeric(s_fin, errors='coerce')
                     s_fin = s_fin[~s_fin.index.duplicated(keep='last')]
                     series_shares_raw = s_fin.reindex(df_price.index, method='ffill').bfill()
+                    
                 except: pass
 
         # 財務データがない場合の救済 (最新値)
@@ -114,24 +118,54 @@ for code in tqdm(target_tickers):
         # --- (C) 分割ラグ補正 (時価総額用) ---
         adjusted_shares = series_shares_raw.copy()
         try:
-            split_dates = series_factor[series_factor < 1.0].index
-            for split_date in split_dates:
-                factor = series_factor.loc[split_date]
-                if factor <= 0: continue
+            # 修正前: split_dates = series_factor[series_factor < 1.0].index
+            # 修正後: 1.0以外（分割も併合も）すべて対象にする
+            # J-Quants等の調整係数は、分割(1→2)なら約0.5、併合(10→1)なら約10.0が入る想定
+            
+            # 変更点1: 1.0以外のすべての変更点を取得
+            action_dates = series_factor[series_factor != 1.0].index
+            
+            for action_date in action_dates:
+                factor = series_factor.loc[action_date]
+                
+                # ゴミデータ除外
+                if factor <= 0 or pd.isna(factor): continue
+                
+                # 変更点2: 係数から倍率を計算
+                # 分割(factor=0.5) -> multiplier=2.0 (株数2倍)
+                # 併合(factor=10.0) -> multiplier=0.1 (株数1/10)
                 multiplier = 1.0 / factor
-                base_shares = adjusted_shares.loc[split_date]
+                
+                # 変更基準日時点の「補正前」の株数を取得
+                base_shares = adjusted_shares.loc[action_date]
                 if pd.isna(base_shares): continue
                 
-                future_shares = series_shares_raw.loc[split_date:]
+                # その日以降のデータを確認
+                future_shares = series_shares_raw.loc[action_date:]
+                
+                # 「財務データの更新がまだ来ていない期間」を特定する
+                # 併合の場合、新しい財務データが来るまで株数は「多いまま(base_sharesに近い)」
+                # 分割の場合、新しい財務データが来るまで株数は「少ないまま(base_sharesに近い)」
+                
+                # 許容誤差範囲（±10%以内なら「まだ更新されてない」とみなす）
                 mask_unchanged = (future_shares >= base_shares * 0.9) & (future_shares <= base_shares * 1.1)
+                
                 target_period = future_shares[mask_unchanged].index
+                
                 if not target_period.empty:
+                    # その期間だけ、株数に倍率を掛けて強制補正
                     adjusted_shares.loc[target_period] = adjusted_shares.loc[target_period] * multiplier
-        except: pass # エラー時は補正なし
-
+                    
+        except Exception as e:
+            # エラー時はログを出してスルー（厳密なエラー処理はお好みで）
+            # print(f"Warning share adjustment {code}: {e}") 
+            pass
         # --- (D) 時価総額計算 ---
+        data_adj_shares[code] = adjusted_shares
         mc = series_close * adjusted_shares
         data_market_cap[code] = mc
+
+
 
     except Exception as e:
         error_logs.append(f"❌ CRITICAL {code}: {e}")
@@ -141,29 +175,40 @@ for code in tqdm(target_tickers):
 # =========================================================
 print("\n⚙️ データを整形・保存中...")
 
-if len(data_market_cap) > 0 and len(data_prices) > 0:
+if len(data_market_cap) > 0 and len(data_adj_close) > 0 and len(data_close) > 0:
     # 1. 結合
     df_mc = pd.concat(data_market_cap, axis=1)
-    df_prices = pd.concat(data_prices, axis=1)
+    df_prices = pd.concat(data_adj_close, axis=1)
+    df_prices_raw = pd.concat(data_close, axis=1)
+    df_shares = pd.concat(data_adj_shares, axis=1)
     
     # 2. 共通の銘柄のみ残す (整合性確保)
     common_tickers = df_mc.columns.intersection(df_prices.columns)
     df_mc = df_mc[common_tickers]
     df_prices = df_prices[common_tickers]
-    
+    df_prices_raw = df_prices_raw[common_tickers]
+    df_shares = df_shares[common_tickers]
+
     # 3. 共通の日付のみ残す
     common_dates = df_mc.index.intersection(df_prices.index)
     df_mc = df_mc.loc[common_dates].sort_index()
     df_prices = df_prices.loc[common_dates].sort_index()
+    df_prices_raw = df_prices_raw.loc[common_dates].sort_index()
+    df_shares = df_shares.loc[common_dates].sort_index()
 
     # 4. 保存
-    df_mc.to_csv("market_caps1.csv")
-    df_prices.to_csv("stock_prices1.csv")
+    df_mc.to_csv("market_caps.csv")
+    df_prices.to_csv("stock_adj_close.csv")
+    df_prices_raw.to_csv("stock_close.csv")
+    df_shares.to_csv("stock_shares.csv")
 
     print(f"✅ 保存完了:")
     print(f"   - market_caps.csv (時価総額: ウェイト計算用)")
-    print(f"   - stock_prices.csv (調整後株価: リターン計算用)")
+    print(f"   - stock_adj_close.csv (調整後株価: リターン計算用)")
+    print(f"   - stock_close.csv (通常株価: リターン計算用)")
+    print(f"   - stock_shares.csv (調整後発行株式数: 時価総額計算用)")
     print(f"📊 銘柄数: {len(common_tickers)}, 期間: {common_dates.min().date()} ~ {common_dates.max().date()}")
 
 else:
     print("❌ データが十分に集まりませんでした。")
+
