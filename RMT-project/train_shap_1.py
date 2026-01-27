@@ -23,7 +23,7 @@ plt.rcParams['lines.linewidth'] = 2.5
 # =========================================================
 INPUT_FILE = "dataset_ml_weighted_1.csv" # あなたのデータファイル名
 SCENARIO_NAME = "2025 Tariff"          # 概要書に載せるメインのシナリオ
-SCENARIO_RANGE = ["2025-01-01", "2025-8-30"] # 期間
+SCENARIO_RANGE = ["2024-01-01", "2025-8-30"] # 期間
 
 # バックテスト用パラメータ
 SELL_THRESHOLD = 0.5   # リスク判定閾値
@@ -496,7 +496,155 @@ imp_c.to_csv(imp_c_file, index=False)
 print(f"✅ Feature importances saved to: {imp_b_file}, {imp_c_file}")
 
 
+   # =========================================================
+# 📊 図6: ミクロ分析（特定の暴落イベントの深掘り）
+# =========================================================
+print("🔍 Drawing Figure 6: Micro-analysis of Indicator Surges...")
 
+# 表示する期間を暴落前後に絞る（細かい時間範囲）
+FOCUS_RANGE = ["2024-07-01", "2024-09-30"]
+focus_start, focus_end = [pd.to_datetime(d) for d in FOCUS_RANGE]
+df_focus = df_ml.loc[focus_start:focus_end]
+probs_a_series = pd.Series(probs_a, index=X_test.index).loc[focus_start:focus_end]
+probs_b_series = pd.Series(probs_b, index=X_test.index).loc[focus_start:focus_end]
+probs_c_series = pd.Series(probs_c, index=X_test.index).loc[focus_start:focus_end]
+
+fig, (ax1, ax2, ax3, ax4, ax5) = plt.subplots(5, 1, figsize=(12, 14), sharex=True)
+
+# (1) Model A 確率 + 価格ライン
+ax1.fill_between(probs_a_series.index, 0, probs_a_series, color='navy', alpha=0.25, label='Prob A')
+ax1.plot(df_focus.index, df_focus['Market_Price_A'], color='black', linewidth=1.5, label='Index Price')
+ax1.set_ylim(0, 1)
+ax1.set_ylabel('Prob A')
+ax1.text(0.5, -0.25, '(a) Model A (prob) + Price', transform=ax1.transAxes, ha='center', fontsize=12)
+ax1.legend(loc='upper left')
+ax1_tw = ax1.twinx()
+for i in range(len(df_focus) - 1):
+    current_date = df_focus.index[i]
+    next_date = df_focus.index[i+1]
+    current_price = df_focus['Market_Price_A'].iloc[i]
+    next_price = df_focus['Market_Price_A'].iloc[i+1]
+    if current_date in y_test.index:
+        target_val = y_test[current_date]
+    else:
+        target_val = 0
+    linewidth = 2.0 if target_val == 1 else 1.0
+    color = 'red' if target_val == 1 else 'black'
+    ax1_tw.plot([current_date, next_date], [current_price, next_price], color=color, linewidth=linewidth, alpha=0.7)
+ax1_tw.set_ylabel('Price')
+ax1_tw.legend(loc='upper right')
+
+# (2) Model B 確率
+ax2.fill_between(probs_b_series.index, 0, probs_b_series, color='crimson', alpha=0.25, label='Prob B')
+ax2.set_ylim(0, 1)
+ax2.set_ylabel('Prob B')
+ax2.text(0.5, -0.25, '(b) Model B (prob)', transform=ax2.transAxes, ha='center', fontsize=12)
+ax2.legend(loc='upper left')
+ax2_tw = ax2.twinx()
+for i in range(len(df_focus) - 1):
+    current_date = df_focus.index[i]
+    next_date = df_focus.index[i+1]
+    current_price = df_focus['Market_Price_A'].iloc[i]
+    next_price = df_focus['Market_Price_A'].iloc[i+1]
+    if current_date in y_test.index:
+        target_val = y_test[current_date]
+    else:
+        target_val = 0
+    linewidth = 2.0 if target_val == 1 else 1.0
+    color = 'red' if target_val == 1 else 'black'
+    ax2_tw.plot([current_date, next_date], [current_price, next_price], color=color, linewidth=linewidth, alpha=0.7)
+ax2_tw.set_ylabel('Price')
+ax2_tw.legend(loc='upper right')
+
+# (3) Model C 確率
+ax3.fill_between(probs_c_series.index, 0, probs_c_series, color='darkgreen', alpha=0.25, label='Prob C')
+ax3.set_ylim(0, 1)
+ax3.set_ylabel('Prob C')
+ax3.text(0.5, -0.25, '(c) Model C (prob)', transform=ax3.transAxes, ha='center', fontsize=12)
+ax3.legend(loc='upper left')
+ax3_tw = ax3.twinx()
+for i in range(len(df_focus) - 1):
+    current_date = df_focus.index[i]
+    next_date = df_focus.index[i+1]
+    current_price = df_focus['Market_Price_A'].iloc[i]
+    next_price = df_focus['Market_Price_A'].iloc[i+1]
+    if current_date in y_test.index:
+        target_val = y_test[current_date]
+    else:
+        target_val = 0
+    linewidth = 2.0 if target_val == 1 else 1.0
+    color = 'red' if target_val == 1 else 'black'
+    ax3_tw.plot([current_date, next_date], [current_price, next_price], color=color, linewidth=linewidth, alpha=0.7)
+ax3_tw.set_ylabel('Price')
+ax3_tw.legend(loc='upper right')
+
+# (4) RMT 最大固有値のサージ (Timing)
+ax4.plot(df_focus.index, df_focus['RMT_Raw_L'], color='blue', label='RMT Max Eigenvalue (λ_max)')
+ax4.set_ylabel('Synchronization (λ)')
+ax4.text(0.5, -0.25, '(d) RMT λ_max', transform=ax4.transAxes, ha='center', fontsize=12)
+ax4.legend(loc='upper left')
+ax4_tw = ax4.twinx()
+for i in range(len(df_focus) - 1):
+    current_date = df_focus.index[i]
+    next_date = df_focus.index[i+1]
+    current_price = df_focus['Market_Price_A'].iloc[i]
+    next_price = df_focus['Market_Price_A'].iloc[i+1]
+    if current_date in y_test.index:
+        target_val = y_test[current_date]
+    else:
+        target_val = 0
+    linewidth = 2.0 if target_val == 1 else 1.0
+    color = 'red' if target_val == 1 else 'black'
+    ax4_tw.plot([current_date, next_date], [current_price, next_price], color=color, linewidth=linewidth, alpha=0.7)
+ax4_tw.set_ylabel('Price')
+ax4_tw.legend(loc='upper right')
+
+# (5) ポテンシャルエネルギーの蓄積 (Scale)
+ax5.plot(df_focus.index, df_focus['E_pot'], color='darkgreen', label='Market Potential Energy (P^2)')
+ax5.set_ylabel('Potential Energy')
+ax5.text(0.5, -0.25, '(e) Potential Energy', transform=ax5.transAxes, ha='center', fontsize=12)
+ax5.legend(loc='upper left')
+ax5_tw = ax5.twinx()
+for i in range(len(df_focus) - 1):
+    current_date = df_focus.index[i]
+    next_date = df_focus.index[i+1]
+    current_price = df_focus['Market_Price_A'].iloc[i]
+    next_price = df_focus['Market_Price_A'].iloc[i+1]
+    if current_date in y_test.index:
+        target_val = y_test[current_date]
+    else:
+        target_val = 0
+    linewidth = 2.0 if target_val == 1 else 1.0
+    color = 'red' if target_val == 1 else 'black'
+    ax5_tw.plot([current_date, next_date], [current_price, next_price], color=color, linewidth=linewidth, alpha=0.7)
+ax5_tw.set_ylabel('Price')
+ax5_tw.legend(loc='upper right')
+
+# X軸設定
+ax5.xaxis.set_major_locator(mdates.WeekdayLocator(interval=2))
+ax5.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
+
+plt.tight_layout()
+fname6 = os.path.join(OUTPUT_DIR, f'fig5_13a_micro_data_index1_scenario2_ueda.png')
+plt.savefig(fname6, dpi=300)
+print(f"✅ Saved Figure 6: {fname6}")
+plt.close()
+
+# === 図6データのCSV保存 ===
+df_figure6 = pd.DataFrame({
+    'Date': df_focus.index,
+    'Prob_A': probs_a_series.values,
+    'Prob_B': probs_b_series.values,
+    'Prob_C': probs_c_series.values,
+    'RMT_Raw_L': df_focus['RMT_Raw_L'].values,
+    'E_pot': df_focus['E_pot'].values,
+    'Market_Price_A': df_focus['Market_Price_A'].values,
+    'Target': [y_test.get(d, 0) for d in df_focus.index],
+    'Weight': [df_ml.loc[d, 'Sample_Weight'] if 'Sample_Weight' in df_ml.columns and d in df_ml.index else 1.0 for d in df_focus.index]
+})
+figure6_csv_path = os.path.join(OUTPUT_DIR, f'fig5_13a_micro_data_index1_scenario2_ueda.csv')
+df_figure6.to_csv(figure6_csv_path, index=False)
+print(f"📊 Saved Figure 6 data to: {figure6_csv_path}")
 
     # =========================================================
 # 📊 図6: ミクロ分析（特定の暴落イベントの深掘り）
@@ -627,7 +775,7 @@ ax5.xaxis.set_major_locator(mdates.WeekdayLocator(interval=2))
 ax5.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
 
 plt.tight_layout()
-fname6 = os.path.join(OUTPUT_DIR, f'figure6_micro_surge_{SCENARIO_NAME.replace(" ", "_")}.png')
+fname6 = os.path.join(OUTPUT_DIR, f'fig5_13b_micro_data_index1_scenario2_tariff.png')
 plt.savefig(fname6, dpi=300)
 print(f"✅ Saved Figure 6: {fname6}")
 plt.close()
@@ -644,6 +792,6 @@ df_figure6 = pd.DataFrame({
     'Target': [y_test.get(d, 0) for d in df_focus.index],
     'Weight': [df_ml.loc[d, 'Sample_Weight'] if 'Sample_Weight' in df_ml.columns and d in df_ml.index else 1.0 for d in df_focus.index]
 })
-figure6_csv_path = os.path.join(OUTPUT_DIR, f'figure6_data_{SCENARIO_NAME.replace(" ", "_")}.csv')
+figure6_csv_path = os.path.join(OUTPUT_DIR, f'fig5_13b_micro_data_index1_scenario2_tariff.csv')
 df_figure6.to_csv(figure6_csv_path, index=False)
 print(f"📊 Saved Figure 6 data to: {figure6_csv_path}")
