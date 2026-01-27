@@ -10,11 +10,11 @@ import os
 TERM_SHORT = 3     # 推奨: 3日
 DROP_SHORT = -0.01  # 推奨: -2%
 TERM_LONG = 10     # 推奨: 10日
-DROP_LONG = -0.03  # 推奨: -8% (より深い暴落を狙う場合)
+DROP_LONG = -0.04  # 推奨: -8% (より深い暴落を狙う場合)
 
 # 重みの設定
 DECAY_RATE = 0.5    # 減衰スピード
-BOOST_FACTOR = 3.0 # 初動の基本ブースト値
+BOOST_FACTOR = 5.0 # 初動の基本ブースト値
 
 print(f"🎯 ターゲット定義: {TERM_SHORT}日後{DROP_SHORT:.0%} & {TERM_LONG}日後{DROP_LONG:.0%}")
 print(f"⚖️ 重み付け: 暴落開始から指数減衰 (Rate={DECAY_RATE}) × 深刻度倍率")
@@ -35,7 +35,7 @@ if os.path.exists("market_caps.csv") and os.path.exists("stock_adj_close.csv") a
 
     # 時価総額の合計（既に株価×発行株式数が含まれている）
     total_market_cap_a = df_caps[common_cols].sum(axis=1)
-    total_market_cap_b = (df_caps[common_cols] * df_close[common_cols]).sum(axis=1)
+    total_market_cap_b = (df_caps[common_cols] * df_adj_close[common_cols]).sum(axis=1)
 
     # 正規化
     market_index_a = total_market_cap_a / total_market_cap_a.iloc[0]
@@ -71,23 +71,15 @@ print("⚙️ テクニカル指標を生成中...")
 price_a = df_dataset['Market_Price_A']
 price_b = df_dataset['Market_Price_B']
 
-df_dataset['Return_a'] = price_a.pct_change()
-df_dataset['Vol_20_a'] = df_dataset['Return_a'].rolling(20).std()
-df_dataset['Momentum_10_a'] = price_a / price_a.shift(10) - 1.0
+df_dataset['Return'] = price_a.pct_change()
+df_dataset['Vol_20'] = df_dataset['Return'].rolling(20).std()
+df_dataset['Momentum_10'] = price_a / price_a.shift(10) - 1.0
 
 delta_a = price_a.diff()
 gain_a = (delta_a.where(delta_a > 0, 0)).rolling(14).mean()
 loss_a = (-delta_a.where(delta_a < 0, 0)).rolling(14).mean()
-df_dataset['RSI_14_a'] = 100 - (100 / (1 + gain_a/loss_a))
+df_dataset['RSI_14'] = 100 - (100 / (1 + gain_a/loss_a))
 
-df_dataset['Return_b'] = price_b.pct_change()
-df_dataset['Vol_20_b'] = df_dataset['Return_b'].rolling(20).std()
-df_dataset['Momentum_10_b'] = price_b / price_b.shift(10) - 1.0
-
-delta_b = price_b.diff()
-gain_b = (delta_b.where(delta_b > 0, 0)).rolling(14).mean()
-loss_b = (-delta_b.where(delta_b < 0, 0)).rolling(14).mean()
-df_dataset['RSI_14_b'] = 100 - (100 / (1 + gain_b/loss_b))
 
 
 
@@ -119,7 +111,7 @@ distortion = ((df_adj_common - P_bar) / (sigma + 1e-8)) ** 2
 # 3. 物理スケール項（有効質量）
 # Scale = 時価総額 * 生株価 (値がさ株ほど重い)
 # ※ここは株式分割で「段差」ができるが、微分はしないのでOK
-physical_mass = df_caps_common * df_raw_common
+physical_mass = df_caps_common * df_adj_common
 
 # 正規化（市場全体での相対的な重み）
 # これをしないと、市場全体の株価水準上昇で値がインフレし続ける

@@ -24,12 +24,12 @@ plt.rcParams['lines.linewidth'] = 2.5
 INPUT_FILE1 = "dataset_ml_weighted_1.csv" # あなたのデータファイル名
 INPUT_FILE2 = "dataset_ml_weighted_2.csv" # あなたのデータファイル名
 SCENARIO_NAME = "2025 Tariff"          # 概要書に載せるメインのシナリオ
-SCENARIO_RANGE = ["2025-01-01", "2025-8-30"] # 期間
+SCENARIO_RANGE = ["2025-01-01", "2025-08-30"] # 期間
 
 # バックテスト用パラメータ
 SELL_THRESHOLD = 0.5  # リスク判定閾値
-BUY_THRESHOLD = 0.1    # 買い判定閾値
-CONFIRM_DAYS = 1       # 買い確認期間（連続で低い確率が続く日数）
+CONFIRM_DAYS = 5       # 買い確認期間（確率合計の計算期間）
+CONFIRM_SUM = 0.1      # 買い判定閾値（期間合計）
 COST = 0.001      # 取引コスト (0.1%)
 
 # 出力先（図）ディレクトリ
@@ -38,12 +38,12 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 # 特徴量定義
 # Model A: テクニカルのみ
-feats_Model_A = ['Return_a', 'Vol_20_a', 'Momentum_10_a', 'RSI_14_a']
+feats_Model_A = ['Return', 'Vol_20', 'Momentum_10', 'RSI_14']
 # Model B: テクニカル + RMT (Long) -> これが提案手法
-feats_Model_B = ['Return_a', 'Vol_20_a', 'Momentum_10_a', 'RSI_14_a', 
-                 'RMT_Raw_L', 'RMT_Vel_L', 'RMT_Accel_L']
-feats_Model_C = ['Return_a', 'Vol_20_a', 'Momentum_10_a', 'RSI_14_a', 
-                 'RMT_Raw_L', 'RMT_Vel_L', 'RMT_Accel_L', 'E_pot', 'E_pot_Vel', 'E_pot_Accel']
+feats_Model_B = ['Return', 'Vol_20', 'Momentum_10', 'RSI_14', 
+                 'RMT_Raw', 'RMT_Vel', 'RMT_Accel']
+feats_Model_C = ['Return', 'Vol_20', 'Momentum_10', 'RSI_14', 
+                 'RMT_Raw', 'RMT_Vel', 'RMT_Accel', 'E_pot', 'E_pot_Vel']
 # =========================================================
 # 1. データ準備 & モデル学習
 # =========================================================
@@ -99,6 +99,7 @@ probs_c = clf_c.predict_proba(X_test[feats_Model_C])[:, 1]
 # --- Model A (Base) ---
 prec_a, rec_a, thresholds_a = precision_recall_curve(y_test, probs_a)
 ap_a = average_precision_score(y_test, probs_a)
+plt.figure(figsize=(10, 7))
 plt.plot(rec_a, prec_a, linestyle='--', color='navy', alpha=0.6, 
          label=f'Baseline (AP={ap_a:.3f})')
 
@@ -113,38 +114,42 @@ ap_c = average_precision_score(y_test, probs_c)
 plt.plot(rec_c, prec_c, color='darkgreen', linewidth=2,
             label=f'Proposed b (AP={ap_c:.3f})')
 
-# 1. 閾値配列の中から、TARGET_THRESHOLD に最も近い値のインデックスを探す
-#    np.abs(配列 - 目標値).argmin() で、差が最小になる場所が見つかります
-closest_idx = np.abs(thresholds_b - SELL_THRESHOLD).argmin()
+# 全モデルの閾値プロット
+# Model A
+if len(thresholds_a) > 0:
+    closest_idx_a = np.abs(thresholds_a - SELL_THRESHOLD).argmin()
+    target_prec_a = prec_a[closest_idx_a]
+    target_rec_a = rec_a[closest_idx_a]
+    actual_th_a = thresholds_a[closest_idx_a]
+    plt.scatter(target_rec_a, target_prec_a, color='navy', s=120, zorder=10, 
+                edgecolor='white', linewidth=2, marker='o', label=f'A (Th={actual_th_a:.2f})')
 
-# 2. そのインデックスに対応する Precision と Recall を取得
-#    ※ thresholdsは prec, rec より要素数が1つ少ないため、インデックスはそのまま使えます
-target_prec = prec_b[closest_idx]
-target_rec = rec_b[closest_idx]
-actual_th = thresholds_b[closest_idx]
+# Model B
+if len(thresholds_b) > 0:
+    closest_idx_b = np.abs(thresholds_b - SELL_THRESHOLD).argmin()
+    target_prec_b = prec_b[closest_idx_b]
+    target_rec_b = rec_b[closest_idx_b]
+    actual_th_b = thresholds_b[closest_idx_b]
+    plt.scatter(target_rec_b, target_prec_b, color='crimson', s=120, zorder=10, 
+                edgecolor='white', linewidth=2, marker='s', label=f'B (Th={actual_th_b:.2f})')
 
-# 3. 点を打つ (Scatter Plot)
-plt.scatter(target_rec, target_prec, color='black', s=150, zorder=10, 
-            edgecolor='white', linewidth=2, label=f'Operating Point (Th={actual_th:.2f})')
+# Model C
+if len(thresholds_c) > 0:
+    closest_idx_c = np.abs(thresholds_c - SELL_THRESHOLD).argmin()
+    target_prec_c = prec_c[closest_idx_c]
+    target_rec_c = rec_c[closest_idx_c]
+    actual_th_c = thresholds_c[closest_idx_c]
+    plt.scatter(target_rec_c, target_prec_c, color='darkgreen', s=120, zorder=10, 
+                edgecolor='white', linewidth=2, marker='^', label=f'C (Th={actual_th_c:.2f})')
 
-# 4. 吹き出しで情報を書き込む (Annotation)
-plt.annotate(
-    f'Threshold: {actual_th:.2f}\nRecall: {target_rec:.1%}\nPrecision: {target_prec:.1%}',
-    xy=(target_rec, target_prec), 
-    xytext=(target_rec - 0.3, target_prec - 0.2), # テキストの位置（調整してください）
-    arrowprops=dict(facecolor='black', shrink=0.05, width=2, headwidth=8),
-    fontsize=12,
-    bbox=dict(boxstyle="round,pad=0.5", fc="white", ec="black", alpha=0.9)
-)
 
 
 plt.xlabel('Recall (Sensitivity)')
 plt.ylabel('Precision (Reliability)')
-plt.title(f'Figure 1: Predictive Performance Comparison\nScenario: {SCENARIO_NAME}')
-plt.legend(loc='upper right')
+plt.legend(loc='upper right', fontsize=12)
 plt.grid(True, linestyle=':', alpha=0.6)
 plt.tight_layout()
-fname1 = os.path.join(OUTPUT_DIR, f'figure1_pr_curve_{SCENARIO_NAME.replace(" ", "_")}.png')
+fname1 = os.path.join(OUTPUT_DIR, f'fig_5_5a.png')
 plt.savefig(fname1, dpi=300)
 print(f"✅ Saved Figure 1: {fname1}")
 plt.close()
@@ -153,7 +158,7 @@ plt.close()
 # 図2: 資産推移シミュレーション (Buy&Hold vs A vs B vs C)
 # =========================================================
 print("💰 Drawing Figure 2: Equity Curve...")
-def calculate_equity(price_series, probs, sell_threshold, buy_threshold, confirm_days, cost):
+def calculate_equity(price_series, probs, sell_threshold, confirm_days, cost):
     # 修正ポイント1: 
     # 予測値(probs)を、ただの配列から「日付付きのデータ(Series)」に格上げする
     # これで「0, 1, 2...」ではなく「2025-01-01...」という住所を持つ
@@ -169,9 +174,9 @@ def calculate_equity(price_series, probs, sell_threshold, buy_threshold, confirm
     mask_sell = probs_series >= sell_threshold
     signal[mask_sell] = 0
 
-    # 買い条件: rolling計算後も日付情報が維持される
-    probs_rolling = probs_series.rolling(window=confirm_days).max()
-    mask_buy = probs_rolling < buy_threshold
+    # 買い条件: confirm_days期間の確率合計がCONFIRM_SUMより小さい
+    probs_rolling = probs_series.rolling(window=confirm_days).sum()
+    mask_buy = probs_rolling < CONFIRM_SUM
     signal[mask_buy] = 1
 
     # --- 以下は変更なし ---
@@ -201,9 +206,9 @@ else:
 eq_bh = (1 + price.pct_change().fillna(0)).cumprod()
 mdd_bh = ((eq_bh - eq_bh.cummax()) / eq_bh.cummax()).min()
 
-eq_a, ret_a, mdd_a = calculate_equity(price, probs_a, SELL_THRESHOLD, BUY_THRESHOLD, CONFIRM_DAYS, COST)
-eq_b, ret_b, mdd_b = calculate_equity(price, probs_b, SELL_THRESHOLD, BUY_THRESHOLD, CONFIRM_DAYS,  COST)
-eq_c, ret_c, mdd_c = calculate_equity(price, probs_c, SELL_THRESHOLD, BUY_THRESHOLD, CONFIRM_DAYS,  COST)
+eq_a, ret_a, mdd_a = calculate_equity(price, probs_a, SELL_THRESHOLD, CONFIRM_DAYS, COST)
+eq_b, ret_b, mdd_b = calculate_equity(price, probs_b, SELL_THRESHOLD, CONFIRM_DAYS, COST)
+eq_c, ret_c, mdd_c = calculate_equity(price, probs_c, SELL_THRESHOLD, CONFIRM_DAYS, COST)
 
 # プロット
 plt.figure(figsize=(10, 6))
@@ -236,7 +241,6 @@ plt.annotate('Lagging Entry\n(Volatility is slow)',
 #plt.fill_between(eq_b.index, eq_b.min(), eq_b.max(), where=cash_pos, 
 #                 color='red', alpha=0.1, label='Risk Avoidance (Cash)')
 
-plt.title(f'Figure 2: Simulation Result ({SCENARIO_NAME})\nTransaction Cost: {COST:.1%}')
 plt.ylabel('Cumulative Return')
 plt.legend(loc='upper left')
 plt.grid(True, alpha=0.3)
@@ -266,10 +270,9 @@ else:
     shap_vals_target = shap_values
 
 plt.figure(figsize=(12, 8))
-plt.title(f'Figure 3: Feature Importance (Proposed Model)', pad=20)
 shap.summary_plot(shap_vals_target, X_test[feats_Model_B], show=False, cmap=plt.get_cmap("coolwarm"))
 plt.tight_layout()
-fname3 = os.path.join(OUTPUT_DIR, f'figure3_shap_{SCENARIO_NAME.replace(" ", "_")}.png')
+fname3 = os.path.join(OUTPUT_DIR, f'fig_5_13a.png')
 plt.savefig(fname3, dpi=300)
 print(f"✅ Saved Figure 3: {fname3}")
 plt.close()
@@ -295,10 +298,9 @@ else:
     shap_vals_target = shap_values
 
 plt.figure(figsize=(12, 8))
-plt.title(f'Figure 5: Feature Importance (Proposed Model 2)', pad=20)
 shap.summary_plot(shap_vals_target, X_test[feats_Model_C], show=False, cmap=plt.get_cmap("coolwarm"))
 plt.tight_layout()
-fname3 = os.path.join(OUTPUT_DIR, f'figure5_shap_{SCENARIO_NAME.replace(" ", "_")}.png')
+fname3 = os.path.join(OUTPUT_DIR, f'fig_5_13b.png')
 plt.savefig(fname3, dpi=300)
 print(f"✅ Saved Figure 5: {fname3}")
 plt.close()
@@ -321,8 +323,8 @@ print("-" * 60)
 print("📊 Drawing Figure 4: PR Curve ( Weighted)...")
 
 # 1. テストデータ用の重みを取得
-if 'Sample_Weight' in df_ml.columns:
-    w_test = df_ml.loc[test_mask, 'Sample_Weight']
+if 'Sample_Weight' in df_ml_original.columns:
+    w_test = df_ml_original.loc[test_mask, 'Sample_Weight']
 else:
     w_test = np.ones(len(y_test))
 
@@ -345,44 +347,53 @@ ap_c_w = average_precision_score(y_test, probs_c, sample_weight=w_test)
 plt.figure(figsize=(10, 7))
 
 # 1. Baseline (点線)
-plt.plot(rec_a_w, prec_a_w, linestyle=':', color='gray', alpha=0.8, linewidth=2,
+plt.plot(rec_a_w, prec_a_w, linestyle=':', color='navy', alpha=0.8, linewidth=2,
          label=f'Baseline (Weighted AP={ap_a_w:.3f})')
 
 # 2. Proposed Standard (破線)
-plt.plot(rec_b_w, prec_b_w, linestyle='--', color='salmon', alpha=0.8, linewidth=2,
+plt.plot(rec_b_w, prec_b_w, linestyle='--', color='crimson', alpha=0.8, linewidth=2,
          label=f'Proposed (Weighted AP={ap_b_w:.3f})')
 
 # 3. Proposed Weighted (実線・太線) -> これが主役！
-plt.plot(rec_c_w, prec_c_w, color='crimson', linewidth=3, zorder=10,
+plt.plot(rec_c_w, prec_c_w, color='darkgreen', linewidth=3, zorder=10,
          label=f'Proposed (Weighted AP={ap_c_w:.3f})')
 
-# --- 動作点 (Operating Point) の描画 ---
-# Weightedでの閾値位置を確認する
-closest_idx = np.abs(thresholds_c - SELL_THRESHOLD).argmin()
-target_prec = prec_c_w[closest_idx] # ここはWeightedの値を参照（実務的な誤検知率だから）
-target_rec = rec_c_w[closest_idx]
-actual_th = thresholds_c[closest_idx]
+# --- 動作点 (Operating Point) の描画：全モデル ---
+# Model A (Weighted)
+if len(thresholds_a) > 0:
+    closest_idx_aw = np.abs(thresholds_a - SELL_THRESHOLD).argmin()
+    target_prec_aw = prec_a_w[closest_idx_aw]
+    target_rec_aw = rec_a_w[closest_idx_aw]
+    actual_th_aw = thresholds_a[closest_idx_aw]
+    plt.scatter(target_rec_aw, target_prec_aw, color='gray', s=120, zorder=11, 
+                edgecolor='white', linewidth=2, marker='o', label=f'A (Th={actual_th_aw:.2f})')
 
-plt.scatter(target_rec, target_prec, color='black', s=150, zorder=11, 
-            edgecolor='white', linewidth=2, label=f'Threshold={actual_th:.2f}')
+# Model B (Weighted)
+if len(thresholds_b) > 0:
+    closest_idx_bw = np.abs(thresholds_b - SELL_THRESHOLD).argmin()
+    target_prec_bw = prec_b_w[closest_idx_bw]
+    target_rec_bw = rec_b_w[closest_idx_bw]
+    actual_th_bw = thresholds_b[closest_idx_bw]
+    plt.scatter(target_rec_bw, target_prec_bw, color='crimson', s=120, zorder=11, 
+                edgecolor='white', linewidth=2, marker='s', label=f'B (Th={actual_th_bw:.2f})')
 
-# 注釈
-plt.annotate(
-    f'Standard AP: {ap_b:.3f}\nWeighted AP: {ap_b_w:.3f}\n(+{ap_b_w - ap_b:.3f} Boost)',
-    xy=(0.5, 0.5), xycoords='axes fraction',
-    xytext=(0.6, 0.6), 
-    fontsize=12, color='darkred', weight='bold',
-    bbox=dict(boxstyle="round,pad=0.5", fc="white", ec="crimson", alpha=0.9)
-)
+# Model C (Weighted)
+if len(thresholds_c) > 0:
+    closest_idx_cw = np.abs(thresholds_c - SELL_THRESHOLD).argmin()
+    target_prec_cw = prec_c_w[closest_idx_cw]
+    target_rec_cw = rec_c_w[closest_idx_cw]
+    actual_th_cw = thresholds_c[closest_idx_cw]
+    plt.scatter(target_rec_cw, target_prec_cw, color='darkgreen', s=120, zorder=11, 
+                edgecolor='white', linewidth=2, marker='^', label=f'C (Th={actual_th_cw:.2f})')
+
 
 plt.xlabel('Recall (Sensitivity)')
 plt.ylabel('Precision (Reliability)')
-plt.title(f'Figure 1: Predictive Performance & Impact Analysis\nScenario: {SCENARIO_NAME}')
-plt.legend(loc='lower left') # 左下に配置変更（曲線とかぶらないように）
+plt.legend(loc='lower right') # 左下に配置変更（曲線とかぶらないように）
 plt.grid(True, linestyle=':', alpha=0.6)
 plt.tight_layout()
 
-fname1 = os.path.join(OUTPUT_DIR, f'figure4_pr_curve_weighted_{SCENARIO_NAME.replace(" ", "_")}.png')
+fname1 = os.path.join(OUTPUT_DIR, f'fig_5_5b.png')
 plt.savefig(fname1, dpi=300)
 print(f"✅ Saved Weighted PR Curve: {fname1}")
 plt.close()
@@ -396,3 +407,232 @@ if ap_c_w > ap_b:
     print("🚀 Result: Weighted score is HIGHER. The model effectively captures large crashes!")
 else:
     print("⚠️ Result: Weighted score is lower. The model might be missing some large crashes.")
+
+# =========================================================
+# 📄 追加: 学習結果・予測・重要度・サマリのCSV出力
+# =========================================================
+# 1) 学習結果（Train AP: 標準/Weighted）
+probs_a_train = clf_a.predict_proba(X_train[feats_Model_A])[:, 1]
+probs_b_train = clf_b.predict_proba(X_train[feats_Model_B])[:, 1]
+probs_c_train = clf_c.predict_proba(X_train[feats_Model_C])[:, 1]
+
+ap_a_train = average_precision_score(y_train, probs_a_train) if len(y_train) > 0 else np.nan
+ap_b_train = average_precision_score(y_train, probs_b_train) if len(y_train) > 0 else np.nan
+ap_c_train = average_precision_score(y_train, probs_c_train) if len(y_train) > 0 else np.nan
+
+if 'Sample_Weight' in df_ml.columns:
+    ap_a_train_w = average_precision_score(y_train, probs_a_train, sample_weight=w_train) if len(y_train) > 0 else np.nan
+    ap_b_train_w = average_precision_score(y_train, probs_b_train, sample_weight=w_train) if len(y_train) > 0 else np.nan
+    ap_c_train_w = average_precision_score(y_train, probs_c_train, sample_weight=w_train) if len(y_train) > 0 else np.nan
+else:
+    ap_a_train_w = np.nan
+    ap_b_train_w = np.nan
+    ap_c_train_w = np.nan
+
+train_results_df = pd.DataFrame({
+    'Scenario': [SCENARIO_NAME],
+    'AP_train_A': [ap_a_train],
+    'AP_train_B': [ap_b_train],
+    'AP_train_C': [ap_c_train],
+    'AP_train_weighted_A': [ap_a_train_w],
+    'AP_train_weighted_B': [ap_b_train_w],
+    'AP_train_weighted_C': [ap_c_train_w]
+})
+train_csv_path = os.path.join(OUTPUT_DIR, f'training_results_{SCENARIO_NAME.replace(" ", "_")}.csv')
+train_results_df.to_csv(train_csv_path, index=False)
+print(f"📝 Saved Training Results CSV: {train_csv_path}")
+
+# 2) 予測CSV（Test期間の確率と正解ラベル）
+pred_df = pd.DataFrame({
+    'Date': X_test.index,
+    'Prob_A': probs_a,
+    'Prob_B': probs_b,
+    'Prob_C': probs_c,
+    'Target': y_test.values,
+    # テスト期間の重み（存在しなければ1で埋める）
+    'Weight': (df_ml_original.loc[test_mask, 'Sample_Weight'].values if 'Sample_Weight' in df_ml_original.columns else np.ones(len(X_test)))
+})
+pred_df.set_index('Date').to_csv(os.path.join(OUTPUT_DIR, f'predictions_{SCENARIO_NAME.replace(" ", "_")}.csv'))
+print(f"📝 Saved Predictions CSV: {os.path.join(OUTPUT_DIR, f'predictions_{SCENARIO_NAME.replace(" ", "_")}.csv')}")
+
+# 3) 特徴量重要度CSV（Model B/C）
+imp_b = pd.DataFrame({'feature': feats_Model_B, 'importance': clf_b.feature_importances_})
+imp_c = pd.DataFrame({'feature': feats_Model_C, 'importance': clf_c.feature_importances_})
+imp_b_path = os.path.join(OUTPUT_DIR, f'feature_importance_model_b_{SCENARIO_NAME.replace(" ", "_")}.csv')
+imp_c_path = os.path.join(OUTPUT_DIR, f'feature_importance_model_c_{SCENARIO_NAME.replace(" ", "_")}.csv')
+imp_b.to_csv(imp_b_path, index=False)
+imp_c.to_csv(imp_c_path, index=False)
+print(f"🧾 Saved Feature Importance CSV (B): {imp_b_path}")
+print(f"🧾 Saved Feature Importance CSV (C): {imp_c_path}")
+
+# 4) サマリCSV（AP, Weighted AP, MDD, Return）
+summary_df = pd.DataFrame({
+    'Scenario': [SCENARIO_NAME],
+    'AP_A': [ap_a],
+    'AP_B': [ap_b],
+    'AP_C': [ap_c],
+    'AP_weighted_A': [ap_a_w],
+    'AP_weighted_B': [ap_b_w],
+    'AP_weighted_C': [ap_c_w],
+    'MDD_Hold': [mdd_bh],
+    'MDD_A': [mdd_a],
+    'MDD_B': [mdd_b],
+    'MDD_C': [mdd_c],
+    'Return_Hold': [eq_bh.iloc[-1] - 1],
+    'Return_A': [ret_a],
+    'Return_B': [ret_b],
+    'Return_C': [ret_c]
+})
+summary_csv_path = os.path.join(OUTPUT_DIR, f'summary_{SCENARIO_NAME.replace(" ", "_")}.csv')
+summary_df.to_csv(summary_csv_path, index=False)
+print(f"🧮 Saved Summary CSV: {summary_csv_path}")
+
+# =========================================================
+# 📊 図6: ミクロ分析（特定の暴落イベントの深掘り）
+# =========================================================
+print("🔍 Drawing Figure 6: Micro-analysis of Indicator Surges...")
+
+# 表示する期間を暴落前後に絞る（細かい時間範囲）
+FOCUS_RANGE = ["2025-03-01", "2025-04-30"]
+focus_start, focus_end = [pd.to_datetime(d) for d in FOCUS_RANGE]
+df_focus = df_ml.loc[focus_start:focus_end]
+probs_a_series = pd.Series(probs_a, index=X_test.index).loc[focus_start:focus_end]
+probs_b_series = pd.Series(probs_b, index=X_test.index).loc[focus_start:focus_end]
+probs_c_series = pd.Series(probs_c, index=X_test.index).loc[focus_start:focus_end]
+
+fig, (ax1, ax2, ax3, ax4, ax5) = plt.subplots(5, 1, figsize=(12, 14), sharex=True)
+
+# (1) Model A 確率 + 価格ライン
+ax1.fill_between(probs_a_series.index, 0, probs_a_series, color='navy', alpha=0.25, label='Prob A')
+ax1.plot(df_focus.index, df_focus['Market_Price_A'], color='black', linewidth=1.5, label='Index Price')
+ax1.set_ylim(0, 1)
+ax1.set_ylabel('Prob A')
+ax1.text(0.5, -0.25, '(a) Model A (prob) + Price', transform=ax1.transAxes, ha='center', fontsize=12)
+ax1.legend(loc='upper left')
+ax1_tw = ax1.twinx()
+for i in range(len(df_focus) - 1):
+    current_date = df_focus.index[i]
+    next_date = df_focus.index[i+1]
+    current_price = df_focus['Market_Price_A'].iloc[i]
+    next_price = df_focus['Market_Price_A'].iloc[i+1]
+    if current_date in y_test.index:
+        target_val = y_test[current_date]
+    else:
+        target_val = 0
+    linewidth = 2.0 if target_val == 1 else 1.0
+    color = 'red' if target_val == 1 else 'black'
+    ax1_tw.plot([current_date, next_date], [current_price, next_price], color=color, linewidth=linewidth, alpha=0.7)
+ax1_tw.set_ylabel('Price')
+ax1_tw.legend(loc='upper right')
+
+# (2) Model B 確率
+ax2.fill_between(probs_b_series.index, 0, probs_b_series, color='crimson', alpha=0.25, label='Prob B')
+ax2.set_ylim(0, 1)
+ax2.set_ylabel('Prob B')
+ax2.text(0.5, -0.25, '(b) Model B (prob)', transform=ax2.transAxes, ha='center', fontsize=12)
+ax2.legend(loc='upper left')
+ax2_tw = ax2.twinx()
+for i in range(len(df_focus) - 1):
+    current_date = df_focus.index[i]
+    next_date = df_focus.index[i+1]
+    current_price = df_focus['Market_Price_A'].iloc[i]
+    next_price = df_focus['Market_Price_A'].iloc[i+1]
+    if current_date in y_test.index:
+        target_val = y_test[current_date]
+    else:
+        target_val = 0
+    linewidth = 2.0 if target_val == 1 else 1.0
+    color = 'red' if target_val == 1 else 'black'
+    ax2_tw.plot([current_date, next_date], [current_price, next_price], color=color, linewidth=linewidth, alpha=0.7)
+ax2_tw.set_ylabel('Price')
+ax2_tw.legend(loc='upper right')
+
+# (3) Model C 確率
+ax3.fill_between(probs_c_series.index, 0, probs_c_series, color='darkgreen', alpha=0.25, label='Prob C')
+ax3.set_ylim(0, 1)
+ax3.set_ylabel('Prob C')
+ax3.text(0.5, -0.25, '(c) Model C (prob)', transform=ax3.transAxes, ha='center', fontsize=12)
+ax3.legend(loc='upper left')
+ax3_tw = ax3.twinx()
+for i in range(len(df_focus) - 1):
+    current_date = df_focus.index[i]
+    next_date = df_focus.index[i+1]
+    current_price = df_focus['Market_Price_A'].iloc[i]
+    next_price = df_focus['Market_Price_A'].iloc[i+1]
+    if current_date in y_test.index:
+        target_val = y_test[current_date]
+    else:
+        target_val = 0
+    linewidth = 2.0 if target_val == 1 else 1.0
+    color = 'red' if target_val == 1 else 'black'
+    ax3_tw.plot([current_date, next_date], [current_price, next_price], color=color, linewidth=linewidth, alpha=0.7)
+ax3_tw.set_ylabel('Price')
+ax3_tw.legend(loc='upper right')
+
+# (4) RMT 最大固有値のサージ (Timing)
+ax4.plot(df_focus.index, df_focus['RMT_Raw_L'], color='blue', label='RMT Max Eigenvalue (λ_max)')
+ax4.set_ylabel('Synchronization (λ)')
+ax4.text(0.5, -0.25, '(d) RMT λ_max', transform=ax4.transAxes, ha='center', fontsize=12)
+ax4.legend(loc='upper left')
+ax4_tw = ax4.twinx()
+for i in range(len(df_focus) - 1):
+    current_date = df_focus.index[i]
+    next_date = df_focus.index[i+1]
+    current_price = df_focus['Market_Price_A'].iloc[i]
+    next_price = df_focus['Market_Price_A'].iloc[i+1]
+    if current_date in y_test.index:
+        target_val = y_test[current_date]
+    else:
+        target_val = 0
+    linewidth = 2.0 if target_val == 1 else 1.0
+    color = 'red' if target_val == 1 else 'black'
+    ax4_tw.plot([current_date, next_date], [current_price, next_price], color=color, linewidth=linewidth, alpha=0.7)
+ax4_tw.set_ylabel('Price')
+ax4_tw.legend(loc='upper right')
+
+# (5) ポテンシャルエネルギーの蓄積 (Scale)
+ax5.plot(df_focus.index, df_focus['E_pot'], color='darkgreen', label='Market Potential Energy (P^2)')
+ax5.set_ylabel('Potential Energy')
+ax5.text(0.5, -0.25, '(e) Potential Energy', transform=ax5.transAxes, ha='center', fontsize=12)
+ax5.legend(loc='upper left')
+ax5_tw = ax5.twinx()
+for i in range(len(df_focus) - 1):
+    current_date = df_focus.index[i]
+    next_date = df_focus.index[i+1]
+    current_price = df_focus['Market_Price_A'].iloc[i]
+    next_price = df_focus['Market_Price_A'].iloc[i+1]
+    if current_date in y_test.index:
+        target_val = y_test[current_date]
+    else:
+        target_val = 0
+    linewidth = 2.0 if target_val == 1 else 1.0
+    color = 'red' if target_val == 1 else 'black'
+    ax5_tw.plot([current_date, next_date], [current_price, next_price], color=color, linewidth=linewidth, alpha=0.7)
+ax5_tw.set_ylabel('Price')
+ax5_tw.legend(loc='upper right')
+
+# X軸設定
+ax5.xaxis.set_major_locator(mdates.WeekdayLocator(interval=2))
+ax5.xaxis.set_major_formatter(mdates.DateFormatter('%m/%d'))
+
+plt.tight_layout()
+fname6 = os.path.join(OUTPUT_DIR, f'figure6_micro_surge_{SCENARIO_NAME.replace(" ", "_")}.png')
+plt.savefig(fname6, dpi=300)
+print(f"✅ Saved Figure 6: {fname6}")
+plt.close()
+
+# === 図6データのCSV保存 ===
+df_figure6 = pd.DataFrame({
+    'Date': df_focus.index,
+    'Prob_A': probs_a_series.values,
+    'Prob_B': probs_b_series.values,
+    'Prob_C': probs_c_series.values,
+    'RMT_Raw_L': df_focus['RMT_Raw_L'].values,
+    'E_pot': df_focus['E_pot'].values,
+    'Market_Price_A': df_focus['Market_Price_A'].values,
+    'Target': [y_test.get(d, 0) for d in df_focus.index],
+    'Weight': [df_ml_original.loc[d, 'Sample_Weight'] if 'Sample_Weight' in df_ml_original.columns and d in df_ml_original.index else 1.0 for d in df_focus.index]
+})
+figure6_csv_path = os.path.join(OUTPUT_DIR, f'figure6_data_{SCENARIO_NAME.replace(" ", "_")}.csv')
+df_figure6.to_csv(figure6_csv_path, index=False)
+print(f"📊 Saved Figure 6 data to: {figure6_csv_path}")

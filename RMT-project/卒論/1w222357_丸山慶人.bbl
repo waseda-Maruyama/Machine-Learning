@@ -25,13 +25,6 @@ Delphine Lautier, Franck Raynaud, et~al.
 \newblock Technical report, 日本証券業協会, 7 2025.
 \newblock Accessed: 2026-01-09.
 
-
-
-
-
-
-
-
 \bibitem{cite:5}
 Burton~G Malkiel.
 \newblock The efficient market hypothesis and its critics.
@@ -47,10 +40,10 @@ Fischer Black and Myron Scholes.
 \newblock The pricing of options and corporate liabilities.
 \newblock {\em Journal of political economy}, 81(3):637--654, 1973.
 
-\bibitem{cite:8}
-Eugene~F Fama.
-\newblock Mandelbrot and the stable paretian hypothesis.
-\newblock {\em The journal of business}, 36(4):420--429, 1963.
+\bibitem{mandelbrot}
+Benoit Mandelbrot.
+\newblock The variation of certain speculative prices.
+\newblock {\em The journal of business}, 36(4):394--419, 1963.
 
 \bibitem{cite:9}
 P.~Gopikrishnan, M.~Meyer, L.~A.~N. Amaral, and H.~E. Stanley.
@@ -76,16 +69,17 @@ Didier Sornette.
   agent-based models.
 \newblock {\em Reports on Progress in Physics}, 77(6):062001, 2014.
 
-\bibitem{cite:13}
-Laurent Laloux, Pierre Cizeau, Jean-Philippe Bouchaud, and Marc Potters.
-\newblock Noise dressing of financial correlation matrices.
-\newblock {\em Physical Review Letters}, 83(7):1467--1470, 1999.
+\bibitem{ye2008non}
+C~Ye and JP~Huang.
+\newblock Non-classical oscillator model for persistent fluctuations in stock
+  markets.
+\newblock {\em Physica A: Statistical Mechanics and its Applications},
+  387(5-6):1255--1263, 2008.
 
-\bibitem{cite:14}
-Vasiliki Plerou, Parameswaran Gopikrishnan, Bernd Rosenow, Lu{\'i}s A.~Nunes
-  Amaral, and H.~Eugene Stanley.
-\newblock Universal and {N}onuniversal {P}roperties of {C}ross {C}orrelations
-  in {F}inancial {T}ime {S}eries.
-\newblock {\em Physical Review Letters}, 83(7):1471--1474, 1999.
+\bibitem{ahn2017modeling}
+Kwangwon Ahn, Mu~Young Choi, Bingcun Dai, Sungbin Sohn, and Biao Yang.
+\newblock Modeling stock return distributions with a quantum harmonic
+  oscillator.
+\newblock {\em EPL (Europhysics Letters)}, 120(3):38003, 2017.
 
 \end{thebibliography}

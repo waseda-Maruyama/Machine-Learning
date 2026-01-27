@@ -11,16 +11,29 @@ PRICE_FILE = "stock_close.csv"
 CAP_FILE = "market_caps.csv"
 RESULT_CSV = "grid_search_comparison.csv"
 
+# 手動で最良条件を固定する場合はタプルを設定する: (short_days, short_drop, long_days, long_drop)
+# 例: {"Index 1 (Eco)": (5, -0.02, 10, -0.08)}
+MANUAL_BEST = {
+    "Index 1 (Eco)": (3,-0.01,10,-0.04),
+    "Index 2 (Phy)": (3,-0.03,10,-0.08)
+}
+
 # 重みパラメータ
 DECAY_RATE = 0.5     # 減衰スピード
-BOOST_FACTOR = 10.0  # 初動の基本ブースト値
+BOOST_FACTOR = 5.0  # 初動の基本ブースト値
 
-# 検証用シナリオ
-scenarios = {
-    "2020 Covid": ("2020-02-01", "2020-04-01"),
-    "2024 Ueda":  ("2024-07-20", "2024-08-15"),
-    "2025 Tariff": ("2025-01-01", "2025-03-28")
-}
+# 検証用シナリオ (config.pyから読み込む)
+try:
+    from config import scenarios
+except ImportError:
+    print("⚠️ config.pyが見つかりません。ダミーシナリオを使用します。")
+    scenarios = {
+        "2020 Covid": ("2020-02-01", "2020-04-01"),
+        "2024 Ueda":  ("2024-07-20", "2024-08-15"),
+        "2025 Tariff": ("2025-01-01", "2025-03-28")
+    }
+
+# シナリオ開始日における的中有無を保存する（最初に存在する営業日で判定）
 
 # =========================================================
 # 1. データ準備 (Index 1 & Index 2 生成)
@@ -66,7 +79,7 @@ market_index1 = raw_idx1 / raw_idx1.iloc[0] * 100
 
 # Index 2: 物理的エネルギー (時価総額 × 生株価)
 # 定義: Σ (M * P)
-raw_idx2 = (df_caps * df_close).sum(axis=1)
+raw_idx2 = (df_caps **2).sum(axis=1)
 market_index2 = raw_idx2 / raw_idx2.iloc[0] * 100
 
 targets = {
@@ -115,23 +128,37 @@ for target_name, series in targets.items():
 
         # --- C. 重み計算 ---
         decay_comp = BOOST_FACTOR * np.exp(-DECAY_RATE * days_since_start)
-        severity_ratio = ret_long.abs() / abs(l_drop)
         
-        raw_weights = decay_comp * severity_ratio
+        # イベント全体の最大下落を基準にした深刻度スコア
+        event_max_drop = ret_long.groupby(event_group).transform('min')
+        event_severity_score = (event_max_drop.abs() / abs(l_drop))
+        
+        raw_weights = decay_comp * event_severity_score
         final_weights = raw_weights[is_crash == 1]
         
         avg_weight = final_weights.mean() if len(final_weights) > 0 else 0
-        sum_weight = final_weights.sum()
+        max_weight = final_weights.max() if len(final_weights) > 0 else 0
 
         # --- D. シナリオ捕捉 ---
         caught_list = []
+        start_hits = {}
         for name, (start, end) in scenarios.items():
             try:
                 sub = is_crash.loc[start:end]
+
+                # 最初の時点からシナリオ開始日までの累積ヒット日数
+                start_dt = pd.to_datetime(start)
+                idx_pos = is_crash.index.searchsorted(start_dt, side="right") - 1
+                if idx_pos >= 0:
+                    start_hits[name] = int(is_crash.iloc[: idx_pos + 1].sum())
+                else:
+                    start_hits[name] = 0
+
                 if sub.sum() > 0:
                     caught_list.append(name)
             except:
-                pass
+                # 範囲外などの場合は0件扱い
+                start_hits[name] = 0
         
         results.append({
             "Target": target_name,
@@ -140,8 +167,9 @@ for target_name, series in targets.items():
             "Events": num_events,
             "Days": total_days,
             "Avg_Weight": round(avg_weight, 2),
-            "Sum_Weight": round(sum_weight, 2),
+            "Max_Weight": round(max_weight, 2),
             "Caught": ", ".join(caught_list),
+            "Start_Hits": "; ".join([f"{k}:{v}" for k, v in start_hits.items()]),
             # 生の値も保存（プロット選択用）
             "_s_days": s_days, "_s_drop": s_drop,
             "_l_days": l_days, "_l_drop": l_drop
@@ -156,7 +184,7 @@ if df_res.empty:
     print("❌ 条件に合うイベントが見つかりませんでした。")
 else:
     # ターゲットごとにAvg_Weightが高い順にソートして表示
-    df_res = df_res.sort_values(by=["Target", "Avg_Weight"], ascending=[True, False])
+    df_res = df_res.sort_values(by=["Target", "Short", "Long"], ascending=[True, False, False])
     
     print(f"📊 分析結果 (各Indexの上位5件):")
     cols = ["Target", "Short", "Long", "Events", "Days", "Avg_Weight", "Caught"]
@@ -170,14 +198,30 @@ else:
 print("\n📈 グラフを作成中...")
 
 # --- A. 条件の選択 ---
+def _manual_cond(target_name: str, manual_tuple):
+    s_days, s_drop, l_days, l_drop = manual_tuple
+    return pd.Series({
+        "Target": target_name,
+        "Short": f"{s_days}d {s_drop:.1%}",
+        "Long": f"{l_days}d {l_drop:.1%}",
+        "_s_days": s_days,
+        "_s_drop": s_drop,
+        "_l_days": l_days,
+        "_l_drop": l_drop,
+    })
+
 # Index 1 (Eco) のベスト条件
-if not df_res[df_res["Target"] == "Index 1 (Eco)"].empty:
+if MANUAL_BEST["Index 1 (Eco)"]:
+    best_cond1 = _manual_cond("Index 1 (Eco)", MANUAL_BEST["Index 1 (Eco)"])
+elif not df_res[df_res["Target"] == "Index 1 (Eco)"].empty:
     best_cond1 = df_res[df_res["Target"] == "Index 1 (Eco)"].iloc[0]
 else:
     best_cond1 = None
 
 # Index 2 (Phy) のベスト条件
-if not df_res[df_res["Target"] == "Index 2 (Phy)"].empty:
+if MANUAL_BEST["Index 2 (Phy)"]:
+    best_cond2 = _manual_cond("Index 2 (Phy)", MANUAL_BEST["Index 2 (Phy)"])
+elif not df_res[df_res["Target"] == "Index 2 (Phy)"].empty:
     best_cond2 = df_res[df_res["Target"] == "Index 2 (Phy)"].iloc[0]
 else:
     best_cond2 = None
@@ -228,7 +272,7 @@ plt.legend(loc='upper left')
 plt.grid(True, alpha=0.3)
 plt.tight_layout()
 
-img_file = "crash_comparison_single_axis.png"
+img_file = "crash_comparison_single_axis.pdf"
 plt.savefig(img_file)
 print(f"🖼️ 画像を保存しました: {img_file}")
 plt.show()

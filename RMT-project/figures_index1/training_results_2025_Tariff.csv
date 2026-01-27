@@ -1,0 +1,2 @@
+Scenario,Train_AP_Baseline,Train_AP_Proposed,Train_AP_Proposed_b,Train_Weighted_AP_Baseline,Train_Weighted_AP_Proposed,Train_Weighted_AP_Proposed_b
+2025 Tariff,1.0,1.0,1.0,0.9999999999999999,1.0,1.0
